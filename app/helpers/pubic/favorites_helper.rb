@@ -1,0 +1,2 @@
+module Pubic::FavoritesHelper
+end
