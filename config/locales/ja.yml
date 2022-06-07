@@ -1,0 +1,6 @@
+  ja:
+    enums:
+      member:
+        gender_method:
+          men: "男性"
+          women: "女性"

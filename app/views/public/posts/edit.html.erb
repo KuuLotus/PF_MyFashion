@@ -1,2 +1,14 @@
-<h1>Public::Posts#edit</h1>
-<p>Find me in app/views/public/posts/edit.html.erb</p>
+<h1>コーディネート登録</h1>
+<%= form_with model: @post, url: post_path, method: :patch do |f| %>
+  <div class="form-group">
+    <label>コーディネート画像</label>
+    <%= f.file_field :outfit_image, accept: 'image/*', class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label>コーディネートのポイント</label>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
+
+  <%= f.submit "投稿する" %>
+<% end %>

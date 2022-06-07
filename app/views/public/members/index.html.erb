@@ -1,2 +1,29 @@
-<h1>Public::Members#index</h1>
-<p>Find me in app/views/public/members/index.html.erb</p>
+<h1>ユーザー一覧</h1>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>名前</th>
+      <th>性別</th>
+      <th>身長</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td>
+          <%= link_to member_path(member) do %>
+            <%= image_tag member.get_profile_image, class: "profile_image_index" %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to member_path(member) do %>
+            <%= member.name %>
+          <% end %>
+        </td>
+        <td><%= member.get_gender %></td>
+        <td><%= member.height %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,2 +1,44 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="member_top">
+      <%= image_tag @post.member.profile_image, class: "profile_image_top" %>
+      <%= @post.member.name %>
+      <%= @post.member.height %>cm
+      <%= @post.member.get_gender %>
+      <% if @post.member == current_member %>
+        <%= link_to "編集", edit_post_path(@post) %>
+        <%= link_to "削除", post_path(@post), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7 col-lg-5">
+      <div class="card">
+        <%= image_tag @post.outfit_image, class: "outfit_image_show" %>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">An item</li>
+          <li class="list-group-item">A second item</li>
+          <li class="list-group-item">A third item</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="coordinate_info">
+        <div class="row">
+          <p>
+            モデル情報:
+            <%= @post.member.height %>cm
+            <%= @post.member.get_gender %>
+          </p>
+          <p class="border-top"><%= @post.body %></p>
+          <p class="border-top">
+            <i class="fa-regular fa-clock"></i>
+            <%= @post.created_at.strftime('%Y/%m/%d') %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
