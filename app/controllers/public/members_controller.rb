@@ -32,6 +32,20 @@ class Public::MembersController < ApplicationController
     @members = member.followers
   end
 
+  # 退会確認画面
+  def withdraw_confirm
+    @member = Member.find(params[:id])
+  end
+
+  # 論理削除
+  def withdraw
+    @member = Member.find(params[:id])
+    @member.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会しました"
+    redirect_to root_path
+  end
+
   private
    def member_params
      params.require(:member).permit(:name, :body, :height, :gender, :email, :profile_image)

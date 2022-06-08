@@ -20,7 +20,7 @@
         <% end %>
       </td>
       <% if @member != current_member %>
-        <td id="follow_btn">
+        <td id="follow_btn_<%= @member.id %>">
           <%= render "public/relationships/follow", member: @member %>
         </td>
       <% end %>
@@ -33,5 +33,5 @@
 <% if @member == current_member %>
   <%= link_to "プロフィール変更", edit_member_path(@member) %>
   <%= link_to "コーディネート登録", new_post_path %>
-   
+  <%= link_to "退会について", withdraw_confirm_member_path(@member) %>
 <% end %>

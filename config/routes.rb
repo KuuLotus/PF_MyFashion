@@ -16,6 +16,8 @@ scope module: :public do
     resource :relationships, only: [:create, :destroy]
     get :followings, on: :member
     get :followers, on: :member
+    get :withdraw_confirm, on: :member
+    patch :withdraw, on: :member
   end
   resources :posts, except:[:index] do
     resource :favorites, only: [:create, :destroy]

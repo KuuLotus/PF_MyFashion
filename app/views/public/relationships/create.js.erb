@@ -1,1 +1,1 @@
-$("#follow_btn").html("<%= j(render "follow", member: @member) %>");
+$("#follow_btn_<%= @member.id %>").html("<%= j(render "follow", member: @member) %>");

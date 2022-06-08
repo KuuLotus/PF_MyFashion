@@ -33,4 +33,8 @@ class Member < ApplicationRecord
     reverse_of_relationships.find_by(following_id: member.id).present?
   end
 
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
+
 end

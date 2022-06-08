@@ -24,7 +24,7 @@
         </td>
         <td><%= member.get_gender %></td>
         <td><%= member.height %></td>
-        <td id="follow_btn">
+        <td id="follow_btn_<%= member.id %>">
           <%= render "public/relationships/follow", member: member %>
         </td>
       </tr>

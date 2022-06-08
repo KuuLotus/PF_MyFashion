@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+  before_action :reject_member, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -18,7 +18,19 @@ class Public::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+  protected
+
+  def reject_member
+    @member = Member.find_by(name: params[:member][:email])
+    if @member
+      if @member.valid_password?(params[:member][:password]) && (@member.is_deleted == true)
+        flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
+        redirect_to new_member_registration_path
+      else
+        flash[:alert] = "項目を入力してください"
+      end
+    end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

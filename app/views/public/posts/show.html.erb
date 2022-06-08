@@ -9,7 +9,7 @@
         <%= link_to "編集", edit_post_path(@post) %>
         <%= link_to "削除", post_path(@post), method: :delete, data: {confirm: "本当に削除しますか？"} %>
       <% else %>
-        <span id="follow_btn">
+        <span id="follow_btn_<%= @post.member.id %>">
           <%= render "public/relationships/follow", member: @post.member %>
         </span>
       <% end %>
