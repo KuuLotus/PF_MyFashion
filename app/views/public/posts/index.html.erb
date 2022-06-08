@@ -18,7 +18,13 @@
                   <%= post.member.name %>
                   <%= post.member.height %>cm
                 </li>
-                <li class="list-group-item">A second item</li>
+                <li class="list-group-item" id="favorite_buttons_<%= post.id %>">
+                  <% if member_signed_in? %>
+                    <%= render "public/favorites/favorite", post: post %>
+                  <% else %>
+                    <%= post.favorites.count %>
+                  <% end %>
+                </li>
               </ul>
             </div>
           </div>
@@ -27,3 +33,4 @@
     </div>
   </div>
 </div>
+

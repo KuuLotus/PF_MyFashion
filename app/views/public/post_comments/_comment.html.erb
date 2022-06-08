@@ -1,0 +1,34 @@
+<li class="list-group-item">
+  <div class="container">
+    <p class="title fw-bold">
+      <%= post.member.name %>へのコメント
+    </p>
+    <% post.post_comments.each do |post_comment| %>
+      <div class="d-flex">
+        <p><%= image_tag post_comment.member.profile_image, class: "profile_image_li" %></p>
+        <div class="main">
+          <p class="mb-0"><%= post_comment.member.name %> <%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
+          <div class="text_box"><%= post_comment.comment %></div>
+          <% if post_comment.member == current_member %>
+            <%= link_to "削除", post_post_comment_path(post, post_comment), method: :delete, data: {confirm: "コメントを削除します。よろしいですか？"}, remote: true %>
+          <% end %>
+        </div>
+        </div>
+    <% end %>
+  </div>
+</li>
+<%= form_with model: post_comment_new, url: post_post_comments_path(post), method: :post, local: false do |f| %>
+  <li class="list-group-item">
+    <div class="form-box d-flex gap-2">
+      <div class="col-1">
+        <%= image_tag current_member.profile_image, class: "profile_image_li" %>
+      </div>
+      <div class="col-8">
+        <%= f.text_area :comment, rows: '1', placeholder: "コメントを書く", class: "form-control" %>
+      </div>
+      <div class="col-2">
+        <%= f.submit "送信", class: "form-control" %>
+      </div>
+    </div>
+  </li>
+<% end %>

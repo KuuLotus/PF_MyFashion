@@ -16,9 +16,14 @@
       <div class="card">
         <%= image_tag @post.outfit_image, class: "outfit_image_show" %>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">An item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
+          <li class="list-group-item">
+            <div id="favorite_buttons_<%= @post.id %>">
+              <%= render "public/favorites/favorite", post: @post %>
+            </div>
+          </li>
+          <div id="post_comments_<%= @post.id %>">
+            <%= render "public/post_comments/comment", post: @post, post_comment_new: @post_comment_new %>
+          </div>
         </ul>
       </div>
     </div>
