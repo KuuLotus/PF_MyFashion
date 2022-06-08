@@ -1,13 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="member_top">
-      <%= image_tag @post.member.profile_image, class: "profile_image_top" %>
+      <%= image_tag @post.member.get_profile_image, class: "profile_image_top" %>
       <%= @post.member.name %>
       <%= @post.member.height %>cm
       <%= @post.member.get_gender %>
       <% if @post.member == current_member %>
         <%= link_to "編集", edit_post_path(@post) %>
         <%= link_to "削除", post_path(@post), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+      <% else %>
+        <span id="follow_btn">
+          <%= render "public/relationships/follow", member: @post.member %>
+        </span>
       <% end %>
     </div>
   </div>

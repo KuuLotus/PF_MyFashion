@@ -21,7 +21,17 @@ class Public::MembersController < ApplicationController
       render :edit
     end
   end
-  
+
+  def followings
+    member = Member.find(params[:id])
+    @members = member.followings
+  end
+
+  def followers
+    member = Member.find(params[:id])
+    @members = member.followers
+  end
+
   private
    def member_params
      params.require(:member).permit(:name, :body, :height, :gender, :email, :profile_image)

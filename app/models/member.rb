@@ -7,6 +7,10 @@ class Member < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
+  has_many :relationships, foreign_key: :following_id, dependent: :destroy
+  has_many :following, through: :relationships, source: :follower
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: :follower_id, dependent: :destroy
+  has_many :followers, through: :reverse_of_relationships, source: :following
   has_one_attached :profile_image
 
   def get_profile_image
@@ -23,6 +27,10 @@ class Member < ApplicationRecord
     elsif gender == 1
       "女性"
     end
+  end
+
+  def followed_by?(member)
+    reverse_of_relationships.find_by(following_id: member.id).present?
   end
 
 end

@@ -21,7 +21,7 @@
   <li class="list-group-item">
     <div class="form-box d-flex gap-2">
       <div class="col-1">
-        <%= image_tag current_member.profile_image, class: "profile_image_li" %>
+        <%= image_tag current_member.get_profile_image, class: "profile_image_li" %>
       </div>
       <div class="col-8">
         <%= f.text_area :comment, rows: '1', placeholder: "コメントを書く", class: "form-control" %>

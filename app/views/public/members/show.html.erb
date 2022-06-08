@@ -6,6 +6,7 @@
       <th>名前</th>
       <th>性別</th>
       <th>身長</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +19,11 @@
           <%= @member.height %>cm
         <% end %>
       </td>
+      <% if @member != current_member %>
+        <td id="follow_btn">
+          <%= render "public/relationships/follow", member: @member %>
+        </td>
+      <% end %>
     </tr>
   </tbody>
 </table>
@@ -27,4 +33,5 @@
 <% if @member == current_member %>
   <%= link_to "プロフィール変更", edit_member_path(@member) %>
   <%= link_to "コーディネート登録", new_post_path %>
+   
 <% end %>

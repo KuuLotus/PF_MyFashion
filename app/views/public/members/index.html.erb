@@ -6,6 +6,7 @@
       <th>名前</th>
       <th>性別</th>
       <th>身長</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,9 @@
         </td>
         <td><%= member.get_gender %></td>
         <td><%= member.height %></td>
+        <td id="follow_btn">
+          <%= render "public/relationships/follow", member: member %>
+        </td>
       </tr>
     <% end %>
   </tbody>

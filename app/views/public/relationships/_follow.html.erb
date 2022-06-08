@@ -1,0 +1,5 @@
+<% if member.followed_by?(current_member) %>
+  <%= link_to "フォロー中", member_relationships_path(member), method: :delete, remote: true, class: "btn btn-danger" %>
+<% else %>
+  <%= link_to "フォローする", member_relationships_path(member), method: :post, remote: true, class: "btn btn-success" %>
+<% end %>

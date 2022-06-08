@@ -12,7 +12,11 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 root to: "public/posts#index"
 
 scope module: :public do
-  resources :members, except:[:new]
+  resources :members, except: [:new] do
+    resource :relationships, only: [:create, :destroy]
+    get :followings, on: :member
+    get :followers, on: :member
+  end
   resources :posts, except:[:index] do
     resource :favorites, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
