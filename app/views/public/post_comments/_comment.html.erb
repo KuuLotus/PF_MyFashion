@@ -3,17 +3,21 @@
     <p class="title fw-bold">
       <%= post.member.name %>へのコメント
     </p>
-    <% post.post_comments.each do |post_comment| %>
-      <div class="d-flex">
-        <p><%= image_tag post_comment.member.profile_image, class: "profile_image_li" %></p>
-        <div class="main">
-          <p class="mb-0"><%= post_comment.member.name %> <%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
-          <div class="text_box"><%= post_comment.comment %></div>
-          <% if post_comment.member == current_member %>
-            <%= link_to "削除", post_post_comment_path(post, post_comment), method: :delete, data: {confirm: "コメントを削除します。よろしいですか？"}, remote: true %>
-          <% end %>
-        </div>
-        </div>
+    <% if post.post_comments.present? %>
+      <% post.post_comments.each do |post_comment| %>
+        <div class="d-flex">
+          <p><%= image_tag post_comment.member.profile_image, class: "profile_image_li" %></p>
+          <div class="main">
+            <p class="mb-0"><%= post_comment.member.name %> <%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
+            <div class="text_box"><%= post_comment.comment %></div>
+            <% if post_comment.member == current_member %>
+              <%= link_to "削除", post_post_comment_path(post, post_comment), method: :delete, data: {confirm: "コメントを削除します。よろしいですか？"}, remote: true %>
+            <% end %>
+          </div>
+          </div>
+      <% end %>
+    <% else %>
+      <p>NO COMMENT</p>
     <% end %>
   </div>
 </li>

@@ -1,33 +1,42 @@
-<h1>ユーザー一覧</h1>
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>名前</th>
-      <th>性別</th>
-      <th>身長</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="container">
+  <h1>ユーザー一覧</h1>
+  <ul>
     <% @members.each do |member| %>
-      <tr>
-        <td>
-          <%= link_to member_path(member) do %>
-            <%= image_tag member.get_profile_image, class: "profile_image_index" %>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to member_path(member) do %>
-            <%= member.name %>
-          <% end %>
-        </td>
-        <td><%= member.get_gender %></td>
-        <td><%= member.height %></td>
-        <td id="follow_btn_<%= member.id %>">
+      <li id="member_list">
+        <div class="member_info d-flex">
+          <div class="profile_image_index">
+            <%= link_to member_path(member) do %>
+              <%= image_tag member.get_profile_image %>
+            <% end %>
+          </div>
+          <div class="member_text">
+            <h3 class="name">
+              <%= link_to member_path(member) do %>
+                <%= member.name %>
+              <% end %>
+            </h3>
+            <p>
+              <span><%= member.get_gender %></span>
+              <span><%= member.get_height %></span>
+            <p>
+            <p>
+              <span>
+                <%= link_to member_path(member) do %>
+                  <%= member.posts.count %>コーディネート
+                <% end %>
+              </span>
+              <span>
+                <%= link_to followers_member_path(member) do %>
+                  <%= member.followers.count %>フォロワー
+                <% end %>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div id="follow_btn_<%= member.id %>">
           <%= render "public/relationships/follow", member: member %>
-        </td>
-      </tr>
+        </div>
+      </li>
     <% end %>
-  </tbody>
-</table>
+  </ul>
+</div>

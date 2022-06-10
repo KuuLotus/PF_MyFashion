@@ -18,10 +18,16 @@
     <main>
       <!--フラッシュメッセージ-->
       <% if flash[:notice] %>
-        <p id="notice" class="alert alert-success m-0"><%= notice %></p>
+        <div id="notice" class="alert alert-success alert-dismissible fade show m-0" data-bs-dismiss="alert">
+          <%= notice %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
        <% end %>
        <% if flash[:alert] %>
-        <p id="alert" class="alert alert-danger m-0"><%= alert %></p>
+        <div id="alert" class="alert alert-danger alert-dismissible fade show m-0" data-bs-dismiss="alert">
+          <%= alert %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
        <% end %>
 
       <%= yield %>

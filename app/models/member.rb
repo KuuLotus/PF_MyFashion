@@ -29,6 +29,12 @@ class Member < ApplicationRecord
     end
   end
 
+  def get_height
+    if height.present?
+      "#{height}" + "cm"
+    end
+  end
+
   def followed_by?(member)
     reverse_of_relationships.find_by(following_id: member.id).present?
   end

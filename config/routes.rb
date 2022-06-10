@@ -9,17 +9,20 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
 
-root to: "public/posts#index"
+root to: "public/homes#top"
 
 scope module: :public do
   resources :members, except: [:new] do
+    collection do
+      get :search
+    end
     resource :relationships, only: [:create, :destroy]
     get :followings, on: :member
     get :followers, on: :member
     get :withdraw_confirm, on: :member
     patch :withdraw, on: :member
   end
-  resources :posts, except:[:index] do
+  resources :posts do
     resource :favorites, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end

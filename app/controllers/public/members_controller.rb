@@ -45,6 +45,10 @@ class Public::MembersController < ApplicationController
     flash[:notice] = "退会しました"
     redirect_to root_path
   end
+  
+  # 検索結果
+  def search
+  end
 
   private
    def member_params

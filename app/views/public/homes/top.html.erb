@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <h1>コーディネート一覧</h1>
+    <div class="col-md-3">
+      <div class="sidebar">
+        <section id="search">
+          <h2 class="title">探す</h2>
+          <ul>
+            <li>
+              <%= link_to "コーディネートを探す", posts_path %>
+            </li>
+            <li>
+              <i class="fa-regular fa-user"></i>
+              <%= link_to "ユーザーを探す", members_path %>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="row">
+        <% @posts.each do |post| %>
+          <div class="col-lg-4 col-sm-6 g-5">
+            <div class="card">
+              <%= link_to post_path(post) do %>
+                <%= image_tag post.outfit_image, class: "outfit_image_index" %>
+              <% end %>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <%= link_to member_path(post.member_id) do %>
+                    <%= image_tag post.member.profile_image, class: "profile_image_li" %>
+                  <% end %>
+                  <%= post.member.name %>
+                  <%= post.member.height %>cm
+                </li>
+                <li class="list-group-item" id="favorite_buttons_<%= post.id %>">
+                  <% if member_signed_in? %>
+                    <%= render "public/favorites/favorite", post: post %>
+                  <% else %>
+                    <%= post.favorites.count %>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

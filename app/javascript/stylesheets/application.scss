@@ -17,6 +17,10 @@ a {
   color: #333;
 }
 
+p {
+  margin-bottom: 0;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -76,4 +80,14 @@ img {
   border-radius: 0 6px 6px 6px;
   border: 1px #ddd solid;
   background: #f6f7f8;
+}
+
+#member_list {
+  display: table;
+  width: 100%;
+  margin: 18px 0 0 0;
+  padding: 23px 0 23px 23px;
+  background: #fff;
+  border-radius: 3px;
+  border: 1px #ddd solid;
 }
