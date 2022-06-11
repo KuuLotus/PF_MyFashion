@@ -1,37 +1,49 @@
-<h1>マイページ</h1>
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>名前</th>
-      <th>性別</th>
-      <th>身長</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= image_tag @member.get_profile_image, class: "profile_image_show" %></td>
-      <td><%= @member.name %></td>
-      <td><%= @member.get_gender %></td>
-      <td>
-        <% if @member.height.present? %>
-          <%= @member.height %>cm
+<header id="title_top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <% if @member == current_member %>
+          <p>マイページ</p>
+        <% else %>
+          <p><%= @member.name %>のページ</p>
         <% end %>
-      </td>
-      <% if @member != current_member %>
-        <td id="follow_btn_<%= @member.id %>">
-          <%= render "public/relationships/follow", member: @member %>
-        </td>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
-<section>自己紹介<section>
-<p><%= @member.body %></p>
+        <div class="member_profile mt-3">
+          <div class="d-flex">
+            <div>
+              <%= image_tag @member.get_profile_image, class: "profile_image_show" %>
+            </div>
+            <div class="title_text ps-4 pt-1">
+              <h1><%= @member.name %></h1>
+              <div class="d-flex">
+                <p class="pe-2"><%= @member.get_gender %></p>
+                <p class="pe-2"><%= @member.get_height %></p>
+              </div>
+              <p class="pt-3"><%= @member.body %></p>
+            </div>
+          </div>
+          <% if @member == current_member %>
+            <div class="btn_area d-flex justify-content-between mt-3">
+              <div>
+                <%= link_to "プロフィール変更", edit_member_path(@member), class: "btn btn-secondary" %>
+              </div>
+              <div>
+                <%= link_to "コーディネート登録", new_post_path, class: "btn btn-primary" %>
+              </div>
+              <div>
+                <%= link_to "退会について", withdraw_confirm_member_path(@member), class: "btn btn-danger" %>
+              </div>
+            </div>
+          <% else %>
+            <div id="follow_btn_<%= @member.id %>">
+              <%= render "public/relationships/follow", member: @member %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
-<% if @member == current_member %>
-  <%= link_to "プロフィール変更", edit_member_path(@member) %>
-  <%= link_to "コーディネート登録", new_post_path %>
-  <%= link_to "退会について", withdraw_confirm_member_path(@member) %>
-<% end %>
+
+
+
