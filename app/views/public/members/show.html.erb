@@ -44,6 +44,61 @@
   </div>
 </header>
 
-
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="coordinate_follow d-flex text-center">
+        <div class="coordinate_follow_box col-4">
+          <%= link_to member_path(@member) do %>
+            <%= @member.posts.count %>
+            <span>コーディネート</span>
+          <% end %>
+        </div>
+        <div class="coordinate_follow_box col-4">
+          <%= link_to followings_member_path(@member) do %>
+            <%= @member.followings.count %>
+            <span>フォロー</span>
+          <% end %>
+        </div>
+        <div class="coordinate_follow_box col-4">
+          <%= link_to followers_member_path(@member) do %>
+            <%= @member.followers.count %>
+            <span>フォロワー</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <% if @member.posts.count == 0 %>
+      <div class="pt-5 text-center">
+        <h4>コーディネートを投稿してみよう！</h4>
+        <p>
+          毎日のコーデ記録始めませんか？<br>
+          自分のコーデを共有しよう！
+        </p>
+      </div>
+    <% else %>
+      <% @member.posts.each do |post| %>
+        <div class="col-md-3 g-5">
+          <div class="card">
+            <%= link_to post_path(post) do %>
+              <%= image_tag post.outfit_image, class: "outfit_image_index" %>
+            <% end %>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="favorite_buttons_<%= post.id %>">
+                <% if member_signed_in? %>
+                  <%= render "public/favorites/favorite", post: post %>
+                <% else %>
+                  <%= post.favorites.count %>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
 

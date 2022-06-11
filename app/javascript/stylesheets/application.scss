@@ -95,9 +95,34 @@
   }
 
 // ユーザー //
-.title_text h1 {
-  font-size: 24px;
-}
+  .title_text h1 {
+    font-size: 24px;
+  }
+
+  .coordinate_follow {
+    background: #fff;
+    border: 1px #ddd solid;
+    border-radius: 3px;
+  }
+
+  .coordinate_follow_box {
+    border-right: 1px #ddd solid;
+  }
+
+  .coordinate_follow_box a {
+    display: block;
+    color: #333;
+    padding: 8px 0 8px 0;
+  }
+
+  .coordinate_follow_box span {
+    display: block;
+    font-size: 10px;
+    font-weight: normal;
+  }
+
+
+
 
 .coordinate_info {
   background: #fff;
