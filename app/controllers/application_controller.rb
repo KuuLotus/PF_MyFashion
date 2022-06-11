@@ -4,5 +4,7 @@ class ApplicationController < ActionController::Base
   def set_search
     @q = Member.ransack(params[:q])
     @search_members = @q.result(distinct: true)
+    @search_post = Post.ransack(params[:q])
+    @search_posts = @search_post.result(distinct: true)
   end
 end

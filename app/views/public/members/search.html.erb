@@ -2,44 +2,49 @@
   <h1>ユーザー検索一覧</h1>
 
   <% @search_members.each do |member| %>
-    <li id="member_list">
-      <div class="member_info d-flex">
-        <div class="profile_image_index">
-          <%= link_to member_path(member) do %>
-            <%= image_tag member.get_profile_image, class: "profile_image_index" %>
-          <% end %>
-        </div>
-        <div class="member_text">
-          <h3 class="name">
-            <%= link_to member_path(member) do %>
-              <%= member.name %>
-            <% end %>
-          </h3>
-          <p>
-            <span><%= member.get_gender %></span>
-            <span><%= member.get_height %></span>
-          <p>
-          <p>
-            <span>
+    <div class="row mx-auto">
+      <div class="col-md-8 offset-md-2">
+        <li id="member_list">
+          <div class="member_info d-flex">
+            <div class="profile_image_index">
               <%= link_to member_path(member) do %>
-                <%= member.posts.count %>コーディネート
+                <%= image_tag member.get_profile_image, class: "profile_image_index" %>
               <% end %>
-            </span>
-            <span>
-              <%= link_to followers_member_path(member) do %>
-                <%= member.followers.count %>フォロワー
-              <% end %>
-            </span>
-          </p>
-        </div>
+            </div>
+            <div class="member_text">
+              <h3 class="name">
+                <%= link_to member_path(member) do %>
+                  <%= member.name %>
+                <% end %>
+              </h3>
+              <p>
+                <span><%= member.get_gender %></span>
+                <span><%= member.get_height %></span>
+              <p>
+              <p>
+                <span>
+                  <%= link_to member_path(member) do %>
+                    <%= member.posts.count %>コーディネート
+                  <% end %>
+                </span>
+                <span>
+                  <%= link_to followers_member_path(member) do %>
+                    <%= member.followers.count %>フォロワー
+                  <% end %>
+                </span>
+              </p>
+            </div>
+          </div>
+          <% if member != current_member %>
+            <div id="follow_btn_<%= member.id %>">
+              <%= render "public/relationships/follow", member: member %>
+            </div>
+          <% end %>
+        </li>
       </div>
-      <% if member != current_member %>
-        <div id="follow_btn_<%= member.id %>">
-          <%= render "public/relationships/follow", member: member %>
-        </div>
-      <% end %>
-    </li>
+    </div>
   <% end %>
 <% else %>
   <p>条件に一致するユーザーは見つかりませんでした</p>
 <% end %>
+

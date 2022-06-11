@@ -46,8 +46,12 @@ class Public::PostsController < ApplicationController
     redirect_to root_path
   end
 
+  # タグに紐ずく検索結果
+  def search
+  end
+
   private
    def post_params
-     params.require(:post).permit(:outfit_image, :body)
+     params.require(:post).permit(:outfit_image, :body, tag_ids: [])
    end
 end

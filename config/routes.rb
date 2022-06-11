@@ -13,18 +13,21 @@ root to: "public/homes#top"
 
 scope module: :public do
   resources :members, except: [:new] do
-    collection do
-      get :search
-    end
     resource :relationships, only: [:create, :destroy]
     get :followings, on: :member
     get :followers, on: :member
     get :withdraw_confirm, on: :member
     patch :withdraw, on: :member
+    collection do
+      get :search
+    end
   end
   resources :posts do
     resource :favorites, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
+    collection do
+      get :search
+    end
   end
 end
 

@@ -6,7 +6,7 @@
         <div class="member_info d-flex">
           <div class="profile_image_index">
             <%= link_to member_path(member) do %>
-              <%= image_tag member.get_profile_image %>
+              <%= image_tag member.get_profile_image, class: "profile_image_index" %>
             <% end %>
           </div>
           <div class="member_text">

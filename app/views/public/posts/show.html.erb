@@ -46,6 +46,14 @@
           </p>
         </div>
       </div>
+      <div class="tag_area">
+        <h4>着用タグからコーディネートを探す</h4>
+        <% @post.tags.each do |tag| %>
+          <%= link_to search_posts_path do %>
+            <span class="tag_box"># <%= tag.name %></span>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

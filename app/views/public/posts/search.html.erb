@@ -1,0 +1,12 @@
+<% if @search_posts.present? %>
+  <div class="container">
+    <div class="row">
+      <h1>タグ検索一覧</h1>
+      <%= render "index", posts: @search_posts %>
+    </div>
+  </div>
+<% else %>
+  <p>条件に一致するコーディネートは見つかりませんでした</p>
+<% end %>
+
+
