@@ -24,7 +24,7 @@
           <% if @member == current_member %>
             <div class="btn_area d-flex justify-content-between mt-3">
               <%= link_to "プロフィール変更", edit_member_path(@member), class: "btn btn-secondary" %>
-              <%= link_to "コーディネート検索", new_post_path, class: "btn btn-primary" %>
+              <%= link_to "コーディネート登録", new_post_path, class: "btn btn-primary" %>
               <%= link_to "退会について", withdraw_confirm_member_path(@member), class: "btn btn-danger" %>
             </div>
           <% else %>
@@ -38,7 +38,7 @@
   </div>
 </header>
 
-<!--ユーザーの投稿一覧-->
+<!--ユーザーの投稿数、フォロー、フォロワー数-->
 <div class="container mt-3">
   <div class="row">
     <div class="col-md-6 offset-md-3">

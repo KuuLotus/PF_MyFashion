@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2 d-flex justify-content-between">
+      <div class="container">
+        <div class="row">
+          <!--性別選択-->
+          <div class="col-lg-3 gender-nav">
+            <nav></nav>
+          </div>
+
+          <!--ユーザー一覧-->
+          <div class="col-lg-9">
+            <ul class="ps-0">
+              <% members.each do |member| %>
+                <li id="member_list" class="d-flex justify-content-between align-items-center">
+                  <div class="member_info d-flex">
+                    <div class="profile_image_index">
+                      <%= link_to member_path(member) do %>
+                        <%= image_tag member.get_profile_image, class: "profile_image_index" %>
+                      <% end %>
+                    </div>
+                    <div class="member_text ps-3">
+                      <h3 class="name">
+                        <%= link_to member_path(member) do %>
+                          <%= member.name %>
+                        <% end %>
+                      </h3>
+                      <p class="info">
+                        <span><%= member.get_gender %></span>
+                        <span><%= member.get_height %></span>
+                      <p>
+                      <p>
+                        <span>
+                          <%= link_to member_path(member), class: "meta" do %>
+                            <span><%= member.posts.count %></span>コーディネート
+                          <% end %>
+                        </span>
+                        <span>
+                          <%= link_to followers_member_path(member), class: "meta" do %>
+                            <span><%= member.followers.count %></span>フォロワー
+                          <% end %>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  <div id="follow_btn_<%= member.id %>" class="me-3">
+                    <%= render "public/relationships/follow", member: member %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,20 +1,36 @@
-<div class="container">
-  <div class="withdraw_box">
+<header id="title_top">
+  <div class="container">
     <div class="row">
-      <h3>本当に退会しますか？</h3>
-    </div>
-    <div class="row">
-      <p>退会をご希望される場合は、下記の注意事項に同意の上退会してください。</p>
-    </div>
-    <div class="row">
-      <h4>ご注意事項</h4>
-    </div>
-    <div class="row">
-      <ul>
-        <li>退会処理後は同じアカウントのご利用ができなくなります。</li>
-        <li>退会処理を行った場合、友達検索結果に表示されなくなり、ID・プロフィールも他のユーザーから閲覧できなくなります。</li>
-      </ul>
+      <div class="col-md-8 offset-md-2">
+        <h1>
+          退会について
+        </h1>
+      </div>
     </div>
   </div>
-  <%= link_to "退会する", withdraw_member_path(@member),method: :patch, class: "btn btn-primary" %>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div id="main-container">
+        <h3 class="main-container-title">本当に退会しますか？</h3>
+        <div class="container py-4">
+          <p>退会をご希望される場合は、下記の注意事項に同意の上退会してください。</p>
+        </div>
+        <h3 class="title">ご注意事項</h3>
+        <div class="container py-3">
+          <ul>
+            <li>退会処理後は同じアカウントのご利用ができなくなります。</li>
+            <li>退会処理を行った場合、友達検索結果に表示されなくなり、ID・プロフィールも他のユーザーから閲覧できなくなります。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row mx-auto my-3">
+        <div class="col-md-4 offset-md-4 d-grid">
+          <%= link_to "退会する", withdraw_member_path(@member),method: :patch, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

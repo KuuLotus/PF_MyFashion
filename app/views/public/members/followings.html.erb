@@ -1,0 +1,72 @@
+<header id="title_top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <p><%= @member.name %>のフォロー一覧</p>
+        <div class="member_profile mt-3">
+          <div class="d-flex">
+            <div>
+              <%= image_tag @member.get_profile_image, class: "profile_image_show" %>
+            </div>
+            <div class="title_text ps-4 pt-1">
+              <h1><%= @member.name %></h1>
+              <div class="d-flex">
+                <p class="pe-2"><%= @member.get_gender %></p>
+                <p class="pe-2"><%= @member.get_height %></p>
+              </div>
+              <p class="pt-3"><%= @member.body %></p>
+            </div>
+          </div>
+          <% if @member == current_member %>
+            <div class="btn_area d-flex justify-content-between mt-3">
+              <%= link_to "プロフィール変更", edit_member_path(@member), class: "btn btn-secondary" %>
+              <%= link_to "コーディネート登録", new_post_path, class: "btn btn-primary" %>
+              <%= link_to "退会について", withdraw_confirm_member_path(@member), class: "btn btn-danger" %>
+            </div>
+          <% else %>
+            <div id="follow_btn_<%= @member.id %>" class="mt-3 ms-3">
+              <%= render "public/relationships/follow", member: @member %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!--ユーザーの投稿数、フォロー、フォロワー数-->
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="coordinate_follow d-flex text-center">
+        <div class="coordinate_follow_box col-4">
+          <%= link_to member_path(@member) do %>
+            <%= @member.posts.count %>
+            <span>コーディネート</span>
+          <% end %>
+        </div>
+        <div class="coordinate_follow_box col-4">
+          <%= link_to followings_member_path(@member) do %>
+            <%= @member.followings.count %>
+            <span>フォロー</span>
+          <% end %>
+        </div>
+        <div class="coordinate_follow_box col-4">
+          <%= link_to followers_member_path(@member) do %>
+            <%= @member.followers.count %>
+            <span>フォロワー</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if @members.present? %>
+  <%= render "follow", members: @members %>
+<% else %>
+　<div class="pt-5 text-center">
+    <h4>まだフォローしていません</h4>
+  </div>
+<% end %>
+

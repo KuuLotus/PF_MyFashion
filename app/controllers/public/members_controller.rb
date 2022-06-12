@@ -26,13 +26,13 @@ class Public::MembersController < ApplicationController
   end
 
   def followings
-    member = Member.find(params[:id])
-    @members = member.followings
+    @member = Member.find(params[:id])
+    @members = @member.followings
   end
 
   def followers
-    member = Member.find(params[:id])
-    @members = member.followers
+    @member = Member.find(params[:id])
+    @members = @member.followers
   end
 
   # 退会確認画面

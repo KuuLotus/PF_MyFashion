@@ -13,6 +13,8 @@ class Member < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :following
   has_one_attached :profile_image
 
+  validates :body, length:{maximum:2000}
+
   def get_profile_image
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image_user.jpg')

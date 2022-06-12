@@ -1,42 +1,81 @@
+<header id="title_top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h1>
+          <i class="fa-solid fa-gear"></i> 基本設定
+        </h1>
+        <p class="ps-3">プロフィールの変更</p>
+      </div>
+    </div>
+  </div>
+</header>
+
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <div id="main-container">
-        <h1>プロフィールの変更</h1>
-        <%= form_with model: @member, url: member_path(@member), method: :patch do |f| %>
-          <div class="form-group">
-            <label>プロフィール画像</label>
-            <%= f.file_field :profile_image, accept: 'image/*', class: "form-control" %>
-          </div>
+      <%= form_with model: @member, url: member_path(@member), method: :patch do |f| %>
+        <div id="main-container">
+          <p class="title">基本情報</p>
+          <div class="container pt-5 pb-3">
+            <div class="form-group row mb-3 align-items-center">
+              <div class="col-lg-4 text-end">
+                <p>プロフィール画像</p>
+              </div>
+              <div class="col-lg-8">
+                <%= f.file_field :profile_image, accept: 'image/*', class: "form-control" %>
+              </div>
+            </div>
 
-          <div class="form-group">
-            <label>ニックネーム</label>
-            <%= f.text_field :name, class: "form-control" %>
-          </div>
+            <div class="form-group row mb-3 align-items-center">
+              <div class="col-md-4 text-end">
+                <p>ニックネーム</p>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_field :name, class: "form-control" %>
+              </div>
+            </div>
 
-          <div class="form-group">
-            <label>性別</label>
-            <%= f.select :gender, {'男性': 0, '女性': 1}, { include_blank: "指定なし" }, class: "form-control" %>
-          </div>
+            <div class="form-group row mb-3 align-items-center">
+              <div class="col-md-4 text-end">
+                <p>性別</p>
+              </div>
+              <div class="col-md-8">
+                <%= f.select :gender, {'男性': 0, '女性': 1}, { include_blank: "指定なし" }, class: "form-control" %>
+              </div>
+            </div>
 
-          <div class="form-group">
-            <label>身長</label>
-            <%= f.select :height, *[120..200], { include_blank: "指定なし" }, class: "form-control" %>cm
-          </div>
+            <div class="form-group row mb-3 align-items-center">
+              <div class="col-md-4 text-end">
+                <p>身長</p>
+              </div>
+              <div class="col-md-8">
+                <%= f.select :height, *[120..200], { include_blank: "指定なし" }, class: "form-control" %>
+              </div>
+            </div>
 
-          <div class="form-group">
-            <label>メールアドレス</label>
-            <%= f.email_field :email, class: "form-control" %>
+            <div class="form-group row mb-3 align-items-center">
+              <div class="col-md-4 text-end">
+                <p>メールアドレス</p>
+              </div>
+              <div class="col-md-8">
+                <%= f.email_field :email, class: "form-control" %>
+              </div>
+            </div>
           </div>
-
-          <div class="form-group">
-            <label>自己紹介</label>
-            <%= f.text_area :body, class: "form-control" %>
+          <p class="title">自己紹介</p>
+          <div class="container py-3">
+            <div class="form-group row mb-3 align-items-center d-grid">
+              <%= f.text_area :body, placeholder: "2000文字以内で入力してください", class: "form-control" %>
+            </div>
           </div>
-
-          <%= f.submit "保存" %>
-        <% end %>
-      </div>
+        </div>
+        <div class="row mx-auto my-3">
+          <div class="col-md-4 offset-md-4 d-grid">
+            <%= f.submit "変更する", class: "btn btn-primary text-center" %>
+          </div>
+        </div>
+    　<% end %>
     </div>
   </div>
 </div>

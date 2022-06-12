@@ -19,6 +19,13 @@
     z-index: 2;
   }
 
+  h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+    font-size: 22px;
+    line-height: 1.5;
+    font-weight: bold;
+  }
+
   a {
     text-decoration: none;
     color: #333;
@@ -27,6 +34,12 @@
   p {
     margin-bottom: 0;
     font-size: 13px;
+  }
+
+  li {
+    margin: 8px 0 0 0;
+    font-size: 12px;
+    padding: 0 20px 0 1em;
   }
 
   img {
@@ -40,9 +53,9 @@
   }
 
   #title_top {
-    padding: 18px 0 30px 0;
+    padding: 30px 0 30px 0;
     background: #fff;
-    min-height: 133px;
+    // min-height: 133px;
     border-bottom: 1px #ddd solid;
     position: relative;
   }
@@ -50,9 +63,24 @@
   #main-container {
     border: 1px #ddd solid;
     border-radius: 4px;
-    padding: 30px;
     background-color: #fff;
     margin-top: 40px;
+  }
+
+  #main-container .title {
+    padding: 10px 5px 10px 20px;
+    font-size: 12px;
+    background: #efefef;
+    border-bottom: 1px #ddd solid;
+  }
+
+  .main-container-title {
+    background: #f6f7f8;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px #ddd solid;
+    font-size: 12px;
+    padding: 20px 0 20px 20px;
+    font-weight: bold;
   }
 
 //// 画像系 ////
@@ -99,11 +127,19 @@
     box-shadow: 0 2px 4px #4b4b4b;
   }
 
-  h1 {
+  #login-box h1 {
     margin-top: 0;
     margin-bottom: 20px;
     font-weight: 300;
     font-size: 28px;
+  }
+
+  .form-control {
+    width: auto;
+  }
+
+  textarea {
+    height: 180px;
   }
 
 // ユーザー //
@@ -133,7 +169,15 @@
     font-weight: normal;
   }
 
+  .all_member h2 {
+    border-left: 1px #ddd solid;
+  }
 
+  .all_member h2 span {
+    font-size: 13px;
+    margin: 0 0 0 5px;
+    vertical-align: 1px;
+  }
 
 
 .coordinate_info {
@@ -154,6 +198,7 @@
   background: #f6f7f8;
 }
 
+// ユーザーの白枠
 #member_list {
   display: table;
   width: 100%;
@@ -162,6 +207,35 @@
   background: #fff;
   border-radius: 3px;
   border: 1px #ddd solid;
+}
+
+.member_text .name {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.member_text .info {
+  color: #888;
+  margin: 4px 0 0 0;
+}
+
+.meta span {
+  padding: 0 3px 0 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.follow-btn span {
+  font-size: 10px;
+}
+
+.gender-nav nav {
+  background: #fff;
+  border: 1px #ddd solid;
+  border-radius: 3px;
+  padding: 21px 0 28px 0;
+  margin-top: 18px;
 }
 
 .tag_box {
