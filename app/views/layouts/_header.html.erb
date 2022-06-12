@@ -36,6 +36,7 @@
       </ul>
 
       <!--検索フォーム-->
+      <%= select_tag 'condition', options_for_select(["ユーザー検索", "コーディネート検索"]), class: "form-select form-select-sm text-center me-2", style: "width: auto;"%>
       <%= search_form_for @q, url: search_members_path, class: "d-flex" do |f| %>
         <%= f.search_field :name_cont, class: "form-control me-2", placeholder: "ユーザーを探す" %>
 
@@ -49,4 +50,41 @@
     </div>
   </div>
 </nav>
+<script>
+  $(document).on('turbolinks:load', function() {
+    showMemberSearch()
+    hidePostSearch()
+
+    $('#condition').change(function() {
+      let condition = $('#condition').val()
+      if(condition === 'ユーザー検索') {
+        showMemberSearch()
+        hidePostSearch()
+      } else {
+        showPostSearch()
+        hideMemberSearch()
+      }
+    })
+
+    function showPostSearch() {
+      $('#post_search').addClass("d-flex")
+      $('#post_search').show()
+    }
+
+    function hidePostSearch() {
+      $('#post_search').removeClass("d-flex")
+      $('#post_search').hide()
+    }
+
+    function showMemberSearch() {
+      $('#member_search').addClass("d-flex")
+      $('#member_search').show()
+    }
+
+    function hideMemberSearch() {
+      $('#member_search').removeClass("d-flex")
+      $('#member_search').hide()
+    }
+  })
+</script>
 

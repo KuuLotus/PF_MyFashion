@@ -15,6 +15,10 @@
     font-weight: 300;
   }
 
+  nav {
+    z-index: 2;
+  }
+
   a {
     text-decoration: none;
     color: #333;
@@ -41,6 +45,14 @@
     min-height: 133px;
     border-bottom: 1px #ddd solid;
     position: relative;
+  }
+
+  #main-container {
+    border: 1px #ddd solid;
+    border-radius: 4px;
+    padding: 30px;
+    background-color: #fff;
+    margin-top: 40px;
   }
 
 //// 画像系 ////

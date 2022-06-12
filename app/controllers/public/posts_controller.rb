@@ -1,4 +1,7 @@
 class Public::PostsController < ApplicationController
+  before_action :ensure_corect_member, only:[:edit]
+  before_action :ensure_withdraw_member, only:[:show]
+
   def new
     @post = Post.new
   end
@@ -21,7 +24,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.joins(:member).where({member: {is_deleted: false}})
   end
 
   def edit
@@ -51,7 +54,23 @@ class Public::PostsController < ApplicationController
   end
 
   private
-   def post_params
-     params.require(:post).permit(:outfit_image, :body, tag_ids: [])
-   end
+    def post_params
+      params.require(:post).permit(:outfit_image, :body, tag_ids: [])
+    end
+
+    def ensure_corect_member
+      @post = Post.find(params[:id])
+      unless @post.member == current_member
+        flash[:alert] = "不正なアクセスです"
+        redirect_to posts_path
+      end
+    end
+
+    def ensure_withdraw_member
+      post = Post.find(params[:id])
+      if post.member.is_deleted == true
+        flash[:alert] = "退会済みユーザーの投稿です"
+        redirect_to posts_path
+      end
+    end
 end
