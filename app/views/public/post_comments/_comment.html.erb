@@ -1,20 +1,28 @@
 <li class="list-group-item">
   <div class="container">
-    <p class="title fw-bold">
+    <h3 class="title fw-bold">
       <%= post.member.name %>へのコメント
-    </p>
+    </h3>
     <% if post.post_comments.present? %>
       <% post.post_comments.each do |post_comment| %>
-        <div class="d-flex">
-          <p><%= image_tag post_comment.member.profile_image, class: "profile_image_li" %></p>
-          <div class="main">
-            <p class="mb-0"><%= post_comment.member.name %> <%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
-            <div class="text_box"><%= post_comment.comment %></div>
-            <% if post_comment.member == current_member %>
-              <%= link_to "削除", post_post_comment_path(post, post_comment), method: :delete, data: {confirm: "コメントを削除します。よろしいですか？"}, remote: true %>
-            <% end %>
+        <div class="comment_area p-2">
+          <div class="d-flex">
+            <p><%= image_tag post_comment.member.profile_image, class: "profile_image_li me-2" %></p>
+            <div class="main">
+              <p class="mb-0"><%= post_comment.member.name %> <span><%= post_comment.created_at.strftime('%Y/%m/%d') %></span></p>
+              <div class="d-flex">
+                <div class="text_box">
+                  <%= post_comment.comment %>
+                </div>
+                <% if post_comment.member == current_member %>
+                  <%= link_to post_post_comment_path(post, post_comment), method: :delete, data: {confirm: "コメントを削除します。よろしいですか？"}, class: "d-flex align-items-end ps-1", remote: true do %>
+                    <i class="fa-solid fa-delete-left"></i>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
           </div>
-          </div>
+        </div>
       <% end %>
     <% else %>
       <p>NO COMMENT</p>
@@ -27,11 +35,11 @@
       <div class="col-1">
         <%= image_tag current_member.get_profile_image, class: "profile_image_li" %>
       </div>
-      <div class="col-8">
-        <%= f.text_area :comment, rows: '1', placeholder: "コメントを書く", class: "form-control" %>
+      <div class="col-9">
+        <%= f.text_area :comment, rows: '1', placeholder: "コメントを書く", class: "form-control d-grid comment-form" %>
       </div>
-      <div class="col-2">
-        <%= f.submit "送信", class: "form-control" %>
+      <div class="col-1">
+        <%= f.submit "送信", class: "btn btn-secondary" %>
       </div>
     </div>
   </li>

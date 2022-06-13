@@ -1,5 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap');
 
 //// 初期設定 ////
   :root {
@@ -13,6 +14,7 @@
     line-height: 1.6;
     font-size: 16px;
     font-weight: 300;
+    font-family: 'Noto Serif JP', serif;
   }
 
   nav {
@@ -29,6 +31,7 @@
   a {
     text-decoration: none;
     color: #333;
+    font-size: 15px;
   }
 
   p {
@@ -37,7 +40,6 @@
   }
 
   li {
-    margin: 8px 0 0 0;
     font-size: 12px;
     padding: 0 20px 0 1em;
   }
@@ -187,6 +189,42 @@
   padding: 20px 0 0 23px;
 }
 
+.coordinate_info h1 {
+  padding: 0 23px 0 0;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.coordinate_info span {
+  color: #888;
+}
+
+.tag_area h2 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.list-group-item h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.main span {
+  color: #888;
+  font-size: 10px;
+}
+
+.tag_box {
+  display: inline;
+  background: #fff;
+  color: #333;
+  border: 1px #e2e2e2 solid;
+  padding: 6px 12px 6px 12px;
+  line-height: 1.2;
+  border-radius: 2px;
+}
+
 .text_box {
   display: table-cell;
   vertical-align: top;
@@ -238,17 +276,6 @@
   margin-top: 18px;
 }
 
-.tag_box {
-  // display: block;
-  width: 50px;
-  background: #fff;
-  color: #333;
-  border: 1px #e2e2e2 solid;
-  padding: 6px 12px 6px 12px;
-  line-height: 1.2;
-  border-radius: 2px;
-}
-
 // ページネーション//
 .pagination {
   margin-top: 50px;
@@ -259,8 +286,32 @@
   padding: 0;
 }
 
+// コーデカード//
+.member-profile {
+  margin: 0;
+}
 
+.member-profile .main .name {
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: bold;
+}
 
+.fa-heart {
+  margin-right: 5px;
+  font-size: 16px;
+}
 
+// 投稿詳細 header//
+.title_text_header {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+// コメントフォーム
+.comment-form {
+  height: 100%;
+  width: 100%;
+}
 
 

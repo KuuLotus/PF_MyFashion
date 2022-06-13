@@ -24,7 +24,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.joins(:member).where({member: {is_deleted: false}})
+    @posts = Post.joins(:member).where({member: {is_deleted: false}}).page(params[:page]).per(40)
   end
 
   def edit
@@ -55,7 +55,7 @@ class Public::PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:outfit_image, :body, tag_ids: [])
+      params.require(:post).permit(:outfit_image, :body, :title, tag_ids: [])
     end
 
     def ensure_corect_member

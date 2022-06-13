@@ -1,33 +1,30 @@
-<div class="col-md-3"></div>
-<div class="col-md-9">
-  <div class="row">
-    <% posts.each do |post| %>
-      <div class="col-lg-4 col-sm-6 g-5">
-        <div class="card">
-          <%= link_to post_path(post) do %>
-            <%= image_tag post.outfit_image, class: "outfit_image_index" %>
+<% posts.each do |post| %>
+  <div class="col-lg-4 col-sm-6 g-3">
+    <div class="card">
+      <%= link_to post_path(post) do %>
+        <%= image_tag post.outfit_image, class: "outfit_image_index" %>
+      <% end %>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item m-0" id="favorite_buttons_<%= post.id %>">
+          <% if member_signed_in? %>
+            <%= render "public/favorites/favorite", post: post %>
+          <% else %>
+            <p>
+              <i class="fa-solid fa-heart"></i>
+              <%= post.favorites.count %>
+            </p>
           <% end %>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <%= link_to member_path(post.member_id) do %>
-                <%= image_tag post.member.profile_image, class: "profile_image_li" %>
-              <% end %>
-              <%= post.member.name %>
-              <%= post.member.height %>cm
-            </li>
-            <li class="list-group-item" id="favorite_buttons_<%= post.id %>">
-              <% if member_signed_in? %>
-                <%= render "public/favorites/favorite", post: post %>
-              <% else %>
-                <p>
-                  <i class="fa-solid fa-heart"></i>
-                  <%= post.favorites.count %>
-                </p>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </div>
-    <% end %>
+        </li>
+        <li class="list-group-item member-profile d-flex">
+          <%= link_to member_path(post.member_id) do %>
+            <%= image_tag post.member.profile_image, class: "profile_image_li" %>
+          <% end %>
+          <div class="main ps-2 pt-1">
+            <p class="name"><%= post.member.name %></p>
+            <p><%= post.member.get_height %></p>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
+<% end %>

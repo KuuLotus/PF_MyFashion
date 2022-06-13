@@ -3,7 +3,7 @@ class Public::MembersController < ApplicationController
   before_action :ensure_withdraw_member, only:[:show, :followings, :followers]
 
   def index
-    @members = Member.where.not(is_deleted: true).where.not(id: current_member.id).page(params[:page]).per(5)
+    @members = Member.where.not(is_deleted: true).where.not(id: current_member.id).page(params[:page]).per(30)
   end
 
   def show
