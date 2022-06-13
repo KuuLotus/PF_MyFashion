@@ -19,7 +19,10 @@
               <% if member_signed_in? %>
                 <%= render "public/favorites/favorite", post: post %>
               <% else %>
-                <%= post.favorites.count %>
+                <p>
+                  <i class="fa-solid fa-heart"></i>
+                  <%= post.favorites.count %>
+                </p>
               <% end %>
             </li>
           </ul>

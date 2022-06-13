@@ -78,7 +78,7 @@
           <h4>まだ投稿がありません</h4>
         </div>
     <% else %>
-      <% @member.posts.each do |post| %>
+      <% @member_posts.each do |post| %>
         <div class="col-md-3 g-5">
           <div class="card">
             <%= link_to post_path(post) do %>
@@ -96,6 +96,7 @@
           </div>
         </div>
       <% end %>
+      <%= paginate @member_posts %>
     <% end %>
   </div>
 </div>

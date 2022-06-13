@@ -3,11 +3,12 @@ class Public::MembersController < ApplicationController
   before_action :ensure_withdraw_member, only:[:show, :followings, :followers]
 
   def index
-    @members = Member.where.not(is_deleted: true).where.not(id: current_member.id)
+    @members = Member.where.not(is_deleted: true).where.not(id: current_member.id).page(params[:page]).per(5)
   end
 
   def show
     @member = Member.find(params[:id])
+    @member_posts = @member.posts.page(params[:page]).per(20)
   end
 
   def edit
@@ -27,12 +28,12 @@ class Public::MembersController < ApplicationController
 
   def followings
     @member = Member.find(params[:id])
-    @members = @member.followings
+    @members = @member.followings.page(params[:page]).per(40)
   end
 
   def followers
     @member = Member.find(params[:id])
-    @members = @member.followers
+    @members = @member.followers.page(params[:page]).per(40)
   end
 
   # 退会確認画面

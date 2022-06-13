@@ -59,6 +59,7 @@ gem "devise"
 gem 'dotenv-rails'
 gem "enum_help"
 gem 'ransack'
+gem 'kaminari'
 
 group :production do
   gem 'mysql2'
