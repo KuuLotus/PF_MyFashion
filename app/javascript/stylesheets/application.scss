@@ -200,7 +200,12 @@
   color: #888;
 }
 
-.tag_area h2 {
+.tag_area {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag_title {
   font-size: 14px;
   font-weight: bold;
 }

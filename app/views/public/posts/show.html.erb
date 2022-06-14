@@ -68,10 +68,10 @@
           </span>
         </p>
       </div>
-      <div class="tag_area pt-3">
-        <h2 class="title mb-3">着用タグからコーディネートを探す</h2>
+      <h2 class="tag_title mt-3">着用タグからコーディネートを探す</h2>
+      <div class="tag_area pt-2 gap-2">
         <% @post.tags.each do |tag| %>
-          <div class="tag_box me-2">
+          <div class="tag_box">
             <%= link_to search_posts_path do %>
               # <%= tag.name %>
             <% end %>
