@@ -5,11 +5,17 @@ devise_for :member,skip: [:passwords], controllers: {
   sessions: 'public/sessions'
 }
 
+devise_scope :member do
+    post 'members/guest_sign_in', to: 'public/sessions#guest_sign_in'
+end
+
 devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
 
 root to: "public/homes#top"
+get "men" => "public/homes#men"
+get "women" => "public/homes#women"
 
 scope module: :public do
   resources :members, except: [:new] do

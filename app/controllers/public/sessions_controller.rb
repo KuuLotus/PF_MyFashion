@@ -18,6 +18,12 @@ class Public::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def guest_sign_in
+    member = Member.guest
+    sign_in member
+    redirect_to member_path(member), notice: '企業様(閲覧用)でログインしました。'
+  end
+
   protected
 
   def reject_member

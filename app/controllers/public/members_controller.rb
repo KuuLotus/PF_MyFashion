@@ -1,5 +1,6 @@
 class Public::MembersController < ApplicationController
   before_action :ensure_corect_member, only:[:edit, :withdraw_confirm]
+  before_action :ensure_guest_user, only:[:edit, :withdraw_confirm]
   before_action :ensure_withdraw_member, only:[:show, :followings, :followers]
 
   def index
@@ -72,6 +73,13 @@ class Public::MembersController < ApplicationController
       if member.is_deleted == true
         flash[:alert] = "退会済みユーザーです"
         redirect_to members_path
+      end
+    end
+
+    def ensure_guest_user
+      @member = Member.find(params[:id])
+      if @member.name == "企業様(閲覧用)"
+        redirect_to member_path(current_member) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
       end
     end
 end

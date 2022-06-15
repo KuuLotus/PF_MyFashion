@@ -42,6 +42,7 @@
   li {
     font-size: 12px;
     padding: 0 20px 0 1em;
+    list-style: none;
   }
 
   img {
@@ -52,6 +53,24 @@
     object-fit: cover;
     border-radius: 50%;
     border: 1px #ddd solid;
+  }
+
+  #switch_gender {
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px #ddd solid;
+  }
+
+  #switch_gender li {
+    display: inline-block;
+    font-size: 17px;
+    text-align: center;
+    line-height: 1.2;
+    color: #888;
+  }
+
+  #switch_gender a {
+    font-size: 17px;
   }
 
   #title_top {
@@ -83,6 +102,16 @@
     font-size: 12px;
     padding: 20px 0 20px 20px;
     font-weight: bold;
+  }
+
+  #sidebar .title {
+    font-size: 18px;
+    color: #333;
+  }
+
+  #sidebar li {
+    font-size: 13px;
+    margin-top: 4px;
   }
 
 //// 画像系 ////

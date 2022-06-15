@@ -1,0 +1,62 @@
+<div id="switch_gender">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <ul class="text-center my-2">
+          <li class="px-5"><%= link_to "All", root_path %></li>
+          <li class="px-5"><%= link_to "MEN", men_path %></li>
+          <li class="px-5"><%= link_to "WOMEN", women_path %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-10 offset-md-1 d-flex justify-content-between">
+      <div class="container">
+        <div class="row">
+          <!--性別選択-->
+          <div class="col-md-3 gender-nav">
+            <div class="dropdown d-grid">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-magnifying-glass"></i> 探す
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><%= link_to "コーディネートを探す", posts_path, class: "dropdown-item" %></li>
+                <li><%= link_to "ユーザーを探す", members_path, class: "dropdown-item" %></li>
+              </ul>
+            </div>
+          </div>
+          <!--コーディネート一覧-->
+          <div class="col-md-9">
+            <div class="row">
+              <% posts.each do |post| %>
+                <div class="col-lg-4 col-sm-6 g-3">
+                  <div class="card">
+                    <%= link_to post_path(post) do %>
+                      <%= image_tag post.outfit_image, class: "outfit_image_index" %>
+                    <% end %>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item member-profile d-flex">
+                        <%= link_to member_path(post.member_id) do %>
+                          <%= image_tag post.member.profile_image, class: "profile_image_li" %>
+                        <% end %>
+                        <div class="main ps-2 pt-1">
+                          <p class="name"><%= post.member.name %></p>
+                          <p><%= post.member.get_height %></p>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <%= paginate posts %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

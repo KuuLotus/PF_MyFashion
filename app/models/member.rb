@@ -44,5 +44,12 @@ class Member < ApplicationRecord
   def active_for_authentication?
     super && (is_deleted == false)
   end
+  
+  def self.guest
+    find_or_create_by!(name: "企業様(閲覧用)" ,email: 'guest@example.com') do |member|
+      member.password = SecureRandom.urlsafe_base64
+      member.name = "企業様(閲覧用)"
+    end
+  end
 
 end

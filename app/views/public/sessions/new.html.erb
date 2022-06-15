@@ -20,8 +20,10 @@
             <div class="actions">
               <%= f.submit "ログイン", class: "btn btn-secondary" %>
             </div>
-            <p class="mt-2">アカウントをお持ちでない方</p>
+            <p class="my-2">アカウントをお持ちでない方</p>
             <%= link_to "新規会員登録をする", new_member_registration_path, class: "btn btn-primary" %>
+            <p class="my-2">採用企業担当者様はこちら</p>
+            <%= link_to 'ゲストログイン', members_guest_sign_in_path, class: "btn btn-primary", method: :post %>
           </div>
         </div>
       <% end %>

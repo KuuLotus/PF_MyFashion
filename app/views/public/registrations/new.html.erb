@@ -22,8 +22,16 @@
             <div class="actions">
               <%= f.submit "登録する", class: "btn btn-secondary" %>
             </div>
-            <p class="mt-2">アカウントをお持ちの方</p>
-            <%= link_to "ログインする", new_member_session_path, class: "btn btn-primary" %>
+            <div class="row">
+              <div class="col-md-6">
+                <p class="my-2">アカウントをお持ちの方</p>
+                <%= link_to "ログインする", new_member_session_path, class: "btn btn-primary" %>
+              </div>
+              <div class="col-md-6">
+                <p class="my-2">採用企業担当者様はこちら</p>
+                <%= link_to 'ゲストログイン', members_guest_sign_in_path, class: "btn btn-primary", method: :post %>
+              </div>
+            </div>
           </div>
         </div>
       <% end %>

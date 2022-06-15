@@ -21,12 +21,16 @@
               <p class="pt-3"><%= @member.body %></p>
             </div>
           </div>
-          <% if @member == current_member %>
+          <% if @member == current_member && @member.name != "企業様(閲覧用)" %>
             <div class="btn_area d-flex justify-content-between mt-3">
               <%= link_to "プロフィール変更", edit_member_path(@member), class: "btn btn-secondary" %>
               <%= link_to "コーディネート登録", new_post_path, class: "btn btn-primary" %>
               <%= link_to "退会について", withdraw_confirm_member_path(@member), class: "btn btn-danger" %>
             </div>
+            <% elsif @member == current_member && @member.name == "企業様(閲覧用)" %>
+              <div class="btn_area d-flex justify-content-between mt-3">
+                <%= link_to "コーディネート登録", new_post_path, class: "btn btn-primary" %>
+              </div>
           <% else %>
             <div id="follow_btn_<%= @member.id %>" class="mt-3 ms-3">
               <%= render "public/relationships/follow", member: @member %>
