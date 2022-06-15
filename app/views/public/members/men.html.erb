@@ -2,9 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 offset-md-2 d-flex justify-content-between">
-        <h1>ユーザー一覧</h1>
+        <h1>ユーザー一覧<span class="ms-1">(男性)</span></h1>
         <div class="all_member">
-          <h2 class="ps-3"><%= @members.count %><span>件</span></h2>
+          <h2 class="ps-3"><%= @members_men.count %><span>件</span></h2>
         </div>
       </div>
     </div>
@@ -32,9 +32,9 @@
           <!--ユーザー一覧-->
           <div class="col-lg-9">
             <ul class="ps-0">
-              <%= render "index", members: @members %>
+              <%= render "index", members: @members_men %>
             </ul>
-            <%= paginate @members %>
+            <%= paginate @members_men %>
           </div>
         </div>
       </div>

@@ -55,6 +55,16 @@ class Public::MembersController < ApplicationController
   def search
   end
 
+  # 男性ユーザー
+  def men
+    @members_men = Member.where.not(is_deleted: true).where.not(id: current_member.id).where(gender: 0).page(params[:page]).per(30)
+  end
+
+  # 女性ユーザー
+  def women
+    @members_women = Member.where.not(is_deleted: true).where.not(id: current_member.id).where(gender: 1).page(params[:page]).per(30)
+  end
+
   private
     def member_params
       params.require(:member).permit(:name, :body, :height, :gender, :email, :profile_image)

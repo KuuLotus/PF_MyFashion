@@ -81,6 +81,10 @@
     position: relative;
   }
 
+  #title_top span {
+    font-size: 15px;
+  }
+
   #main-container {
     border: 1px #ddd solid;
     border-radius: 4px;
@@ -348,4 +352,8 @@
   width: 100%;
 }
 
+.gender-nav h2 {
+  font-size: 18px;
+  margin-left: 19px;
+}
 

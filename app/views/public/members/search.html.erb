@@ -1,4 +1,3 @@
-<% if @search_members.present? %>
   <header id="title_top">
     <div class="container">
       <div class="row">
@@ -19,22 +18,31 @@
           <div class="row">
             <!--性別選択-->
             <div class="col-lg-3 gender-nav">
-              <nav></nav>
+              <nav>
+                <h2 class="title">性別</h2>
+                <ul class="m-0">
+                  <li class="py-2"><%= link_to "ALL", members_path %></li>
+                  <li class="py-2"><%= link_to "MEN", men_member_path(current_member) %></li>
+                  <li class="py-2"><%= link_to "WOMEN", women_member_path(current_member) %></li>
+                </ul>
+              </nav>
             </div>
 
             <!--ユーザー一覧-->
             <div class="col-lg-9">
-              <ul class="ps-0">
-                <%= render "index", members: @search_members %>
-              </ul>
-              <%= paginate @search_members %>
+              <% if @search_members.present? %>
+                <ul class="ps-0">
+                  <%= render "index", members: @search_members %>
+                </ul>
+                <%= paginate @search_members %>
+              <% else %>
+                <h3 class="pt-5 text-center">条件に一致するユーザーは見つかりませんでした</h3>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-<% else %>
-  <p>条件に一致するユーザーは見つかりませんでした</p>
-<% end %>
+
 

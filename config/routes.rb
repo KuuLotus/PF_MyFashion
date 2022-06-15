@@ -16,6 +16,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 root to: "public/homes#top"
 get "men" => "public/homes#men"
 get "women" => "public/homes#women"
+get "tags/:id/posts" => "public/tags#tag_posts", as: :tag
 
 scope module: :public do
   resources :members, except: [:new] do
@@ -23,6 +24,8 @@ scope module: :public do
     get :followings, on: :member
     get :followers, on: :member
     get :withdraw_confirm, on: :member
+    get :men, on: :member
+    get :women, on: :member
     patch :withdraw, on: :member
     collection do
       get :search
@@ -33,6 +36,8 @@ scope module: :public do
     resources :post_comments, only: [:create, :destroy]
     collection do
       get :search
+      get :men
+      get :women
     end
   end
 end

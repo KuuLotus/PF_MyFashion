@@ -2,9 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10 offset-md-1 d-flex justify-content-between">
-        <h1>コーディネート一覧</h1>
+        <h1>コーディネート一覧<span>(男性)</span></h1>
         <div class="all_member">
-          <h2 class="ps-3"><%= @posts.count %><span>件</span></h2>
+          <h2 class="ps-3"><%= @posts_men.count %><span>件</span></h2>
         </div>
       </div>
     </div>
@@ -47,9 +47,9 @@
           <!--コーディネート一覧-->
           <div class="col-md-9">
             <div class="row">
-              <%= render "index", posts: @posts %>
+              <%= render "index", posts: @posts_men %>
             </div>
-            <%= paginate @posts %>
+            <%= paginate @posts_men %>
           </div>
         </div>
       </div>

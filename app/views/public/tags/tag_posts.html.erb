@@ -2,9 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10 offset-md-1 d-flex justify-content-between">
-        <h1>コーディネート一覧</h1>
+        <h1><%= @tag.name %>の投稿一覧</h1>
         <div class="all_member">
-          <h2 class="ps-3"><%= @posts.count %><span>件</span></h2>
+          <h2 class="ps-3"><%= @tag_posts.count %><span>件</span></h2>
         </div>
       </div>
     </div>
@@ -47,9 +47,13 @@
           <!--コーディネート一覧-->
           <div class="col-md-9">
             <div class="row">
-              <%= render "index", posts: @posts %>
+              <% if @tag_posts.present? %>
+                <%= render "public/posts/index", posts: @tag_posts %>
+              <% else %>
+                <h4 class="text-center mt-5"><%= @tag.name %>の投稿はまだありません</h4>
+              <% end %>
             </div>
-            <%= paginate @posts %>
+            <%= paginate @tag_posts %>
           </div>
         </div>
       </div>

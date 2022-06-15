@@ -19,15 +19,20 @@
         <div class="row">
           <!--性別選択-->
           <div class="col-md-3 gender-nav">
-            <div class="dropdown d-grid">
-              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-magnifying-glass"></i> 探す
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><%= link_to "コーディネートを探す", posts_path, class: "dropdown-item" %></li>
-                <li><%= link_to "ユーザーを探す", members_path, class: "dropdown-item" %></li>
+            <nav>
+              <h2 class="title">タグ</h2>
+              <ul class="m-0">
+                <li class="py-2 d-flex flex-wrap">
+                  <% tags.each do |tag| %>
+                    <div class="tag_box mb-2 me-2">
+                      <%= link_to tag_path(tag) do %>
+                        # <%= tag.name %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </li>
               </ul>
-            </div>
+            </nav>
           </div>
           <!--コーディネート一覧-->
           <div class="col-md-9">

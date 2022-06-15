@@ -25,6 +25,7 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts = Post.joins(:member).where({member: {is_deleted: false}}).page(params[:page]).per(40)
+    @tags = Tag.limit(10)
   end
 
   def edit
@@ -51,6 +52,19 @@ class Public::PostsController < ApplicationController
 
   # タグに紐ずく検索結果
   def search
+    @tags = Tag.limit(10)
+  end
+
+  # 男性の投稿
+  def men
+    @posts_men = Post.joins(:member).where({member: {is_deleted: false}}).where({member: {gender: 0}}).page(params[:page]).per(40)
+    @tags = Tag.limit(10)
+  end
+
+  # 女性の投稿
+  def women
+    @posts_women = Post.joins(:member).where({member: {is_deleted: false}}).where({member: {gender: 1 }}).page(params[:page]).per(40)
+    @tags = Tag.limit(10)
   end
 
   private
