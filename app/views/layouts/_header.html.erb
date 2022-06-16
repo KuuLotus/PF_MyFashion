@@ -1,51 +1,63 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">MyFashion</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <% if member_signed_in? %>
-          <li class="nav-item">
-            <%= link_to "コーデ一覧", posts_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "ユーザー一覧", members_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-            <%= link_to "マイページ", member_path(current_member), class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "nav-link" %>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "コーデ一覧", root_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "ユーザー一覧", members_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "新規登録", new_member_registration_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "ログイン", new_member_session_path, class: "nav-link" %>
-          </li>
+  <div class="container d-flex justify-content-around">
+    <div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!--検索フォーム-->
+        <%= search_form_for @q, url: search_members_path, class: "d-flex search_form" do |f| %>
+          <%= f.search_field :name_cont, class: "form-control me-2", placeholder: "ユーザーを探す" %>
+
+          <%= f.submit "検索", class: "btn btn-outline-success" %>
         <% end %>
-      </ul>
+        <%= search_form_for @search_post, url: search_posts_path, class: "d-flex search_form" do |f| %>
+          <%= f.search_field :tags_name_cont, class: "form-control me-2", placeholder: "コーディネートを探す" %>
 
-      <!--検索フォーム-->
-      <%= select_tag 'condition', options_for_select(["ユーザー検索", "コーディネート検索"]), class: "form-select form-select-sm text-center me-2", style: "width: auto;"%>
-      <%= search_form_for @q, url: search_members_path, class: "d-flex" do |f| %>
-        <%= f.search_field :name_cont, class: "form-control me-2", placeholder: "ユーザーを探す" %>
+          <%= f.submit "検索", class: "btn btn-outline-success" %>
+        <% end %>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">コーディネートやユーザーを探す</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link user-search" id="user-search-tab">ユーザー検索</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link user-search" id="coodinate-search-tab" aria-current="page">コーディネート検索</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <%= f.submit "検索", class: "btn btn-outline-success" %>
-      <% end %>
-      <%= search_form_for @search_post, url: search_posts_path, class: "d-flex" do |f| %>
-        <%= f.search_field :tags_name_cont, class: "form-control me-2", placeholder: "コーディネートを探す" %>
+    <div class="application-name">
+      <a class="navbar-brand" href="/"><strong>MyFashion</strong></a>
+    </div>
 
-        <%= f.submit "検索", class: "btn btn-outline-success" %>
+    <div class="user-icon">
+      <% if member_signed_in? %>
+        <div class="dropdown">
+          <%= image_tag current_member.get_profile_image, class: "profile_image_li dropdown-toggle", id: "dropdownMenuButton1", "data-bs-toggle": "dropdown" %>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><%= link_to "マイページ", member_path(current_member), class: "dropdown-item" %></li>
+            <li><%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "dropdown-item" %></li>
+            <li><%= link_to "退会について", withdraw_confirm_member_path(current_member), class: "dropdown-item" %></li>
+          </ul>
+        </div>
+      <% else %>
+        <%= image_tag "no_image_user.jpg", class: "profile_image_li" %> 
+        <%= link_to "新規登録", new_member_registration_path %> |
+        <%= link_to "ログイン", new_member_session_path %>
       <% end %>
     </div>
   </div>

@@ -4,7 +4,7 @@ class Public::MembersController < ApplicationController
   before_action :ensure_withdraw_member, only:[:show, :followings, :followers]
 
   def index
-    @members = Member.where.not(is_deleted: true).where.not(id: current_member.id).page(params[:page]).per(30)
+    @members = Member.where.not(is_deleted: true).page(params[:page]).per(30)
   end
 
   def show
@@ -57,12 +57,12 @@ class Public::MembersController < ApplicationController
 
   # 男性ユーザー
   def men
-    @members_men = Member.where.not(is_deleted: true).where.not(id: current_member.id).where(gender: 0).page(params[:page]).per(30)
+    @members_men = Member.where.not(is_deleted: true).where(gender: 0).page(params[:page]).per(30)
   end
 
   # 女性ユーザー
   def women
-    @members_women = Member.where.not(is_deleted: true).where.not(id: current_member.id).where(gender: 1).page(params[:page]).per(30)
+    @members_women = Member.where.not(is_deleted: true).where(gender: 1).page(params[:page]).per(30)
   end
 
   private

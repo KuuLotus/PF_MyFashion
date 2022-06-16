@@ -6,7 +6,9 @@
         <div class="member_profile mt-3 d-flex justify-content-between">
           <div class="d-flex">
             <div>
-              <%= image_tag @post.member.get_profile_image, class: "profile_image_top" %>
+              <%= link_to member_path(@post.member) do %>
+                <%= image_tag @post.member.get_profile_image, class: "profile_image_top" %>
+              <% end %>
             </div>
             <div class="title_text_header ps-4">
               <h1><%= @post.member.name %></h1>

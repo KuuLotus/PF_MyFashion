@@ -18,8 +18,13 @@
       <div class="container">
         <div class="row">
           <!--性別選択-->
-          <div class="col-md-3 gender-nav">
+          <div class="col-md-3">
             <nav>
+              <h2 class="title">探す</h2>
+              <ul>
+                <li class="pb-2"><%= link_to "コーディネートを探す", posts_path %></li>
+                <li><%= link_to "ユーザーを探す", members_path %></li>
+              </ul>
               <h2 class="title">タグ</h2>
               <ul class="m-0">
                 <li class="py-2 d-flex flex-wrap">

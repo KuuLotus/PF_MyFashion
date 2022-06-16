@@ -14,7 +14,6 @@
     <header>
       <%= render "layouts/header" %>
     </header>
-
     <main>
       <!--フラッシュメッセージ-->
       <% if flash[:notice] %>
@@ -36,6 +35,81 @@
     <footer>
 
     </footer>
+    <script>
+      var elements = document.getElementsByClassName('search_form')
+      Array.prototype.forEach.call(elements, function(element){
+        element.addEventListener("click", function(){
+          var e = document.getElementById('exampleModal')
+          e.classList.add("show")
+          e.style.display = "block"
+          e.setAttribute("aria-modal", true)
+          e.setAttribute("role", "dialog")
+          e.removeAttribute("aria-hidden")
+        })
+      })
+
+      var closeBtn = document.getElementsByClassName('btn-close')[0]
+      closeBtn.addEventListener("click", function(){
+        var e = document.getElementById('exampleModal')
+        e.classList.remove("show")
+        e.style.display = "none"
+        e.removeAttribute("aria-modal")
+        e.removeAttribute("role")
+        e.setAttribute("aria-hidden", true)
+      })
+
+      var userSearchTab = document.getElementById('user-search-tab')
+      var coodinateSearchTab = document.getElementById('coodinate-search-tab')
+        userSearchTab.addEventListener("click", function(){
+          // userSearchTab.classList.toggle("active")
+          // coodinateSearchTab.classList.toggle("active")
+          userSearchTab.classList.add("active")
+          coodinateSearchTab.classList.remove("active")
+          showMemberSearch()
+          hidePostSearch()
+        })
+
+      coodinateSearchTab.addEventListener("click", function(){
+          // userSearchTab.classList.toggle("active")
+          // coodinateSearchTab.classList.toggle("active")
+          userSearchTab.classList.remove("active")
+          coodinateSearchTab.classList.add("active")
+          showPostSearch()
+          hideMemberSearch()
+        })
+
+    // $('#condition').change(function() {
+    //   let condition = $('#condition').val()
+    //   if(condition === 'ユーザー検索') {
+    //     showMemberSearch()
+    //     hidePostSearch()
+    //   } else {
+    //     showPostSearch()
+    //     hideMemberSearch()
+    //   }
+    // })
+
+    function showPostSearch() {
+      $('#post_search').addClass("d-flex")
+      $('#post_search').show()
+    }
+
+    function hidePostSearch() {
+      $('#post_search').removeClass("d-flex")
+      $('#post_search').hide()
+    }
+
+    function showMemberSearch() {
+      $('#member_search').addClass("d-flex")
+      $('#member_search').show()
+    }
+
+    function hideMemberSearch() {
+      $('#member_search').removeClass("d-flex")
+      $('#member_search').hide()
+    }
+
+    </script>
 
   </body>
 </html>

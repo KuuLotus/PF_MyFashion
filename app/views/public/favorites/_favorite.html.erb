@@ -1,15 +1,17 @@
-<% if post.favorited_by?(current_member) %>
-	<p class="mb-0 text-center">
-		<%= link_to post_favorites_path(post), method: :delete, remote: true do %>
-			<i class="fa-solid fa-heart"></i>
-			<span class="fw-bold"><%= post.favorites.count %></span>
-		<% end %>
-	</p>
-<% else %>
-	<p class="mb-0 text-center">
-		<%= link_to post_favorites_path(post), method: :post, remote: true do %>
-			<i class="fa-regular fa-heart"></i>
-			<span class="fw-bold"><%= post.favorites.count %></span>
-		<% end %>
-	</p>
+<% if member_signed_in? %>
+	<% if post.favorited_by?(current_member) %>
+		<p class="mb-0 text-center">
+			<%= link_to post_favorites_path(post), method: :delete, remote: true do %>
+				<i class="fa-solid fa-heart"></i>
+				<span class="fw-bold"><%= post.favorites.count %></span>
+			<% end %>
+		</p>
+	<% else %>
+		<p class="mb-0 text-center">
+			<%= link_to post_favorites_path(post), method: :post, remote: true do %>
+				<i class="fa-regular fa-heart"></i>
+				<span class="fw-bold"><%= post.favorites.count %></span>
+			<% end %>
+		</p>
+	<% end %>
 <% end %>
