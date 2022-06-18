@@ -1,4 +1,5 @@
 class Public::TagsController < ApplicationController
+  layout 'public/application'
 
   def tag_posts
     @tag = Tag.find(params[:id])

@@ -12,7 +12,7 @@
 
   <body>
     <header>
-      <%= render "layouts/header" %>
+      <%= render "layouts/public/header" %>
     </header>
     <main>
       <!--フラッシュメッセージ-->
@@ -70,24 +70,11 @@
         })
 
       coodinateSearchTab.addEventListener("click", function(){
-          // userSearchTab.classList.toggle("active")
-          // coodinateSearchTab.classList.toggle("active")
           userSearchTab.classList.remove("active")
           coodinateSearchTab.classList.add("active")
           showPostSearch()
           hideMemberSearch()
         })
-
-    // $('#condition').change(function() {
-    //   let condition = $('#condition').val()
-    //   if(condition === 'ユーザー検索') {
-    //     showMemberSearch()
-    //     hidePostSearch()
-    //   } else {
-    //     showPostSearch()
-    //     hideMemberSearch()
-    //   }
-    // })
 
     function showPostSearch() {
       $('#post_search').addClass("d-flex")
@@ -110,6 +97,5 @@
     }
 
     </script>
-
   </body>
 </html>

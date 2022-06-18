@@ -1,4 +1,5 @@
 class Public::RelationshipsController < ApplicationController
+  layout 'public/application'
   before_action :authenticate_member!
 
   def create

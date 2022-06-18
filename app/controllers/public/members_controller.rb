@@ -1,4 +1,5 @@
 class Public::MembersController < ApplicationController
+  layout 'public/application'
   before_action :ensure_corect_member, only:[:edit, :withdraw_confirm]
   before_action :ensure_guest_user, only:[:edit, :withdraw_confirm]
   before_action :ensure_withdraw_member, only:[:show, :followings, :followers]

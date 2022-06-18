@@ -45,6 +45,7 @@ end
 namespace :admin do
   root to: "members#index"
   resources :members, only:[:show]
+  resources :posts, only:[:show, :index]
 end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

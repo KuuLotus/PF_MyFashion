@@ -41,23 +41,15 @@
     </div>
 
     <div class="application-name">
-      <a class="navbar-brand" href="/"><strong>MyFashion</strong></a>
+      <a class="navbar-brand" href="/admin"><strong>MyFashion</strong></a>
     </div>
 
     <div class="user-icon">
-      <% if member_signed_in? %>
-        <div class="dropdown">
-          <%= image_tag current_member.get_profile_image, class: "profile_image_li dropdown-toggle", id: "dropdownMenuButton1", "data-bs-toggle": "dropdown" %>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><%= link_to "マイページ", member_path(current_member), class: "dropdown-item" %></li>
-            <li><%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "dropdown-item" %></li>
-            <li><%= link_to "退会について", withdraw_confirm_member_path(current_member), class: "dropdown-item" %></li>
-          </ul>
-        </div>
+      <% if admin_signed_in? %>
+        <%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "dropdown-item" %></li>
       <% else %>
-        <%= image_tag "no_image_user.jpg", class: "profile_image_li" %> 
-        <%= link_to "新規登録", new_member_registration_path %> |
-        <%= link_to "ログイン", new_member_session_path %>
+        <%= image_tag "no_image_user.jpg", class: "profile_image_li" %>
+        <%= link_to "ログイン", new_admin_session_path %>
       <% end %>
     </div>
   </div>

@@ -1,0 +1,76 @@
+<header id="title_top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 offset-md-1">
+        <p><%= @post.member.name %>の投稿詳細</p>
+        <div class="member_profile mt-3 d-flex justify-content-between">
+          <div class="d-flex">
+            <div>
+              <%= link_to admin_member_path(@post.member) do %>
+                <%= image_tag @post.member.get_profile_image, class: "profile_image_top" %>
+              <% end %>
+            </div>
+            <div class="title_text_header ps-4">
+              <h1><%= @post.member.name %></h1>
+              <div class="d-flex">
+                <p class="pe-2"><%= @post.member.get_gender %></p>
+                <p class="pe-2"><%= @post.member.get_height %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="container mt-4">
+  <div class="row">
+    <!--投稿画像-->
+    <div class="col-md-5 offset-md-1">
+      <div class="card">
+        <%= image_tag @post.outfit_image, class: "outfit_image_show" %>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <p class="text-center">
+              <i class="fa-solid fa-heart"></i>
+              <%= @post.favorites.count %>
+            </p>
+          </li>
+          <div id="post_comments_<%= @post.id %>">
+            <%= render "public/post_comments/comment", post: @post, post_comment_new: @post_comment_new %>
+          </div>
+        </ul>
+      </div>
+    </div>
+    <!--投稿テキスト-->
+    <div class="col-md-5">
+      <div class="coordinate_info">
+        <h1><%= @post.title %></h1>
+        <p class="mt-2">
+          <span>
+            モデル情報:
+            <%= @post.member.get_height %> /
+            <%= @post.member.get_gender %>
+          </span>
+        </p>
+        <p class="border-top mt-3 pt-3"><%= @post.body %></p>
+        <p class="border-top mt-3 py-2">
+          <span>
+            <i class="fa-regular fa-clock me-1"></i>
+            <%= @post.created_at.strftime('%Y/%m/%d') %>
+          </span>
+        </p>
+      </div>
+      <h2 class="tag_title mt-3">着用タグからコーディネートを探す</h2>
+      <div class="tag_area pt-2 gap-2">
+        <% @post.tags.each do |tag| %>
+          <div class="tag_box">
+            <%= link_to tag_path(tag.id) do %>
+              # <%= tag.name %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

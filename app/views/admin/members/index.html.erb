@@ -1,2 +1,43 @@
-<h1>Admin::Members#index</h1>
-<p>Find me in app/views/admin/members/index.html.erb</p>
+<header id="title_top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2 d-flex justify-content-between">
+        <h1>ユーザー一覧</h1>
+        <div class="all_member">
+          <h2 class="ps-3"><%= @members.count %><span>件</span></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!--ユーザー一覧メイン-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2 d-flex justify-content-between">
+      <div class="container">
+        <div class="row">
+          <!--性別選択-->
+          <div class="col-lg-3 gender-nav">
+            <nav>
+              <h2 class="title">性別</h2>
+              <ul class="m-0">
+                <li class="py-2"><%= link_to "ALL", members_path %></li>
+                <li class="py-2"><%= link_to "MEN", men_members_path %></li>
+                <li class="py-2"><%= link_to "WOMEN", women_members_path %></li>
+              </ul>
+            </nav>
+          </div>
+
+          <!--ユーザー一覧-->
+          <div class="col-lg-9">
+            <ul class="ps-0">
+              <%= render "index", members: @members %>
+            </ul>
+            <%= paginate @members %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

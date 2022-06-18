@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  layout 'public/application'
   before_action :ensure_corect_member, only:[:edit]
   before_action :ensure_withdraw_member, only:[:show]
 

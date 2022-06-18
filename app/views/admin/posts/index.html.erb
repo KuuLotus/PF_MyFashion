@@ -1,0 +1,58 @@
+<header id="title_top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 d-flex justify-content-between">
+        <h1>コーディネート一覧</h1>
+        <div class="all_member">
+          <h2 class="ps-3"><%= @posts.count %><span>件</span></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!--コーデ一覧メイン-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 offset-md-1 d-flex justify-content-between">
+      <div class="container">
+        <div class="row">
+          <!--性別選択-->
+          <div class="col-md-3 gender-nav">
+            <nav>
+              <section class="gender pb-3">
+                <h2 class="title">性別</h2>
+                <ul class="m-0">
+                  <li class="py-2"><%= link_to "ALL", posts_path %></li>
+                  <li class="py-2"><%= link_to "MEN", men_posts_path %></li>
+                  <li class="py-2"><%= link_to "WOMEN", women_posts_path %></li>
+                </ul>
+              </section>
+              <section class="sidebar-tag pt-3">
+                <h2 class="title">タグ</h2>
+                <ul>
+                  <li class="py-2 d-flex flex-wrap">
+                    <% @tags.each do |tag| %>
+                      <div class="tag_box mb-2 me-2">
+                        <%= link_to tag_path(tag) do %>
+                          # <%= tag.name %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </li>
+                </ul>
+              </section>
+            </nav>
+          </div>
+          <!--コーディネート一覧-->
+          <div class="col-md-9">
+            <div class="row">
+              <%= render "index", posts: @posts %>
+            </div>
+            <%= paginate @posts %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

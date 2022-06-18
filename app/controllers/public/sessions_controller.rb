@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+  layout 'public/application'
   before_action :reject_member, only: [:create]
 
   # GET /resource/sign_in

@@ -1,4 +1,5 @@
 class Public::HomesController < ApplicationController
+  layout 'public/application'
   def top
     @posts = Post.joins(:member).where({member: {is_deleted: false}}).page(params[:page]).per(40)
     @tags = Tag.limit(10)
