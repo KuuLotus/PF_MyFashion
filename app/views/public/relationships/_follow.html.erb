@@ -1,7 +1,5 @@
 <% if member_signed_in? %>
-  <% if member == current_member %>
-    <%= link_to "マイページ", member_path(current_member), class: "btn btn-secondary" %>
-  <% else %>
+  <% if member != current_member %>
     <% if member.followed_by?(current_member) %>
       <%= link_to member_relationships_path(member), method: :delete, remote: true, class: "follow-btn btn btn-danger px-3" do %>
         <span>フォロー中</span>
