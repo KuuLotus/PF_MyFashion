@@ -11,6 +11,10 @@ Tag.create([
   { name: 'フレアパンツ' },
   { name: 'バケットハット' },
   { name: 'ショートパンツ' },
+  { name: 'モード' },
+  { name: 'ハンチング' },
+  { name: 'プチプラコーデ' },
+  { name: 'サンダル' },
   { name: 'ストリート' }
 ])
 
@@ -18,3 +22,21 @@ Admin.create!(
   email: 'admin@admin',
   password: 'adminadmin',
   )
+  
+Member.create!(
+  email: 'narita@gmail.com',
+  password: 'narita',
+  )
+Member.create!(
+  email: 'ayano@gmail.com',
+  password: '555555',
+  )
+Member.create!(
+  email: 'komatu@gmail.com',
+  password: '777777',
+  )
+Member.create!(
+  email: 'baba@gmail.com',
+  password: 'bababa',
+  )
+
