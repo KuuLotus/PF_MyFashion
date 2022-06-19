@@ -9,6 +9,7 @@ class Post < ApplicationRecord
   has_one_attached :outfit_image
 
   validates :title, presence: true
+  validates :body, length:{maximum:400}
 
   def favorited_by?(member)
     favorites.exists?(member_id: member.id)

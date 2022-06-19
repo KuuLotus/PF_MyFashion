@@ -36,7 +36,8 @@ class Member < ApplicationRecord
       "#{height}" + "cm"
     end
   end
-
+  
+  # 引数のユーザーにフォローされているかどうか
   def followed_by?(member)
     reverse_of_relationships.find_by(following_id: member.id).present?
   end
