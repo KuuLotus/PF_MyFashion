@@ -1,7 +1,7 @@
 <header id="title_top">
   <div class="container">
     <div class="row">
-      <div class="col-lg-10 offset-md-1">
+      <div class="col-lg-10 offset-md-1 member_info">
         <p><%= @post.member.name %>の投稿詳細</p>
         <div class="member_profile mt-3 d-flex justify-content-between">
           <div class="d-flex">
@@ -19,6 +19,11 @@
             </div>
           </div>
         </div>
+        <div class="admin-delete-btn">
+          <%= link_to admin_post_path(@post), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger" do %>
+            <i class="fa-solid fa-trash-can"></i> 削除
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
@@ -32,12 +37,12 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <p class="text-center">
-              <i class="fa-solid fa-heart"></i>
+              <i class="fa-solid fa-heart text-danger"></i>
               <%= @post.favorites.count %>
             </p>
           </li>
           <div id="post_comments_<%= @post.id %>">
-            <%= render "public/post_comments/comment", post: @post, post_comment_new: @post_comment_new %>
+            <%= render "admin/post_comments/comment", post: @post %>
           </div>
         </ul>
       </div>
@@ -65,9 +70,7 @@
       <div class="tag_area pt-2 gap-2">
         <% @post.tags.each do |tag| %>
           <div class="tag_box">
-            <%= link_to tag_path(tag.id) do %>
               # <%= tag.name %>
-            <% end %>
           </div>
         <% end %>
       </div>

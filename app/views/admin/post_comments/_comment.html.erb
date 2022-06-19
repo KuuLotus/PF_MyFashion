@@ -18,8 +18,8 @@
                 <div class="text_box">
                   <%= post_comment.comment %>
                 </div>
-                <% if post_comment.member == current_member || current_admin %>
-                  <%= link_to post_post_comment_path(post, post_comment), method: :delete, data: {confirm: "コメントを削除します。よろしいですか？"}, class: "d-flex align-items-end ps-1", remote: true do %>
+                <% if current_admin %>
+                  <%= link_to admin_post_post_comment_path(post, post_comment), method: :delete, data: {confirm: "コメントを削除します。よろしいですか？"}, class: "d-flex align-items-end ps-1", remote: true do %>
                     <i class="fa-solid fa-delete-left"></i>
                   <% end %>
                 <% end %>
@@ -33,20 +33,4 @@
     <% end %>
   </div>
 </li>
-<% if member_signed_in? %>
-  <%= form_with model: post_comment_new, url: post_post_comments_path(post), method: :post, local: false do |f| %>
-    <li class="list-group-item">
-      <div class="form-box d-flex gap-2">
-        <div class="col-1">
-          <%= image_tag current_member.get_profile_image, class: "profile_image_li" %>
-        </div>
-        <div class="col-9">
-          <%= f.text_area :comment, rows: '1', placeholder: "コメントを書く", class: "form-control d-grid comment-form" %>
-        </div>
-        <div class="col-1">
-          <%= f.submit "送信", class: "btn btn-secondary" %>
-        </div>
-      </div>
-    </li>
-  <% end %>
-<% end %>
+

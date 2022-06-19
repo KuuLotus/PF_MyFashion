@@ -44,8 +44,25 @@ end
 
 namespace :admin do
   root to: "members#index"
-  resources :members, only:[:show]
-  resources :posts, only:[:show, :index]
+  resources :members, only:[:show] do
+    patch :withdraw, on: :member
+    get :followings, on: :member
+    get :followers, on: :member
+    collection do
+      get :search
+      get :men
+      get :women
+    end
+  end
+  resources :posts, only:[:show, :index, :destroy] do
+    resources :post_comments, only:[:destroy]
+    collection do
+      get :search
+      get :men
+      get :women
+    end
+  end
+  resources :tags, only:[:index, :create, :destroy]
 end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

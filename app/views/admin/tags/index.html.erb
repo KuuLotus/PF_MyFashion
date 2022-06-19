@@ -2,22 +2,22 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 offset-md-2 d-flex justify-content-between">
-        <h1>ユーザー一覧</h1>
+        <h1>タグ一覧</h1>
         <div class="all_member">
-          <h2 class="ps-3"><%= @members.count %><span>件</span></h2>
+          <h2 class="ps-3"><%= @tags.count %><span>件</span></h2>
         </div>
       </div>
     </div>
   </div>
 </header>
 
-<!--ユーザー一覧メイン-->
+<!--タグ一覧メイン-->
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2 d-flex justify-content-between">
       <div class="container">
         <div class="row">
-          <!--性別選択-->
+          <!--サイドバー-->
           <div class="col-lg-3 gender-nav">
             <nav>
               <h2 class="title">一覧</h2>
@@ -35,12 +35,15 @@
             </nav>
           </div>
 
-          <!--ユーザー一覧-->
+          <!--メイン-->
           <div class="col-lg-9">
-            <ul class="ps-0">
-              <%= render "index", members: @members %>
-            </ul>
-            <%= paginate @members %>
+            <!--タグ追加-->
+            <div id="tag-main-container">
+              <%= render "tag", tag: @tag, tags: @tags %>
+              <div class="px-2">
+                <%= paginate @tags %>
+              </div>
+            </div>
           </div>
         </div>
       </div>

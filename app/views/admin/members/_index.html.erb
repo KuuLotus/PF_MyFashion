@@ -30,5 +30,12 @@
         </p>
       </div>
     </div>
+    <div class="which_withdraw">
+      <% if member.is_deleted == true %>
+        <p class="badge bg-danger me-3 fw-bold fs-6">退会済み</p>
+      <% else%>
+        <p class="badge bg-success me-3 fw-bold fs-6">入会中</p>
+      <% end %>
+    </div>
   </li>
 <% end %>

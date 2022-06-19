@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 offset-md-2 member_info">
-        <p><%= @member.name %>のページ</p>
+        <p><%= @member.name %>のフォロー一覧</p>
         <div class="member_profile mt-3">
           <div class="d-flex">
             <div>
@@ -54,31 +54,13 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <% if @member.posts.count == 0 %>
-      <div class="pt-5 text-center">
-        <h4>まだ投稿がありません</h4>
-      </div>
-    <% else %>
-      <% @member_posts.each do |post| %>
-        <div class="col-md-3 g-5">
-          <div class="card">
-            <%= link_to admin_post_path(post) do %>
-              <%= image_tag post.outfit_image, class: "outfit_image_index" %>
-            <% end %>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item" id="favorite_buttons_<%= post.id %>">
-                <p class="text-center">
-                  <i class="fa-solid fa-heart text-danger"></i>
-                  <%= post.favorites.count %>
-                </p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      <% end %>
-      <%= paginate @member_posts %>
-    <% end %>
-  </div>
 </div>
+
+<% if @members.present? %>
+  <%= render "follow", members: @members %>
+<% else %>
+　<div class="pt-5 text-center">
+    <h4>まだフォローしていません</h4>
+  </div>
+<% end %>
 
