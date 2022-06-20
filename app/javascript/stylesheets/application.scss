@@ -393,3 +393,45 @@
   right: 0;
 }
 
+#member_list,
+.card {
+  animation-name:fadeDownAnime;
+  animation-duration: 0.3s;
+  animation-fill-mode:forwards;
+  opacity:0;
+  overflow: hidden;/*拡大してはみ出る要素を隠す*/
+}
+
+@keyframes fadeDownAnime{
+  from {
+    opacity: 0;
+  transform: translateY(-100px);
+  }
+
+  to {
+    opacity: 1;
+  transform: translateY(0);
+  }
+}
+
+// ホバー時に画像を拡大
+.card .outfit_image_index {
+  transform: scale(1);
+  transition: .3s ease-in-out;/*移り変わる速さを変更したい場合はこの数値を変更*/
+}
+
+.card:hover .outfit_image_index {/*hoverした時の変化*/
+  transform: scale(1.1);/*拡大の値を変更したい場合はこの数値を変更*/
+}
+
+// カードに影を追加
+.card-effect {
+  box-shadow: 0 8px 22px rgba(0,0,0,0.1);
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.card-effect:hover {
+  box-shadow: none;
+  transform: translateY(5px) !important;
+}

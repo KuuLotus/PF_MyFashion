@@ -1,6 +1,6 @@
 <% posts.each do |post| %>
   <div class="col-lg-4 col-sm-6 g-3">
-    <div class="card">
+    <div class="card card-effect">
       <%= link_to admin_post_path(post) do %>
         <%= image_tag post.outfit_image, class: "outfit_image_index" %>
       <% end %>

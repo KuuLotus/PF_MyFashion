@@ -1,9 +1,11 @@
 <% posts.each do |post| %>
   <div class="col-lg-4 col-sm-6 g-3">
-    <div class="card">
-      <%= link_to post_path(post) do %>
-        <%= image_tag post.outfit_image, class: "outfit_image_index" %>
-      <% end %>
+    <div class="card card-effect">
+      <div class="zoomIn">
+        <%= link_to post_path(post) do %>
+          <%= image_tag post.outfit_image, class: "outfit_image_index" %>
+        <% end %>
+      </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item m-0" id="favorite_buttons_<%= post.id %>">
           <% if member_signed_in? %>
