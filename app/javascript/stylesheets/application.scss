@@ -83,6 +83,14 @@
     justify-content: center;
   }
 
+  #sidebar {
+    /*stickyで固定*/
+    position: -webkit-sticky;/*Safari*/
+    position: sticky;
+      /*固定したい位置*/
+    top: 18px;
+  }
+
   #switch_gender {
     width: 100%;
     background: #fff;
