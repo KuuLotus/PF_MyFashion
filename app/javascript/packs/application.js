@@ -13,6 +13,7 @@ import "bootstrap";
 import "../stylesheets/application"
 // import '@fortawesome/fontawesome-free/js/all'
 import "../stylesheets/public/sessions"
+import "script.js";
 
 
 Rails.start()

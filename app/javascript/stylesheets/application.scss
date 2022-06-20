@@ -66,6 +66,23 @@
     border: 1px #ddd solid;
   }
 
+  footer{
+    background: #fff;
+    position: relative;
+    z-index: 2;
+    padding:100px 20px;
+    border-top: 1px #ddd solid;
+    margin-top: 40px;
+  }
+
+  #sns-icon {
+    font-size: 18px;
+    color: #aaa;
+    margin-right: 7px;
+    display: flex;
+    justify-content: center;
+  }
+
   #switch_gender {
     width: 100%;
     background: #fff;
@@ -434,4 +451,65 @@
 .card-effect:hover {
   box-shadow: none;
   transform: translateY(5px) !important;
+}
+
+/*========= ページトップのためのCSS ===============*/
+/*リンクの形状*/
+#page-top a{
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  background: #fff;
+  border-radius: 100px;
+  border: 1px solid #000;
+  width: 60px;
+  height: 60px;
+  color: #000;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size:0.6rem;
+  transition:all 0.3s;
+}
+
+/*リンクを右下に固定*/
+#page-top {
+  position: fixed;
+  right: 10px;
+  z-index: 2;
+    /*はじめは非表示*/
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+/*　上に上がる動き　*/
+
+#page-top.UpMove{
+  animation: UpAnime 0.5s forwards;
+}
+@keyframes UpAnime{
+  from {
+    opacity: 0;
+  transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+  transform: translateY(0);
+  }
+}
+
+/*　下に下がる動き　*/
+
+#page-top.DownMove{
+  animation: DownAnime 0.5s forwards;
+}
+@keyframes DownAnime{
+  from {
+    opacity: 1;
+  transform: translateY(0);
+  }
+  to {
+    opacity: 1;
+  transform: translateY(100px);
+  }
 }
