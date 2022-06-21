@@ -19,6 +19,7 @@
 
   nav {
     z-index: 2;
+    background: #fff !important;
   }
 
   h1,h2,h3,h4,h5,h6 {
@@ -89,6 +90,10 @@
     position: sticky;
       /*固定したい位置*/
     top: 18px;
+    border: 1px #ddd solid;
+    border-radius: 3px;
+    padding: 21px 0 28px 0;
+    margin-top: 18px;
   }
 
   #switch_gender {
@@ -112,7 +117,6 @@
   #title_top {
     padding: 30px 0 30px 0;
     background: #fff;
-    // min-height: 133px;
     border-bottom: 1px #ddd solid;
     position: relative;
   }
@@ -202,7 +206,7 @@
     position: relative;
     margin: 5% auto;
     padding: 40px;
-    width: 600px;
+    width: 650px;
     height: auto;
     box-shadow: 0 2px 4px #4b4b4b;
   }
@@ -235,6 +239,11 @@
 
   .coordinate_follow_box {
     border-right: 1px #ddd solid;
+  }
+
+  .coordinate_follow_box:hover {
+    background-color: #dcdcdc;
+    transition: all .3s;
   }
 
   .coordinate_follow_box a {
@@ -519,5 +528,240 @@
   to {
     opacity: 1;
   transform: translateY(100px);
+  }
+}
+
+// テキストのボーダー
+.gnavi li {
+    /*線の基点とするためrelativeを指定*/
+	position: relative;
+}
+
+.gnavi li a::after {
+    content: '';
+    /*絶対配置で線の位置を決める*/
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    /*線の形状*/
+    width: 80%;
+    height: 2px;
+    background:#000;
+    /*アニメーションの指定*/
+    transition: all .3s;
+    transform: scale(0, 1);/*X方向0、Y方向1*/
+    transform-origin: center top;/*上部中央基点*/
+}
+
+/*現在地とhoverの設定*/
+.gnavi li.current a::after,
+.gnavi li a:hover::after {
+    transform: scale(1, 1);/*X方向にスケール拡大*/
+}
+
+/*== 赤ボタン設定 */
+.danger-btn {
+    /*アニメーションの起点とするためrelativeを指定*/
+  position: relative;
+  overflow: hidden;
+    /*ボタンの形状*/
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid #f00;/* ボーダーの色と太さ */
+  padding: 10px 30px;
+  text-align: center;
+  outline: none;
+    /*アニメーションの指定*/
+  transition: ease .2s;
+}
+
+/*ボタン内spanの形状*/
+.danger-btn span {
+  position: relative;
+  z-index: 3;/*z-indexの数値をあげて文字を背景よりも手前に表示*/
+  color:#f00;
+}
+
+.danger-btn:hover span{
+  color:#fff;
+}
+
+/*== 背景が流れる（中央から縦全体） */
+.bg-red:before {
+  content: '';
+    /*絶対配置で位置を指定*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+    /*色や形状*/
+  background: #f00;
+  width: 100%;
+  height: 100%;
+    /*アニメーション*/
+  transition: transform .3s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+  transform: scale(1, 0);
+  transform-origin: center;
+}
+
+/*hoverした際の形状*/
+.bg-red:hover:before{
+  transform:scale(1, 1);
+}
+
+// 青ボタンの設定
+.primary-btn{
+    /*アニメーションの起点とするためrelativeを指定*/
+  position: relative;
+  overflow: hidden;
+    /*ボタンの形状*/
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid #1e78ad;/* ボーダーの色と太さ */
+  padding: 10px 30px;
+  text-align: center;
+  outline: none;
+    /*アニメーションの指定*/
+  transition: ease .2s;
+}
+
+.primary-btn span {
+  position: relative;
+  z-index: 3;/*z-indexの数値をあげて文字を背景よりも手前に表示*/
+  color:#1e78ad;
+}
+
+.primary-btn:hover span{
+  color:#fff;
+}
+
+/*== 背景が流れる（中央から縦全体） */
+.bg-blue:before {
+  content: '';
+    /*絶対配置で位置を指定*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+    /*色や形状*/
+  background: #1e78ad;
+  width: 100%;
+  height: 100%;
+    /*アニメーション*/
+  transition: transform .3s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+  transform: scale(1, 0);
+  transform-origin: center;
+}
+
+/*hoverした際の形状*/
+.bg-blue:hover:before{
+  transform:scale(1, 1);
+}
+
+// グレーボタンの設定
+.secondary-btn{
+    /*アニメーションの起点とするためrelativeを指定*/
+  position: relative;
+  overflow: hidden;
+    /*ボタンの形状*/
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid #808080;/* ボーダーの色と太さ */
+  padding: 10px 30px;
+  background-color: inherit;
+  text-align: center;
+  outline: none;
+    /*アニメーションの指定*/
+  transition: ease .2s;
+}
+
+.secondary-btn span {
+  position: relative;
+  z-index: 3;/*z-indexの数値をあげて文字を背景よりも手前に表示*/
+  color:#808080;
+}
+
+.secondary-btn:hover span{
+  color:#fff;
+}
+
+/*== 背景が流れる（中央から縦全体） */
+.bg-gray:before {
+  content: '';
+    /*絶対配置で位置を指定*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+    /*色や形状*/
+  background: #808080;
+  width: 100%;
+  height: 100%;
+    /*アニメーション*/
+  transition: transform .3s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+  transform: scale(1, 0);
+  transform-origin: center;
+}
+
+/*hoverした際の形状*/
+.bg-gray:hover:before{
+  transform:scale(1, 1);
+}
+
+// 検索フォーム
+.open-btn{
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  background-position: center;
+}
+
+.close-btn {
+  width: 20px;
+  height: 20px;
+}
+
+/*tabの形状*/
+.tab{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tab li a{
+  display: block;
+  margin: 0 2px;
+  padding: 10px 20px;
+}
+/*liにactiveクラスがついた時の形状*/
+.tab li.active a{
+  background:#fff;
+  border: 1px #ddd solid;
+  border-bottom: none;
+}
+
+
+/*エリアの表示非表示と形状*/
+.area {
+  display: none;/*はじめは非表示*/
+  opacity: 0;/*透過0*/
+  background: #fff;
+  padding:50px 20px;
+  border: 1px #ddd solid;
+}
+
+/*areaにis-activeというクラスがついた時の形状*/
+.area.is-active {
+    display: block;/*表示*/
+    animation-name: displayAnime;/*ふわっと表示させるためのアニメーション*/
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes displayAnime{
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

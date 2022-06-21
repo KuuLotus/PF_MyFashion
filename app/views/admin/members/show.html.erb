@@ -20,7 +20,9 @@
         </div>
         <div class="withdraw_btn">
           <% if @member.is_deleted != true %>
-            <%= link_to "退会させる", withdraw_admin_member_path(@member), method: :patch, data: {confirm: "本当に退会させますか？"}, class: "btn btn-danger mb-3" %>
+            <%= link_to withdraw_admin_member_path(@member), method: :patch, data: {confirm: "本当に退会させますか？"}, class: "danger-btn bg-red" do %>
+              <span>退会させる</span>
+            <% end %>
           <% end %>
         </div>
       </div>

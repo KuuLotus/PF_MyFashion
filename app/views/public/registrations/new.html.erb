@@ -20,16 +20,22 @@
               <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード(確認用)", class: "form-control" %>
             </div>
             <div class="actions">
-              <%= f.submit "登録する", class: "btn btn-secondary" %>
+              <%= button_tag(type: "submit", class: "secondary-btn bg-gray") do %>
+                <span>登録する</span>
+              <% end %>
             </div>
-            <div class="row">
+            <div class="row mt-2">
               <div class="col-md-6">
                 <p class="my-2">アカウントをお持ちの方</p>
-                <%= link_to "ログインする", new_member_session_path, class: "btn btn-primary" %>
+                <%= link_to new_member_session_path, class: "primary-btn bg-blue" do %>
+                  <span>ログインする</span>
+                <% end %>
               </div>
               <div class="col-md-6">
                 <p class="my-2">採用企業担当者様はこちら</p>
-                <%= link_to 'ゲストログイン', members_guest_sign_in_path, class: "btn btn-primary", method: :post %>
+                <%= link_to members_guest_sign_in_path, class: "primary-btn bg-blue", method: :post do %>
+                  <span>ログインする</span>
+                <% end %>
               </div>
             </div>
           </div>

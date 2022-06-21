@@ -1,11 +1,11 @@
 <% if member_signed_in? %>
   <% if member != current_member %>
     <% if member.followed_by?(current_member) %>
-      <%= link_to member_relationships_path(member), method: :delete, remote: true, class: "follow-btn btn btn-danger px-3" do %>
+      <%= link_to member_relationships_path(member), method: :delete, remote: true, class: "danger-btn btn bg-red" do %>
         <span>フォロー中</span>
       <% end %>
     <% else %>
-      <%= link_to member_relationships_path(member), method: :post, remote: true, class: "follow-btn btn btn-primary" do %>
+      <%= link_to member_relationships_path(member), method: :post, remote: true, class: "primary-btn btn bg-blue" do %>
         <span>フォローする</span>
       <% end %>
     <% end %>

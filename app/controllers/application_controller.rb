@@ -14,4 +14,5 @@ class ApplicationController < ActionController::Base
       @search_posts = @search_post.result(distinct: true).page(params[:page]).per(40)
     end
   end
+
 end

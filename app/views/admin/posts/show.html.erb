@@ -20,8 +20,8 @@
           </div>
         </div>
         <div class="admin-delete-btn">
-          <%= link_to admin_post_path(@post), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger" do %>
-            <i class="fa-solid fa-trash-can"></i> 削除
+          <%= link_to admin_post_path(@post), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "danger-btn bg-red" do %>
+            <span>削除</span>
           <% end %>
         </div>
       </div>

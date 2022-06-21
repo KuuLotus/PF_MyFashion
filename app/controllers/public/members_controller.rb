@@ -90,7 +90,7 @@ class Public::MembersController < ApplicationController
     def ensure_guest_user
       @member = Member.find(params[:id])
       if @member.name == "企業様(閲覧用)"
-        redirect_to member_path(current_member) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+        redirect_to member_path(current_member) , notice: 'ゲストユーザーはプロフィール編集画面,退会画面へ遷移できません。'
       end
     end
 end

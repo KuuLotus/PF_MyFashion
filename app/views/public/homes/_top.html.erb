@@ -2,10 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10 offset-md-1">
-        <ul class="text-center my-2">
-          <li class="px-5"><%= link_to "All", root_path %></li>
-          <li class="px-5"><%= link_to "MEN", men_path %></li>
-          <li class="px-5"><%= link_to "WOMEN", women_path %></li>
+        <ul class="text-center m-0 p-0 gnavi">
+          <li class="px-5 py-3"><%= link_to "All", root_path %></li>
+          <li class="px-5 py-3"><%= link_to "MEN", men_path %></li>
+          <li class="px-5 py-3"><%= link_to "WOMEN", women_path %></li>
         </ul>
       </div>
     </div>
@@ -20,12 +20,12 @@
           <!--性別選択-->
           <div class="col-md-3">
             <nav id="sidebar">
-              <h2 class="title">探す</h2>
+              <h2 class="title ms-3">探す</h2>
               <ul>
                 <li class="pb-2"><%= link_to "コーディネートを探す", posts_path %></li>
                 <li><%= link_to "ユーザーを探す", members_path %></li>
               </ul>
-              <h2 class="title">タグ</h2>
+              <h2 class="title ms-3">タグ</h2>
               <ul class="m-0">
                 <li class="py-2 d-flex flex-wrap">
                   <% tags.each do |tag| %>
