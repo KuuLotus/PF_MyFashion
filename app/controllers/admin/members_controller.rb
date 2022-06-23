@@ -41,5 +41,7 @@ class Admin::MembersController < ApplicationController
 
   # 検索結果
   def search
+    @q = Member.ransack(params[:q])
+    @search_members = @q.result(distinct: true).page(params[:page]).per(30)
   end
 end

@@ -204,3 +204,15 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+
+ja:
+  activerecord:
+    attributes:
+      member:
+        name: ニックネーム
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(確認用)
+      post:
+        title: タイトル
+        outfit_image: コーディネート画像

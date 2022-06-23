@@ -1,8 +1,10 @@
+<!--エラーメッセージ-->
+<%= render "layouts/error", model: resource %>
+
 <div class="container text-center">
   <div class="row">
     <div id="login-box">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      　<%= render "public/shared/error_messages", resource: resource %>
 
 　　　　<div class="row">
           <div class="col-8 offset-2">

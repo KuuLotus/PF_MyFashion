@@ -23,7 +23,6 @@ class Public::MembersController < ApplicationController
       flash[:notice] = "ユーザー情報を変更しました"
       redirect_to member_path(@member)
     else
-      flash[:alert] = "ユーザー情報の変更に失敗しました"
       render :edit
     end
   end

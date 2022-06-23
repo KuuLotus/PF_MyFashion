@@ -26,4 +26,8 @@ class Admin::PostsController < ApplicationController
   def women
     @posts_women = Post.joins(:member).where({member: {gender: 1 }}).page(params[:page]).per(40)
   end
+
+  def search
+    @tags = Tag.limit(10)
+  end
 end

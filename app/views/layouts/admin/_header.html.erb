@@ -1,41 +1,30 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
   <div class="container d-flex justify-content-around">
-    <div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!--検索フォーム-->
-        <%= search_form_for @q, url: search_members_path, class: "d-flex search_form" do |f| %>
-          <%= f.search_field :name_cont, class: "form-control me-2", placeholder: "ユーザーを探す" %>
+    <div id="header-search-area">
+      <%= image_tag "search-icon.jpeg", class: "open-btn" %>
+      <%= image_tag "stop-btn.png", class: "close-btn" %>
+      <div class="wrapper mt-2">
+        <ul class="tab m-0 p-0">
+          <li><a href="#user-search">ユーザー検索</a></li>
+          <li><a href="#coodinate-search">コーディネート検索</a></li>
+        </ul>
 
-          <%= f.submit "検索", class: "btn btn-outline-success" %>
-        <% end %>
-        <%= search_form_for @search_post, url: search_posts_path, class: "d-flex search_form" do |f| %>
-          <%= f.search_field :tags_name_cont, class: "form-control me-2", placeholder: "コーディネートを探す" %>
-
-          <%= f.submit "検索", class: "btn btn-outline-success" %>
-        <% end %>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">コーディネートやユーザーを探す</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <ul class="nav nav-tabs">
-                  <li class="nav-item">
-                    <a class="nav-link user-search" id="user-search-tab">ユーザー検索</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link user-search" id="coodinate-search-tab" aria-current="page">コーディネート検索</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+        <div id="user-search" class="area">
+          <!--検索フォーム-->
+          <%= search_form_for @q, url: search_admin_members_path, class: "d-flex search_form" do |f| %>
+            <%= f.search_field :name_cont, class: "form-control me-2", placeholder: "ユーザーを探す" , autocomplete: 'off', required: true %>
+            <%= button_tag(type: "submit", class: "secondary-btn bg-gray") do %>
+              <span>検索</span>
+            <% end %>
+          <% end %>
+        </div>
+        <div id="coodinate-search" class="area">
+          <%= search_form_for @search_post, url: search_admin_posts_path, class: "d-flex search_form" do |f| %>
+            <%= f.search_field :tags_name_cont, class: "form-control me-2", placeholder: "コーディネートを探す",  autocomplete: 'off', required: true%>
+            <%= button_tag(type: "submit", class: "secondary-btn bg-gray") do %>
+              <span>検索</span>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -46,7 +35,7 @@
 
     <div class="user-icon">
       <% if admin_signed_in? %>
-        <%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "dropdown-item" %></li>
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
       <% else %>
         <%= image_tag "no_image_user.jpg", class: "profile_image_li" %>
         <%= link_to "ログイン", new_admin_session_path %>
@@ -55,40 +44,55 @@
   </div>
 </nav>
 <script>
-  $(document).on('turbolinks:load', function() {
-    showMemberSearch()
-    hidePostSearch()
-
-    $('#condition').change(function() {
-      let condition = $('#condition').val()
-      if(condition === 'ユーザー検索') {
-        showMemberSearch()
-        hidePostSearch()
-      } else {
-        showPostSearch()
-        hideMemberSearch()
-      }
-    })
-
-    function showPostSearch() {
-      $('#post_search').addClass("d-flex")
-      $('#post_search').show()
-    }
-
-    function hidePostSearch() {
-      $('#post_search').removeClass("d-flex")
-      $('#post_search').hide()
-    }
-
-    function showMemberSearch() {
-      $('#member_search').addClass("d-flex")
-      $('#member_search').show()
-    }
-
-    function hideMemberSearch() {
-      $('#member_search').removeClass("d-flex")
-      $('#member_search').hide()
-    }
+  $(function(){
+    $(".wrapper").hide();
+    $(".close-btn").hide();
   })
-</script>
 
+  $(".open-btn").click(function(){
+    $(".wrapper").show();
+    $(".close-btn").show();
+    $(".open-btn").hide();
+  });
+
+  $(".close-btn").click(function(){
+    $(".wrapper").hide();
+    $(".close-btn").hide();
+    $(".open-btn").show();
+  });
+
+
+    //任意のタブにURLからリンクするための設定
+  function GethashID (hashIDName){
+    if(hashIDName){
+      //タブ設定
+      $('.tab li').find('a').each(function() { //タブ内のaタグ全てを取得
+        var idName = $(this).attr('href'); //タブ内のaタグのリンク名（例）#lunchの値を取得
+        if(idName == hashIDName){ //リンク元の指定されたURLのハッシュタグ（例）http://example.com/#lunch←この#の値とタブ内のリンク名（例）#lunchが同じかをチェック
+          var parentElm = $(this).parent(); //タブ内のaタグの親要素（li）を取得
+          $('.tab li').removeClass("active"); //タブ内のliについているactiveクラスを取り除き
+          $(parentElm).addClass("active"); //リンク元の指定されたURLのハッシュタグとタブ内のリンク名が同じであれば、liにactiveクラスを追加
+          //表示させるエリア設定
+          $(".area").removeClass("is-active"); //もともとついているis-activeクラスを取り除き
+          $(hashIDName).addClass("is-active"); //表示させたいエリアのタブリンク名をクリックしたら、表示エリアにis-activeクラスを追加
+        }
+      });
+    }
+  }
+
+  //タブをクリックしたら
+  $('.tab a').on('click', function() {
+    var idName = $(this).attr('href'); //タブ内のリンク名を取得
+    GethashID (idName);//設定したタブの読み込みと
+    return false;//aタグを無効にする
+  });
+
+
+  // 上記の動きをページが読み込まれたらすぐに動かす
+  $(window).on('load', function () {
+      $('.tab li:first-of-type').addClass("active"); //最初のliにactiveクラスを追加
+      $('.area:first-of-type').addClass("is-active"); //最初の.areaにis-activeクラスを追加
+    var hashName = location.hash; //リンク元の指定されたURLのハッシュタグを取得
+    GethashID (hashName);//設定したタブの読み込み
+  });
+</script>

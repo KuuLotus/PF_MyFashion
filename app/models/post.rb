@@ -8,6 +8,7 @@ class Post < ApplicationRecord
 
   has_one_attached :outfit_image
 
+  validates :outfit_image, presence: true
   validates :title, presence: true
   validates :body, length:{maximum:400}
 

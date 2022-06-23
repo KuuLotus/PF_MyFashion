@@ -28,7 +28,9 @@
       </div>
       <div class="row mx-auto my-3">
         <div class="col-md-4 offset-md-4 d-grid">
-          <%= link_to "退会する", withdraw_member_path(@member),method: :patch, class: "btn btn-primary" %>
+          <%= link_to withdraw_member_path(@member),method: :patch, class: "primary-btn bg-blue" do %>
+            <span>退会する</span>
+          <% end %>
         </div>
       </div>
     </div>

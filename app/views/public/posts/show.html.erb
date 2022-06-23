@@ -92,29 +92,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-<div class="wrapper">
-  <ul class="tab m-0 p-0">
-    <li><a href="#user-search">ユーザー</a></li>
-    <li><a href="#coodinate-search">コーディネート</a></li>
-  </ul>
-
-  <div id="user-search" class="area">
-    <!--検索フォーム-->
-    <%= search_form_for @q, url: search_members_path, class: "d-flex search_form" do |f| %>
-      <%= f.search_field :name_cont, class: "form-control me-2", placeholder: "ユーザーを探す" , autocomplete: 'off'%>
-      <%= f.submit "検索", class: "btn btn-outline-success" %>
-    <% end %>
-  </div>
-  <div id="coodinate-search" class="area">
-    <%= search_form_for @search_post, url: search_posts_path, class: "d-flex search_form" do |f| %>
-      <%= f.search_field :tags_name_cont, class: "form-control me-2", placeholder: "コーディネートを探す",  autocomplete: 'off'%>
-      <%= f.submit "検索", class: "btn btn-outline-success" %>
-    <% end %>
-  </div>
-</div>
-

@@ -1,6 +1,9 @@
 class Member < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  validates :name, length:{maximum:10}, presence: true
+  validates :body, length:{maximum:2000}
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -13,7 +16,6 @@ class Member < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :following
   has_one_attached :profile_image
 
-  validates :body, length:{maximum:2000}
 
   def get_profile_image
     unless profile_image.attached?
@@ -36,7 +38,7 @@ class Member < ApplicationRecord
       "#{height}" + "cm"
     end
   end
-  
+
   # 引数のユーザーにフォローされているかどうか
   def followed_by?(member)
     reverse_of_relationships.find_by(following_id: member.id).present?

@@ -1,32 +1,36 @@
 <nav class="navbar navbar-expand-lg shadow">
   <div class="container d-flex justify-content-around">
-    <div>
+    <div id="header-search-area">
       <%= image_tag "search-icon.jpeg", class: "open-btn" %>
       <%= image_tag "stop-btn.png", class: "close-btn" %>
       <div class="wrapper mt-2">
-      <ul class="tab m-0 p-0">
-        <li><a href="#user-search">ユーザー検索</a></li>
-        <li><a href="#coodinate-search">コーディネート検索</a></li>
-      </ul>
+        <ul class="tab m-0 p-0">
+          <li><a href="#user-search">ユーザー検索</a></li>
+          <li><a href="#coodinate-search">コーディネート検索</a></li>
+        </ul>
 
-      <div id="user-search" class="area">
-        <!--検索フォーム-->
-        <%= search_form_for @q, url: search_members_path, class: "d-flex search_form" do |f| %>
-          <%= f.search_field :name_cont, class: "form-control me-2", placeholder: "ユーザーを探す" , autocomplete: 'off'%>
-          <%= f.submit "検索", class: "btn btn-outline-success" %>
-        <% end %>
-      </div>
-      <div id="coodinate-search" class="area">
-        <%= search_form_for @search_post, url: search_posts_path, class: "d-flex search_form" do |f| %>
-          <%= f.search_field :tags_name_cont, class: "form-control me-2", placeholder: "コーディネートを探す",  autocomplete: 'off'%>
-          <%= f.submit "検索", class: "btn btn-outline-success" %>
-        <% end %>
+        <div id="user-search" class="area">
+          <%= search_form_for @q, url: search_members_path, class: "d-flex search_form" do |f| %>
+            <%= f.search_field :name_cont, class: "form-control me-2", placeholder: "ユーザーを探す" , autocomplete: 'off', required: true %>
+            <%= button_tag(type: "submit", class: "secondary-btn bg-gray") do %>
+              <span>検索</span>
+            <% end %>
+          <% end %>
+        </div>
+        <div id="coodinate-search" class="area">
+          <%= search_form_for @search_post, url: search_posts_path, class: "d-flex search_form" do |f| %>
+            <%= f.search_field :tags_name_cont, class: "form-control me-2", placeholder: "コーディネートを探す",  autocomplete: 'off', required: true %>
+            <%= button_tag(type: "submit", class: "secondary-btn bg-gray") do %>
+              <span>検索</span>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
-    </div>
+
 
     <div class="application-name">
-      <a class="navbar-brand pe-3" href="/"><strong>MyFashion</strong></a>
+      <a class="navbar-brand" href="/"><strong>MyFashion</strong></a>
     </div>
 
     <div class="user-icon">
@@ -40,7 +44,6 @@
           </ul>
         </div>
       <% else %>
-        <%= image_tag "no_image_user.jpg", class: "profile_image_li" %>
         <%= link_to "新規登録", new_member_registration_path %> |
         <%= link_to "ログイン", new_member_session_path %>
       <% end %>
@@ -48,20 +51,23 @@
   </div>
 </nav>
 <script>
-  $(".wrapper").hide()
-  $(".close-btn").hide()
+  $(function(){
+    $(".wrapper").hide();
+    $(".close-btn").hide();
+  })
 
   $(".open-btn").click(function(){
-    $(".wrapper").show()
-    $(".close-btn").show()
-    $(".open-btn").hide()
-  })
+    $(".wrapper").show();
+    $(".close-btn").show();
+    $(".open-btn").hide();
+  });
 
   $(".close-btn").click(function(){
-    $(".wrapper").hide()
-    $(".close-btn").hide()
-    $(".open-btn").show()
-  })
+    $(".wrapper").hide();
+    $(".close-btn").hide();
+    $(".open-btn").show();
+  });
+
 
     //任意のタブにURLからリンクするための設定
   function GethashID (hashIDName){
