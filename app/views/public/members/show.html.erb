@@ -63,13 +63,13 @@
         </div>
         <div class="coordinate_follow_box col-4">
           <%= link_to followings_member_path(@member) do %>
-            <%= @member.followings.count %>
+            <%= @member_followings.count %>
             <span>フォロー</span>
           <% end %>
         </div>
         <div class="coordinate_follow_box col-4">
           <%= link_to followers_member_path(@member) do %>
-            <%= @member.followers.count %>
+            <%= @member_followers.count %>
             <span>フォロワー</span>
           <% end %>
         </div>

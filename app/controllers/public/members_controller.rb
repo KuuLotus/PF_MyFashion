@@ -11,6 +11,8 @@ class Public::MembersController < ApplicationController
   def show
     @member = Member.find(params[:id])
     @member_posts = @member.posts.page(params[:page]).per(20)
+    @member_followings = @member.followings.where.not(is_deleted: true).page(params[:page]).per(40)
+    @member_followers = @member.followers.where.not(is_deleted: true).page(params[:page]).per(40)
   end
 
   def edit
@@ -29,12 +31,12 @@ class Public::MembersController < ApplicationController
 
   def followings
     @member = Member.find(params[:id])
-    @members = @member.followings.page(params[:page]).per(40)
+    @members = @member.followings.where.not(is_deleted: true).page(params[:page]).per(40)
   end
 
   def followers
     @member = Member.find(params[:id])
-    @members = @member.followers.page(params[:page]).per(40)
+    @members = @member.followers.where.not(is_deleted: true).page(params[:page]).per(40)
   end
 
   # 退会確認画面

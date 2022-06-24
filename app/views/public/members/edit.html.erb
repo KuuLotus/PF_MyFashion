@@ -75,7 +75,9 @@
         </div>
         <div class="row mx-auto my-3">
           <div class="col-md-4 offset-md-4 d-grid">
-            <%= f.submit "変更する", class: "btn btn-primary text-center" %>
+            <%= button_tag(type: "submit", class: "primary-btn bg-blue") do %>
+              <span>登録する</span>
+            <% end %>
           </div>
         </div>
     　<% end %>
