@@ -208,6 +208,7 @@
     padding: 40px;
     width: 650px;
     height: auto;
+    background: #fff;
     box-shadow: 0 2px 4px #4b4b4b;
   }
 
@@ -568,6 +569,7 @@
   text-decoration: none;
   display: inline-block;
   border: 1px solid #f00;/* ボーダーの色と太さ */
+  background: #f00;
   padding: 10px 30px;
   text-align: center;
   outline: none;
@@ -579,11 +581,11 @@
 .danger-btn span {
   position: relative;
   z-index: 3;/*z-indexの数値をあげて文字を背景よりも手前に表示*/
-  color:#f00;
+  color: #fff;
 }
 
 .danger-btn:hover span{
-  color:#fff;
+  color:#f00;
 }
 
 /*== 背景が流れる（中央から縦全体） */
@@ -595,7 +597,7 @@
   left: 0;
   z-index: 2;
     /*色や形状*/
-  background: #f00;
+  background: #fff;
   width: 100%;
   height: 100%;
     /*アニメーション*/
@@ -606,7 +608,7 @@
 
 /*hoverした際の形状*/
 .bg-red:hover:before{
-  transform:scale(1, 1);
+  transform: scale(1, 1);
 }
 
 // 青ボタンの設定
@@ -618,6 +620,7 @@
   text-decoration: none;
   display: inline-block;
   border: 1px solid #1e78ad;/* ボーダーの色と太さ */
+  background: #1e78ad;
   padding: 10px 30px;
   text-align: center;
   outline: none;
@@ -628,11 +631,11 @@
 .primary-btn span {
   position: relative;
   z-index: 3;/*z-indexの数値をあげて文字を背景よりも手前に表示*/
-  color:#1e78ad;
+  color: #fff;
 }
 
 .primary-btn:hover span{
-  color:#fff;
+  color: #1e78ad;
 }
 
 /*== 背景が流れる（中央から縦全体） */
@@ -644,7 +647,7 @@
   left: 0;
   z-index: 2;
     /*色や形状*/
-  background: #1e78ad;
+  background: #fff;
   width: 100%;
   height: 100%;
     /*アニメーション*/
@@ -655,7 +658,7 @@
 
 /*hoverした際の形状*/
 .bg-blue:hover:before{
-  transform:scale(1, 1);
+  transform: scale(1, 1);
 }
 
 // グレーボタンの設定
@@ -667,8 +670,8 @@
   text-decoration: none;
   display: inline-block;
   border: 1px solid #808080;/* ボーダーの色と太さ */
+  background: #808080;
   padding: 10px 30px;
-  background-color: inherit;
   text-align: center;
   outline: none;
     /*アニメーションの指定*/
@@ -678,11 +681,11 @@
 .secondary-btn span {
   position: relative;
   z-index: 3;/*z-indexの数値をあげて文字を背景よりも手前に表示*/
-  color:#808080;
+  color: #fff;
 }
 
 .secondary-btn:hover span{
-  color:#fff;
+  color:#808080;
 }
 
 /*== 背景が流れる（中央から縦全体） */
@@ -694,7 +697,7 @@
   left: 0;
   z-index: 2;
     /*色や形状*/
-  background: #808080;
+  background: #fff;
   width: 100%;
   height: 100%;
     /*アニメーション*/
@@ -705,7 +708,7 @@
 
 /*hoverした際の形状*/
 .bg-gray:hover:before{
-  transform:scale(1, 1);
+  transform: scale(1, 1);
 }
 
 // 検索フォーム
@@ -717,52 +720,134 @@
   background-position: center;
 }
 
-.close-btn {
-  width: 20px;
-  height: 20px;
+/*========= 検索窓の設定 ===============*/
+
+/*==検索窓背景のエリア*/
+
+#search-wrap-user,
+#search-wrap-coordinate {
+  position:fixed;/*固定配置にして*/
+  top: 0;
+  left: 0;
+  z-index: -1;/*最背面に設定*/
+  opacity: 0;/*透過を0に*/
+  transition: all 0.4s;/*transitionを使ってスムースに現れる*/
+  width: 100%;
+  height: 100vh;
 }
 
-/*tabの形状*/
-.tab{
+/*ボタンクリック後、JSで#search-wrapに panelactive クラスが付与された後の見た目*/
+#search-wrap-user.panelactive,
+#search-wrap-coordinate.panelactive{
+  opacity: 1;/*不透明に変更*/
+  z-index: 3;/*全面に出現*/
+  background: rgba(51,51,51,0.8);
+  /*中の要素を天地中央揃えにする設定*/
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
-.tab li a{
-  display: block;
-  padding: 10px 20px;
+/*==検索窓のエリア*/
+
+#search-wrap-user .search-area,
+#search-wrap-coordinate .search-area {
+  display: none;/*検索窓のエリアは、はじめ非表示*/
 }
-/*liにactiveクラスがついた時の形状*/
-.tab li.active a{
-  background:#fff;
-  border-top: 1px #ddd solid;
-  border-right: 1px #ddd solid;
-  border-left: 1px #ddd solid;
+
+/*ボタンクリック後、JSで#search-wrapに panelactive クラスが付与された後*/
+#search-wrap-user.panelactive .search-area,
+#search-wrap-coordinate.panelactive .search-area {
+  display: block;/*検索窓エリアを表示*/
+  width: 80%;
+  position: relative;
+}
+
+/*==検索フォームの設定*/
+
+#search-wrap-user form,
+#search-wrap-coordinate form {
+  position: relative;
+  height: 66px;
+}
+
+/*==テキスト入力とボタンinput共通設定*/
+#search-wrap-user input,
+#search-wrap-coordinate input {
+  -webkit-appearance: none;/*SafariやChromeのデフォルトの設定を無効*/
+  outline: none;
+  cursor: pointer;/*カーソルを指マークに*/
+  color: #fff;
+}
+
+/*テキスト入力input設定*/
+ #search-wrap-user input[type="search"],
+ #search-wrap-coordinate input[type="search"] {
+  width: 100%;
+  padding: 20px;
+  margin-right: 10px;
+  color: #000;
+  border: none;
+  border-bottom: 2px solid #666;
+  transition: all 0.5s;
+  letter-spacing: 0.05em;
+}
+
+ #search-wrap-user input[type="search"]:focus,
+ #search-wrap-coordinate input[type="search"]:focus {
+  background:#444;
+  color: #fff;
+}
+
+/*ボタンinput設定*/
+ #search-wrap-user input[type="submit"],
+ #search-wrap-coordinate input[type="submit"] {
+  position: absolute;
+  top: 1px;
+  right: 10px;
+  background: url("https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/7-2-3/img/icon_search.svg") no-repeat 15px center;/*虫眼鏡アイコンを背景に表示*/
+  background-size: 25px 25px;
+  width: 60px;
+  height: 60px;
+  border: none;
 }
 
 
-/*エリアの表示非表示と形状*/
-.area {
-  display: none;/*はじめは非表示*/
-  opacity: 0;/*透過0*/
-  background: #fff;
-  padding:50px 20px;
-  border: 1px #ddd solid;
+/*=======　閉じるための×ボタン　========*/
+.close-btn-user,
+.close-btn-coordinate{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
 }
 
-/*areaにis-activeというクラスがついた時の形状*/
-.area.is-active {
-  display: block;/*表示*/
-  animation-name: displayAnime;/*ふわっと表示させるためのアニメーション*/
-  animation-duration: 2s;
-  animation-fill-mode: forwards;
+.close-btn-user span,
+.close-btn-coordinate span{
+  display: inline-block;
+  position: absolute;
+  left: 14px;
+  height: 3px;
+  border-radius: 2px;
+  background-color: #fff;
+ }
+
+/*×マーク*/
+.close-btn-user span:nth-of-type(1),
+.close-btn-coordinate span:nth-of-type(1) {
+  top: 21px;
+  left: 16px;
+  transform: translateY(6px) rotate(-135deg);
+  width: 50%;
 }
 
-@keyframes displayAnime{
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.close-btn-user span:nth-of-type(2),
+.close-btn-coordinate span:nth-of-type(2) {
+  top: 32px;
+  left: 16px;
+  transform: translateY(-6px) rotate(135deg);
+  width: 50%;
 }

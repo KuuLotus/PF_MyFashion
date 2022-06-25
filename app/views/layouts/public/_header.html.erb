@@ -1,33 +1,34 @@
 <nav class="navbar navbar-expand-lg shadow">
   <div class="container d-flex justify-content-around">
     <div id="header-search-area">
-      <%= image_tag "search-icon.jpeg", class: "open-btn" %>
-      <%= image_tag "stop-btn.png", class: "close-btn" %>
-      <div class="wrapper mt-2">
-        <ul class="tab m-0 p-0">
-          <li><a href="#user-search">ユーザー検索</a></li>
-          <li><a href="#coodinate-search">コーディネート検索</a></li>
+      <div class="dropdown">
+        <%= image_tag "search-icon.jpeg", class: "open-btn dropdown-toggle", id: "dropdownMenuButton1", "data-bs-toggle": "dropdown" %>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><button class="dropdown-item user-search">ユーザー検索</a></li>
+          <li><button class="dropdown-item coordinate-search">コーディネート検索</a></li>
         </ul>
 
-        <div id="user-search" class="area">
-          <%= search_form_for @q, url: search_members_path, class: "d-flex search_form" do |f| %>
-            <%= f.search_field :name_cont, class: "form-control me-2", placeholder: "ユーザーを探す" , autocomplete: 'off', required: true %>
-            <%= button_tag(type: "submit", class: "secondary-btn bg-gray") do %>
-              <span>検索</span>
+        <div id="search-wrap-user">
+          <div class="close-btn-user"><span></span><span></span></div>
+          <div class="search-area">
+            <%= search_form_for @q, url: search_members_path do |f| %>
+              <%= f.search_field :name_cont, placeholder: "ユーザーを探す" , autocomplete: 'off', required: true %>
+              <input type="submit" id="searchsubmit" value="">
             <% end %>
-          <% end %>
+          </div>
         </div>
-        <div id="coodinate-search" class="area">
-          <%= search_form_for @search_post, url: search_posts_path, class: "d-flex search_form" do |f| %>
-            <%= f.search_field :tags_name_cont, class: "form-control me-2", placeholder: "コーディネートを探す",  autocomplete: 'off', required: true %>
-            <%= button_tag(type: "submit", class: "secondary-btn bg-gray") do %>
-              <span>検索</span>
+
+        <div id="search-wrap-coordinate">
+          <div class="close-btn-coordinate"><span></span><span></span></div>
+          <div class="search-area">
+            <%= search_form_for @search_post, url: search_posts_path do |f| %>
+              <%= f.search_field :tags_name_cont, placeholder: "コーディネートを探す",  autocomplete: 'off', required: true %>
+              <input type="submit" id="searchsubmit" value="">
             <% end %>
-          <% end %>
+          </div>
         </div>
       </div>
     </div>
-
 
     <div class="application-name">
       <a class="navbar-brand" href="/"><strong>MyFashion</strong></a>
@@ -52,55 +53,46 @@
 </nav>
 <script>
   $(function(){
-    $(".wrapper").hide();
-    $(".close-btn").hide();
-  })
-
-  $(".open-btn").click(function(){
-    $(".wrapper").show();
-    $(".close-btn").show();
-    $(".open-btn").hide();
+    $("#search-wrap-user").hide();
+    $("#search-wrap-coordinate").hide();
   });
 
-  $(".close-btn").click(function(){
-    $(".wrapper").hide();
-    $(".close-btn").hide();
-    $(".open-btn").show();
+  $(".user-search").click(function () {
+    $("#search-wrap-user").show();
+    $("#search-wrap-user").addClass('panelactive');//#search-wrap-userへpanelactiveクラスを付与
+    $('#search-text').focus();//テキスト入力のinputにフォーカス
+    $("#sidebar").hide();
+    $("footer").hide();
   });
 
-
-    //任意のタブにURLからリンクするための設定
-  function GethashID (hashIDName){
-    if(hashIDName){
-      //タブ設定
-      $('.tab li').find('a').each(function() { //タブ内のaタグ全てを取得
-        var idName = $(this).attr('href'); //タブ内のaタグのリンク名（例）#lunchの値を取得
-        if(idName == hashIDName){ //リンク元の指定されたURLのハッシュタグ（例）http://example.com/#lunch←この#の値とタブ内のリンク名（例）#lunchが同じかをチェック
-          var parentElm = $(this).parent(); //タブ内のaタグの親要素（li）を取得
-          $('.tab li').removeClass("active"); //タブ内のliについているactiveクラスを取り除き
-          $(parentElm).addClass("active"); //リンク元の指定されたURLのハッシュタグとタブ内のリンク名が同じであれば、liにactiveクラスを追加
-          //表示させるエリア設定
-          $(".area").removeClass("is-active"); //もともとついているis-activeクラスを取り除き
-          $(hashIDName).addClass("is-active"); //表示させたいエリアのタブリンク名をクリックしたら、表示エリアにis-activeクラスを追加
-        }
-      });
-    }
-  }
-
-  //タブをクリックしたら
-  $('.tab a').on('click', function() {
-    var idName = $(this).attr('href'); //タブ内のリンク名を取得
-    GethashID (idName);//設定したタブの読み込みと
-    return false;//aタグを無効にする
+  //閉じるボタンを押した時には
+  $(".close-btn-user").click(function () {
+    $("#search-wrap-user").removeClass('panelactive');//#search-wrap-userからpanelactiveクラスを除去
+    $("#sidebar").show();
+    $("footer").show();
+    $("#search-wrap-coordinate").show();
+    $("#q_name_cont").val("");
+    $("#search-wrap-user").hide();
+    $("#search-wrap-coordinate").hide();
   });
 
+  $(".coordinate-search").click(function () {
+    $("#search-wrap-coordinate").show();
+    $("#search-wrap-coordinate").addClass('panelactive');//#search-wrap-coordinateへpanelactiveクラスを付与
+    $('#search-text').focus();//テキスト入力のinputにフォーカス
+    $("#sidebar").hide();
+    $("footer").hide();
+  });
 
-  // 上記の動きをページが読み込まれたらすぐに動かす
-  $(window).on('load', function () {
-      $('.tab li:first-of-type').addClass("active"); //最初のliにactiveクラスを追加
-      $('.area:first-of-type').addClass("is-active"); //最初の.areaにis-activeクラスを追加
-    var hashName = location.hash; //リンク元の指定されたURLのハッシュタグを取得
-    GethashID (hashName);//設定したタブの読み込み
+  //閉じるボタンを押した時には
+  $(".close-btn-coordinate").click(function () {
+    $("#search-wrap-coordinate").removeClass('panelactive');//#search-wrap-coordinateからpanelactiveクラスを除去
+    $("#sidebar").show();
+    $("footer").show();
+    $("#search-wrap-user").show();
+    $("#q_tags_name_cont").val("");
+    $("#search-wrap-user").hide();
+    $("#search-wrap-coordinate").hide();
   });
 </script>
 
