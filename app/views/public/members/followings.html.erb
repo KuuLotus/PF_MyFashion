@@ -53,13 +53,13 @@
         </div>
         <div class="coordinate_follow_box col-4">
           <%= link_to followings_member_path(@member) do %>
-            <%= @member.followings.count %>
+            <%= @member_followings.count %>
             <span>フォロー</span>
           <% end %>
         </div>
         <div class="coordinate_follow_box col-4">
           <%= link_to followers_member_path(@member) do %>
-            <%= @member.followers.count %>
+            <%= @member_followers.count %>
             <span>フォロワー</span>
           <% end %>
         </div>
@@ -68,8 +68,8 @@
   </div>
 </div>
 
-<% if @members.present? %>
-  <%= render "follow", members: @members %>
+<% if @member_followings.present? %>
+  <%= render "follow", members: @member_followings %>
 <% else %>
 　<div class="pt-5 text-center">
     <h4>まだフォローしていません</h4>

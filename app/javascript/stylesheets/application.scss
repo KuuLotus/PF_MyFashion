@@ -781,8 +781,8 @@
 }
 
 /*テキスト入力input設定*/
- #search-wrap-user input[type="search"],
- #search-wrap-coordinate input[type="search"] {
+ #search-wrap-user input[type="text"],
+ #search-wrap-coordinate input[type="text"] {
   width: 100%;
   padding: 20px;
   margin-right: 10px;
@@ -793,8 +793,8 @@
   letter-spacing: 0.05em;
 }
 
- #search-wrap-user input[type="search"]:focus,
- #search-wrap-coordinate input[type="search"]:focus {
+ #search-wrap-user input[type="text"]:focus,
+ #search-wrap-coordinate input[type="text"]:focus {
   background:#444;
   color: #fff;
 }
