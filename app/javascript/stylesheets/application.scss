@@ -486,8 +486,8 @@
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
-  font-size:0.6rem;
-  transition:all 0.3s;
+  font-size: 0.6rem;
+  transition: all 0.3s;
 }
 
 /*リンクを右下に固定*/
@@ -740,7 +740,7 @@
 #search-wrap-user.panelactive,
 #search-wrap-coordinate.panelactive{
   opacity: 1;/*不透明に変更*/
-  z-index: 3;/*全面に出現*/
+  z-index: 4;/*全面に出現*/
   background: rgba(51,51,51,0.8);
   /*中の要素を天地中央揃えにする設定*/
   display: flex;

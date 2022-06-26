@@ -24,6 +24,7 @@ scope module: :public do
     get :followings, on: :member
     get :followers, on: :member
     get :withdraw_confirm, on: :member
+    get :favorites, on: :member
     patch :withdraw, on: :member
     collection do
       get :search

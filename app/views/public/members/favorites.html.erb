@@ -2,7 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 offset-md-2">
-        <p><%= @member.name %>のフォロワー一覧</p>
+        <% if @member == current_member %>
+          <p>マイページ</p>
+        <% else %>
+          <p><%= @member.name %>のページ</p>
+        <% end %>
         <div class="member_profile mt-3">
           <div class="d-flex">
             <div>
@@ -17,7 +21,7 @@
               <p class="pt-3"><%= @member.body %></p>
             </div>
           </div>
-          <% if @member == current_member %>
+          <% if @member == current_member && @member.name != "企業様(閲覧用)" %>
             <div class="btn_area d-flex justify-content-between mt-3">
               <%= link_to edit_member_path(@member), class: "secondary-btn bg-gray" do %>
                 <span>プロフィール編集</span>
@@ -29,6 +33,12 @@
                 <span>退会について</span>
               <% end %>
             </div>
+            <% elsif @member == current_member && @member.name == "企業様(閲覧用)" %>
+              <div class="btn_area d-flex justify-content-between mt-3">
+                <%= link_to new_post_path, class: "primary-btn bg-blue" do %>
+                  <span>コーディネート登録</span>
+                <% end %>
+              </div>
           <% else %>
             <div id="follow_btn_<%= @member.id %>" class="mt-3 ms-3">
               <%= render "public/relationships/follow", member: @member %>
@@ -72,12 +82,45 @@
       </div>
     </div>
   </div>
-</div>
-
-<% if @member_followers.present? %>
-  <%= render "follow", members: @member_followers %>
-<% else %>
-　<div class="pt-5 text-center">
-    <h4>まだフォローされていません</h4>
+  <div class="row">
+    <% if @member == current_member && @member.posts.count == 0 %>
+      <div class="pt-5 text-center">
+        <h4>コーディネートを投稿してみよう！</h4>
+        <p>
+          毎日のコーデ記録始めませんか？<br>
+          自分のコーデを共有しよう！
+        </p>
+      </div>
+      <% elsif @member != current_member && @member.posts.count == 0 %>
+        <div class="pt-5 text-center">
+          <h4>まだ投稿がありません</h4>
+        </div>
+    <% else %>
+      <% if @favorites.present? %>
+        <% @favorites.each do |post| %>
+          <div class="col-lg-3 col-md-4 col-sm-6 g-5">
+            <div class="card card-effect">
+              <%= link_to post_path(post) do %>
+                <%= image_tag post.outfit_image, class: "outfit_image_index" %>
+              <% end %>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item" id="favorite_buttons_<%= post.id %>">
+                  <% if member_signed_in? %>
+                    <%= render "public/favorites/favorite", post: post %>
+                  <% else %>
+                    <p class="text-center">
+                      <i class="fa-solid fa-heart"></i>
+                      <%= post.favorites.count %>
+                    </p>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <h2 class="text-center pt-5">いいねした投稿がありません</h2>
+      <% end %>
+    <% end %>
   </div>
-<% end %>
+</div>

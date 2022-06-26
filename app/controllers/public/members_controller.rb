@@ -71,6 +71,14 @@ class Public::MembersController < ApplicationController
     @members_women = Member.where.not(is_deleted: true).where(gender: 1).page(params[:page]).per(30)
   end
 
+  def favorites
+    @member = Member.find(params[:id])
+    favorites = Favorite.where(member_id: @member.id).order(created_at: :desc).pluck(:post_id)
+    @favorites = Post.find(favorites)
+    @member_followings = @member.followings.where.not(is_deleted: true).page(params[:page]).per(40)
+    @member_followers = @member.followers.where.not(is_deleted: true).page(params[:page]).per(40)
+  end
+
   private
     def member_params
       params.require(:member).permit(:name, :body, :height, :gender, :email, :profile_image)
