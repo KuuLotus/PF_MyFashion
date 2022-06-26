@@ -24,7 +24,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.joins(:member).where({member: {is_deleted: false}}).page(params[:page]).per(40)
+    @posts = Post.joins(:member).where({member: {is_deleted: false}}).order(id: :desc).page(params[:page]).per(40)
     @tags = Tag.limit(10)
   end
 
@@ -56,13 +56,13 @@ class Public::PostsController < ApplicationController
 
   # 男性の投稿
   def men
-    @posts_men = Post.joins(:member).where({member: {is_deleted: false}}).where({member: {gender: 0}}).page(params[:page]).per(40)
+    @posts_men = Post.joins(:member).where({member: {is_deleted: false}}).where({member: {gender: 0}}).order(id: :desc).page(params[:page]).per(40)
     @tags = Tag.limit(10)
   end
 
   # 女性の投稿
   def women
-    @posts_women = Post.joins(:member).where({member: {is_deleted: false}}).where({member: {gender: 1 }}).page(params[:page]).per(40)
+    @posts_women = Post.joins(:member).where({member: {is_deleted: false}}).where({member: {gender: 1 }}).order(id: :desc).page(params[:page]).per(40)
     @tags = Tag.limit(10)
   end
 

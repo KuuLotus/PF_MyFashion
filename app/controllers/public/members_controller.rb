@@ -5,14 +5,14 @@ class Public::MembersController < ApplicationController
   before_action :ensure_withdraw_member, only:[:show, :followings, :followers]
 
   def index
-    @members = Member.where.not(is_deleted: true).page(params[:page]).per(30)
+    @members = Member.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(30)
   end
 
   def show
     @member = Member.find(params[:id])
     @member_posts = @member.posts.page(params[:page]).per(20)
-    @member_followings = @member.followings.where.not(is_deleted: true).page(params[:page]).per(40)
-    @member_followers = @member.followers.where.not(is_deleted: true).page(params[:page]).per(40)
+    @member_followings = @member.followings.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
+    @member_followers = @member.followers.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
   end
 
   def edit
@@ -31,16 +31,16 @@ class Public::MembersController < ApplicationController
 
   def followings
     @member = Member.find(params[:id])
-    @members = @member.followings.where.not(is_deleted: true).page(params[:page]).per(40)
-    @member_followings = @member.followings.where.not(is_deleted: true).page(params[:page]).per(40)
-    @member_followers = @member.followers.where.not(is_deleted: true).page(params[:page]).per(40)
+    @members = @member.followings.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
+    @member_followings = @member.followings.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
+    @member_followers = @member.followers.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
   end
 
   def followers
     @member = Member.find(params[:id])
-    @members = @member.followers.where.not(is_deleted: true).page(params[:page]).per(40)
-    @member_followings = @member.followings.where.not(is_deleted: true).page(params[:page]).per(40)
-    @member_followers = @member.followers.where.not(is_deleted: true).page(params[:page]).per(40)
+    @members = @member.followers.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
+    @member_followings = @member.followings.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
+    @member_followers = @member.followers.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
   end
 
   # 退会確認画面
@@ -63,20 +63,20 @@ class Public::MembersController < ApplicationController
 
   # 男性ユーザー
   def men
-    @members_men = Member.where.not(is_deleted: true).where(gender: 0).page(params[:page]).per(30)
+    @members_men = Member.where.not(is_deleted: true).where(gender: 0).order(id: :desc).page(params[:page]).per(30)
   end
 
   # 女性ユーザー
   def women
-    @members_women = Member.where.not(is_deleted: true).where(gender: 1).page(params[:page]).per(30)
+    @members_women = Member.where.not(is_deleted: true).where(gender: 1).order(id: :desc).page(params[:page]).per(30)
   end
 
   def favorites
     @member = Member.find(params[:id])
     favorites = Favorite.where(member_id: @member.id).order(created_at: :desc).pluck(:post_id)
     @favorites = Post.find(favorites)
-    @member_followings = @member.followings.where.not(is_deleted: true).page(params[:page]).per(40)
-    @member_followers = @member.followers.where.not(is_deleted: true).page(params[:page]).per(40)
+    @member_followings = @member.followings.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
+    @member_followers = @member.followers.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
   end
 
   private
