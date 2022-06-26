@@ -30,6 +30,7 @@ scope module: :public do
       get :search
       get :men
       get :women
+      get :many_followers
     end
   end
   resources :posts do
@@ -55,6 +56,7 @@ namespace :admin do
       get :search
       get :men
       get :women
+      get :many_followers
     end
   end
   resources :posts, only:[:show, :index, :destroy] do

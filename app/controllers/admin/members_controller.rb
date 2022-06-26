@@ -3,7 +3,12 @@ class Admin::MembersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @members = Member.page(params[:page]).per(30)
+    @members = Member.order(id: :desc).page(params[:page]).per(30)
+  end
+
+  # フォロワーが多い順
+  def many_followers
+    @members = Member.includes(:followed_members).sort {|a,b| b.followed_members.size <=> a.followed_members.size}
   end
 
   def show

@@ -8,6 +8,12 @@ class Public::MembersController < ApplicationController
     @members = Member.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(30)
   end
 
+  # フォロワーが多い順
+  def many_followers
+    @members = Member.includes(:followed_members).sort {|a,b| b.followed_members.size <=> a.followed_members.size}
+  end
+
+
   def show
     @member = Member.find(params[:id])
     @member_posts = @member.posts.page(params[:page]).per(20)

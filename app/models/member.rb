@@ -15,6 +15,7 @@ class Member < ApplicationRecord
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: :follower_id, dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :following
   has_many :favorited_posts, through: :favorites, source: :post
+  has_many :followed_members, through: :reverse_of_relationships, source: :following
   has_one_attached :profile_image
 
 
