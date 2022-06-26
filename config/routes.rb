@@ -39,6 +39,7 @@ scope module: :public do
       get :search
       get :men
       get :women
+      get :many_favorites
     end
   end
 end
@@ -62,6 +63,7 @@ namespace :admin do
       get :search
       get :men
       get :women
+      get :many_favorites
     end
   end
   resources :tags, only:[:index, :create, :destroy]

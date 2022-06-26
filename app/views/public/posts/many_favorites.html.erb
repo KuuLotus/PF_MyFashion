@@ -18,20 +18,28 @@
       <div class="container">
         <div class="row">
           <!--性別選択-->
-          <div class="col-md-3 gender-nav">
+          <div class="col-lg-3 gender-nav">
             <nav id="sidebar">
-              <section class="gender">
-                <h2 class="title">一覧</h2>
-                <ul class="m-0">
-                  <li class="py-2"><%= link_to "コーディネート", admin_posts_path %></li>
-                  <li class="py-2"><%= link_to "ユーザー", admin_root_path %></li>
-                  <li class="py-2"><%= link_to "タグ", admin_tags_path %></li>
-                </ul>
+              <section class="gender pb-3">
                 <h2 class="title">性別</h2>
                 <ul class="m-0">
-                  <li class="py-2"><%= link_to "ALL", admin_posts_path %></li>
-                  <li class="py-2"><%= link_to "MEN", men_admin_posts_path %></li>
-                  <li class="py-2"><%= link_to "WOMEN", women_admin_posts_path %></li>
+                  <li class="py-2"><%= link_to "ALL", posts_path %></li>
+                  <li class="py-2"><%= link_to "MEN", men_posts_path %></li>
+                  <li class="py-2"><%= link_to "WOMEN", women_posts_path %></li>
+                </ul>
+              </section>
+              <section class="sidebar-tag pt-3">
+                <h2 class="title">タグ</h2>
+                <ul>
+                  <li class="py-2 d-flex flex-wrap">
+                    <% @tags.each do |tag| %>
+                      <div class="tag_box mb-2 me-2">
+                        <%= link_to tag_path(tag) do %>
+                          # <%= tag.name %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </li>
                 </ul>
               </section>
             </nav>
@@ -42,11 +50,11 @@
               <div class="col-3 offset-9 text-end">
                 <div class="dropdown">
                   <button class="dropdown-toggle order-btn" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                    新着順
+                    人気順
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                    <li><%= link_to "新着順", admin_posts_path, class: "dropdown-item" %></li>
-                    <li><%= link_to "人気順", many_favorites_admin_posts_path, class: "dropdown-item" %></li>
+                    <li><%= link_to "新着順", posts_path, class: "dropdown-item" %></li>
+                    <li><%= link_to "人気順", many_favorites_posts_path, class: "dropdown-item" %></li>
                   </ul>
                 </div>
               </div>
@@ -54,7 +62,7 @@
             <div class="row">
               <%= render "index", posts: @posts %>
             </div>
-            <%= paginate @posts %>
+
           </div>
         </div>
       </div>

@@ -3,7 +3,13 @@ class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @posts = Post.page(params[:page]).per(40)
+    @posts = Post.page(params[:page]).order(id: :desc).per(40)
+  end
+
+  # いいねが多い順
+  def many_favorites
+    @posts = Post.includes(:favorited_members).sort {|a,b| b.favorited_members.size <=> a.favorited_members.size}
+    @tags = Tag.limit(10)
   end
 
   def show
@@ -19,12 +25,12 @@ class Admin::PostsController < ApplicationController
 
   # 男性の投稿
   def men
-    @posts_men = Post.joins(:member).where({member: {gender: 0}}).page(params[:page]).per(40)
+    @posts_men = Post.joins(:member).where({member: {gender: 0}}).order(id: :desc).page(params[:page]).per(40)
   end
 
   # 女性の投稿
   def women
-    @posts_women = Post.joins(:member).where({member: {gender: 1 }}).page(params[:page]).per(40)
+    @posts_women = Post.joins(:member).where({member: {gender: 1 }}).order(id: :desc).page(params[:page]).per(40)
   end
 
   def search

@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags, dependent: :destroy
+  has_many :favorited_members, through: :favorites, source: :member
 
   has_one_attached :outfit_image
 

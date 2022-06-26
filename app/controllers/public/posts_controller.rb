@@ -28,6 +28,12 @@ class Public::PostsController < ApplicationController
     @tags = Tag.limit(10)
   end
 
+  # いいねが多い順
+  def many_favorites
+    @posts = Post.includes(:favorited_members).sort {|a,b| b.favorited_members.size <=> a.favorited_members.size}
+    @tags = Tag.limit(10)
+  end
+
   def edit
     @post = Post.find(params[:id])
   end
