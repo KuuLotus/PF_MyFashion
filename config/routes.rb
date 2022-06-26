@@ -49,6 +49,7 @@ namespace :admin do
     patch :withdraw, on: :member
     get :followings, on: :member
     get :followers, on: :member
+    get :favorites, on: :member
     collection do
       get :search
       get :men

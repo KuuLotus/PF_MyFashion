@@ -23,10 +23,6 @@
             <%= link_to withdraw_admin_member_path(@member), method: :patch, data: {confirm: "本当に退会させますか？"}, class: "danger-btn bg-red" do %>
               <span>退会させる</span>
             <% end %>
-          <% else %>
-            <%= link_to withdraw_admin_member_path(@member), method: :patch, data: {confirm: "本当に入会中にさせますか？"}, class: "success-btn bg-green" do %>
-              <span>入会中に戻す</span>
-            <% end %>
           <% end %>
         </div>
       </div>
@@ -67,30 +63,44 @@
     </div>
   </div>
   <div class="row">
-    <% if @member.posts.count == 0 %>
+    <% if @member == current_member && @member.posts.count == 0 %>
       <div class="pt-5 text-center">
-        <h4>まだ投稿がありません</h4>
+        <h4>コーディネートを投稿してみよう！</h4>
+        <p>
+          毎日のコーデ記録始めませんか？<br>
+          自分のコーデを共有しよう！
+        </p>
       </div>
-    <% else %>
-      <% @member_posts.each do |post| %>
-        <div class="col-md-3 g-5">
-          <div class="card card-effect">
-            <%= link_to admin_post_path(post) do %>
-              <%= image_tag post.outfit_image, class: "outfit_image_index" %>
-            <% end %>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item" id="favorite_buttons_<%= post.id %>">
-                <p class="text-center">
-                  <i class="fa-solid fa-heart text-danger"></i>
-                  <%= post.favorites.count %>
-                </p>
-              </li>
-            </ul>
-          </div>
+      <% elsif @member != current_member && @member.posts.count == 0 %>
+        <div class="pt-5 text-center">
+          <h4>まだ投稿がありません</h4>
         </div>
+    <% else %>
+      <% if @favorites.present? %>
+        <% @favorites.each do |post| %>
+          <div class="col-lg-3 col-md-4 col-sm-6 g-5">
+            <div class="card card-effect">
+              <%= link_to admin_post_path(post) do %>
+                <%= image_tag post.outfit_image, class: "outfit_image_index" %>
+              <% end %>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item" id="favorite_buttons_<%= post.id %>">
+                  <% if member_signed_in? %>
+                    <%= render "public/favorites/favorite", post: post %>
+                  <% else %>
+                    <p class="text-center">
+                      <i class="fa-solid fa-heart"></i>
+                      <%= post.favorites.count %>
+                    </p>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <h2 class="text-center pt-5">いいねした投稿がありません</h2>
       <% end %>
-      <%= paginate @member_posts %>
     <% end %>
   </div>
 </div>
-
