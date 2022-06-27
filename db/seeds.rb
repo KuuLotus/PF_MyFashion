@@ -22,7 +22,7 @@ Admin.create!(
   email: 'admin@admin',
   password: 'adminadmin',
   )
-  
+
 Member.create!(
   email: 'narita@gmail.com',
   password: 'narita',
