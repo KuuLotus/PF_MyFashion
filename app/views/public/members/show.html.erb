@@ -1,3 +1,4 @@
+<!--タイトル-->
 <header id="title_top">
   <div class="container">
     <div class="row">
@@ -50,7 +51,7 @@
   </div>
 </header>
 
-<!--ユーザーの投稿数、フォロー、フォロワー数-->
+<!--ユーザーの投稿数、いいね数、フォロー、フォロワー数-->
 <div class="container mt-3">
   <div class="row">
     <div class="col-md-6 offset-md-3">
@@ -86,15 +87,13 @@
     <% if @member == current_member && @member.posts.count == 0 %>
       <div class="pt-5 text-center">
         <h4>コーディネートを投稿してみよう！</h4>
-        <p>
+        <p class="pt-2">
           毎日のコーデ記録始めませんか？<br>
           自分のコーデを共有しよう！
         </p>
       </div>
       <% elsif @member != current_member && @member.posts.count == 0 %>
-        <div class="pt-5 text-center">
-          <h4>まだ投稿がありません</h4>
-        </div>
+        <h4 class="pt-5 text-center">まだ投稿がありません</h4>
     <% else %>
       <% @member_posts.each do |post| %>
         <div class="col-lg-3 col-md-4 col-sm-6 g-5">
@@ -108,7 +107,7 @@
                   <%= render "public/favorites/favorite", post: post %>
                 <% else %>
                   <p class="text-center">
-                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart text-danger"></i>
                     <%= post.favorites.count %>
                   </p>
                 <% end %>

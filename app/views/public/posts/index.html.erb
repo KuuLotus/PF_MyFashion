@@ -17,35 +17,13 @@
     <div class="col-md-10 offset-md-1 d-flex justify-content-between">
       <div class="container">
         <div class="row">
-          <!--性別選択-->
+          <!--サイドバー-->
           <div class="col-lg-3 gender-nav">
-            <nav id="sidebar">
-              <section class="gender pb-3">
-                <h2 class="title">性別</h2>
-                <ul class="m-0">
-                  <li class="py-2"><%= link_to "ALL", posts_path %></li>
-                  <li class="py-2"><%= link_to "MEN", men_posts_path %></li>
-                  <li class="py-2"><%= link_to "WOMEN", women_posts_path %></li>
-                </ul>
-              </section>
-              <section class="sidebar-tag pt-3">
-                <h2 class="title">タグ</h2>
-                <ul>
-                  <li class="py-2 d-flex flex-wrap">
-                    <% @tags.each do |tag| %>
-                      <div class="tag_box mb-2 me-2">
-                        <%= link_to tag_path(tag) do %>
-                          # <%= tag.name %>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  </li>
-                </ul>
-              </section>
-            </nav>
+            <%= render "sidebar", tags: @tags %>
           </div>
           <!--コーディネート一覧-->
           <div class="col-md-9">
+            <!--並び替え-->
             <div class="row">
               <div class="col-3 offset-9 text-end">
                 <div class="dropdown">

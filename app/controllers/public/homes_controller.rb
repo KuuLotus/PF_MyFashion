@@ -6,12 +6,12 @@ class Public::HomesController < ApplicationController
   end
 
   def men
-    @posts_men = Post.joins(:member).where({member: {is_deleted: false}}).where({member: {gender: 0}}).order(id: :desc).page(params[:page]).per(40)
+    @posts = Post.joins(:member).where({member: {is_deleted: false}}).where({member: {gender: 0}}).order(id: :desc).page(params[:page]).per(40)
     @tags = Tag.limit(10)
   end
 
   def women
-    @posts_women = Post.joins(:member).where({member: {is_deleted: false}}).where({member: {gender: 1}}).order(id: :desc).page(params[:page]).per(40)
+    @posts = Post.joins(:member).where({member: {is_deleted: false}}).where({member: {gender: 1}}).order(id: :desc).page(params[:page]).per(40)
     @tags = Tag.limit(10)
   end
 

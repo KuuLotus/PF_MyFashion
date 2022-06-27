@@ -1,3 +1,4 @@
+<!--タイトル-->
 <header id="title_top">
   <div class="container">
     <div class="row">
@@ -40,7 +41,7 @@
   </div>
 </header>
 
-<!--ユーザーの投稿数、フォロー、フォロワー数-->
+<!--ユーザーの投稿数、いいね数、フォロー、フォロワー数-->
 <div class="container mt-3">
   <div class="row">
     <div class="col-md-6 offset-md-3">
@@ -74,10 +75,14 @@
   </div>
 </div>
 
+<!--ユーザーのフォロー一覧-->
 <% if @member_followings.present? %>
-  <%= render "follow", members: @member_followings %>
-<% else %>
-　<div class="pt-5 text-center">
-    <h4>まだフォローしていません</h4>
+  <div class="container">
+    <div class="row">
+      <%= render "follow", members: @member_followings %>
+      <%= paginate @member_followings %>
+    </div>
   </div>
+<% else %>
+  <h4 class="text-center pt-5">まだフォローしていません</h4>
 <% end %>

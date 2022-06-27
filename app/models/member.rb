@@ -18,7 +18,7 @@ class Member < ApplicationRecord
   has_many :followed_members, through: :reverse_of_relationships, source: :following
   has_one_attached :profile_image
 
-
+  # プロフィール画像が設定されていない場合にデフォルト画像を設定する
   def get_profile_image
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image_user.jpg')

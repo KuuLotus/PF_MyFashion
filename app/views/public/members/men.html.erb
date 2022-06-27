@@ -1,3 +1,4 @@
+<!--タイトル-->
 <header id="title_top">
   <div class="container">
     <div class="row">
@@ -17,7 +18,7 @@
     <div class="col-md-8 offset-md-2 d-flex justify-content-between">
       <div class="container">
         <div class="row">
-          <!--性別選択-->
+          <!--サイドバー-->
           <div class="col-lg-3 gender-nav">
             <nav id="sidebar">
               <h2 class="title">性別</h2>
@@ -28,8 +29,7 @@
               </ul>
             </nav>
           </div>
-
-          <!--ユーザー一覧-->
+          <!--ユーザー一覧(男性)-->
           <div class="col-lg-9">
             <ul class="ps-0">
               <%= render "index", members: @members_men %>

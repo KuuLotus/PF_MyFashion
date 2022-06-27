@@ -8,14 +8,15 @@ class Admin::MembersController < ApplicationController
 
   # フォロワーが多い順
   def many_followers
-    @members = Member.includes(:followed_members).sort {|a,b| b.followed_members.size <=> a.followed_members.size}
+    members = Member.includes(:followed_members).sort {|a,b| b.followed_members.size <=> a.followed_members.size}
+    @members = Kaminari.paginate_array(members).page(params[:page]).per(30)
   end
 
   def show
     @member = Member.find(params[:id])
     @member_posts = @member.posts.page(params[:page]).per(20)
-    @member_followings = @member.followings.where.not(is_deleted: true).page(params[:page]).per(40)
-    @member_followers = @member.followers.where.not(is_deleted: true).page(params[:page]).per(40)
+    @member_followings = @member.followings
+    @member_followers = @member.followers
   end
 
   # 論理削除
@@ -35,15 +36,15 @@ class Admin::MembersController < ApplicationController
   def followings
     @member = Member.find(params[:id])
     @members = @member.followings.page(params[:page]).per(40)
-    @member_followings = @member.followings.where.not(is_deleted: true).page(params[:page]).per(40)
-    @member_followers = @member.followers.where.not(is_deleted: true).page(params[:page]).per(40)
+    @member_followings = @member.followings.page(params[:page]).per(40)
+    @member_followers = @member.followers.page(params[:page]).per(40)
   end
 
   def followers
     @member = Member.find(params[:id])
     @members = @member.followers.page(params[:page]).per(40)
-    @member_followings = @member.followings.where.not(is_deleted: true).page(params[:page]).per(40)
-    @member_followers = @member.followers.where.not(is_deleted: true).page(params[:page]).per(40)
+    @member_followings = @member.followings.page(params[:page]).per(40)
+    @member_followers = @member.followers.page(params[:page]).per(40)
   end
 
   # 男性ユーザー
@@ -62,11 +63,12 @@ class Admin::MembersController < ApplicationController
     @search_members = @q.result(distinct: true).page(params[:page]).per(30)
   end
 
+  # いいねした投稿
   def favorites
     @member = Member.find(params[:id])
     favorites = Favorite.where(member_id: @member.id).order(created_at: :desc).pluck(:post_id)
     @favorites = Post.find(favorites)
-    @member_followings = @member.followings.where.not(is_deleted: true).page(params[:page]).per(40)
-    @member_followers = @member.followers.where.not(is_deleted: true).page(params[:page]).per(40)
+    @member_followings = @member.followings.where.not(is_deleted: true)
+    @member_followers = @member.followers.where.not(is_deleted: true)
   end
 end

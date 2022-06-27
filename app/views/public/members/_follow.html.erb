@@ -1,44 +1,39 @@
-<div class="container">
-  <div class="row">
-    <% members.each do |member| %>
-      <div class="col-md-6">
-        <li id="member_list" class="d-flex justify-content-between align-items-center card-effect">
-          <div class="member_info d-flex">
-            <div class="profile_image_index">
-              <%= link_to member_path(member) do %>
-                <%= image_tag member.get_profile_image, class: "profile_image_index" %>
+<% members.each do |member| %>
+  <div class="col-md-6">
+    <li id="member_list" class="d-flex justify-content-between align-items-center card-effect">
+      <div class="member_info d-flex">
+        <div class="profile_image_index">
+          <%= link_to member_path(member) do %>
+            <%= image_tag member.get_profile_image, class: "profile_image_index" %>
+          <% end %>
+        </div>
+        <div class="member_text ps-3">
+          <h3 class="name">
+            <%= link_to member_path(member) do %>
+              <%= member.name %>
+            <% end %>
+          </h3>
+          <p class="info">
+            <span><%= member.get_gender %></span>
+            <span><%= member.get_height %></span>
+          <p>
+          <p>
+            <span>
+              <%= link_to member_path(member), class: "meta" do %>
+                <span><%= member.posts.count %></span>コーディネート
               <% end %>
-            </div>
-            <div class="member_text ps-3">
-              <h3 class="name">
-                <%= link_to member_path(member) do %>
-                  <%= member.name %>
-                <% end %>
-              </h3>
-              <p class="info">
-                <span><%= member.get_gender %></span>
-                <span><%= member.get_height %></span>
-              <p>
-              <p>
-                <span>
-                  <%= link_to member_path(member), class: "meta" do %>
-                    <span><%= member.posts.count %></span>コーディネート
-                  <% end %>
-                </span>
-                <span>
-                  <%= link_to followers_member_path(member), class: "meta" do %>
-                    <span><%= member.followers.count %></span>フォロワー
-                  <% end %>
-                </span>
-              </p>
-            </div>
-          </div>
-          <div id="follow_btn_<%= member.id %>" class="me-3">
-            <%= render "public/relationships/follow", member: member %>
-          </div>
-        </li>
+            </span>
+            <span>
+              <%= link_to followers_member_path(member), class: "meta" do %>
+                <span><%= member.followers.count %></span>フォロワー
+              <% end %>
+            </span>
+          </p>
+        </div>
       </div>
-    <% end %>
-    <%= paginate @members%>
+      <div id="follow_btn_<%= member.id %>" class="me-3">
+        <%= render "public/relationships/follow", member: member %>
+      </div>
+    </li>
   </div>
-</div>
+<% end %>

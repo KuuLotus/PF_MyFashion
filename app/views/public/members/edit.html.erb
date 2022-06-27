@@ -1,6 +1,7 @@
 <!--エラーメッセージ-->
 <%= render "layouts/error", model: @member %>
 
+<!--タイトル-->
 <header id="title_top">
   <div class="container">
     <div class="row">
@@ -29,7 +30,6 @@
                 <%= f.file_field :profile_image, accept: 'image/*', class: "form-control" %>
               </div>
             </div>
-
             <div class="form-group row mb-3 align-items-center">
               <div class="col-md-4 text-end">
                 <p>ニックネーム</p>
@@ -38,7 +38,6 @@
                 <%= f.text_field :name, class: "form-control" %>
               </div>
             </div>
-
             <div class="form-group row mb-3 align-items-center">
               <div class="col-md-4 text-end">
                 <p>性別</p>
@@ -47,7 +46,6 @@
                 <%= f.select :gender, {'男性': 0, '女性': 1}, { include_blank: "指定なし" }, class: "form-control" %>
               </div>
             </div>
-
             <div class="form-group row mb-3 align-items-center">
               <div class="col-md-4 text-end">
                 <p>身長</p>
@@ -56,7 +54,6 @@
                 <%= f.select :height, *[120..200], { include_blank: "指定なし" }, class: "form-control" %>
               </div>
             </div>
-
             <div class="form-group row mb-3 align-items-center">
               <div class="col-md-4 text-end">
                 <p>メールアドレス</p>

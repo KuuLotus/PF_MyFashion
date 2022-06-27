@@ -17,7 +17,7 @@
     <div class="col-md-8 offset-md-2 d-flex justify-content-between">
       <div class="container">
         <div class="row">
-          <!--性別選択-->
+          <!--サイドバー-->
           <div class="col-lg-3 gender-nav">
             <nav id="sidebar">
               <h2 class="title">一覧</h2>
@@ -37,6 +37,21 @@
 
           <!--ユーザー一覧-->
           <div class="col-lg-9">
+            <!--並び替え-->
+            <div class="row">
+              <div class="col-3 offset-9 text-end">
+                <div class="dropdown">
+                  <button class="dropdown-toggle order-btn" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    新着順
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                    <li><%= link_to "新着順", admin_root_path, class: "dropdown-item" %></li>
+                    <li><%= link_to "人気順", many_followers_admin_members_path, class: "dropdown-item" %></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!--ユーザー一覧-->
             <ul class="ps-0">
               <%= render "index", members: @members %>
             </ul>

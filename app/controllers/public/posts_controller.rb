@@ -30,7 +30,8 @@ class Public::PostsController < ApplicationController
 
   # いいねが多い順
   def many_favorites
-    @posts = Post.includes(:favorited_members).sort {|a,b| b.favorited_members.size <=> a.favorited_members.size}
+    posts = Post.includes(:favorited_members).joins(:member).where({member: {is_deleted: false}}).order(id: :desc).sort {|a,b| b.favorited_members.size <=> a.favorited_members.size}
+    @posts = Kaminari.paginate_array(posts).page(params[:page]).per(40)
     @tags = Tag.limit(10)
   end
 

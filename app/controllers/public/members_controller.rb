@@ -10,15 +10,15 @@ class Public::MembersController < ApplicationController
 
   # フォロワーが多い順
   def many_followers
-    @members = Member.includes(:followed_members).sort {|a,b| b.followed_members.size <=> a.followed_members.size}
+    members = Member.includes(:followed_members).where.not(is_deleted: true).sort {|a,b| b.followed_members.size <=> a.followed_members.size}
+    @members = Kaminari.paginate_array(members).page(params[:page]).per(30)
   end
-
 
   def show
     @member = Member.find(params[:id])
     @member_posts = @member.posts.page(params[:page]).per(20)
-    @member_followings = @member.followings.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
-    @member_followers = @member.followers.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
+    @member_followings = @member.followings.where.not(is_deleted: true)
+    @member_followers = @member.followers.where.not(is_deleted: true)
   end
 
   def edit
@@ -35,17 +35,17 @@ class Public::MembersController < ApplicationController
     end
   end
 
+  # フォロー一覧
   def followings
     @member = Member.find(params[:id])
-    @members = @member.followings.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
     @member_followings = @member.followings.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
-    @member_followers = @member.followers.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
+    @member_followers = @member.followers.where.not(is_deleted: true)
   end
 
+  # フォロワー一覧
   def followers
     @member = Member.find(params[:id])
-    @members = @member.followers.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
-    @member_followings = @member.followings.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
+    @member_followings = @member.followings.where.not(is_deleted: true)
     @member_followers = @member.followers.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
   end
 
@@ -77,12 +77,13 @@ class Public::MembersController < ApplicationController
     @members_women = Member.where.not(is_deleted: true).where(gender: 1).order(id: :desc).page(params[:page]).per(30)
   end
 
+  # いいねした投稿一覧
   def favorites
     @member = Member.find(params[:id])
     favorites = Favorite.where(member_id: @member.id).order(created_at: :desc).pluck(:post_id)
     @favorites = Post.find(favorites)
-    @member_followings = @member.followings.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
-    @member_followers = @member.followers.where.not(is_deleted: true).order(id: :desc).page(params[:page]).per(40)
+    @member_followings = @member.followings.where.not(is_deleted: true)
+    @member_followers = @member.followers.where.not(is_deleted: true)
   end
 
   private
@@ -90,6 +91,7 @@ class Public::MembersController < ApplicationController
       params.require(:member).permit(:name, :body, :height, :gender, :email, :profile_image)
     end
 
+    # パラメータのidがログインしているユーザーのidか
     def ensure_corect_member
       @member = Member.find(params[:id])
       unless @member == current_member
@@ -98,6 +100,7 @@ class Public::MembersController < ApplicationController
       end
     end
 
+    # 退会してるかどうか
     def ensure_withdraw_member
       member = Member.find(params[:id])
       if member.is_deleted == true
@@ -106,6 +109,7 @@ class Public::MembersController < ApplicationController
       end
     end
 
+    # ゲストユーザーかどうか
     def ensure_guest_user
       @member = Member.find(params[:id])
       if @member.name == "企業様(閲覧用)"

@@ -12,7 +12,8 @@ class Post < ApplicationRecord
   validates :outfit_image, presence: true
   validates :title, presence: true
   validates :body, length:{maximum:400}
-
+  
+  # いいねされているかどうか
   def favorited_by?(member)
     favorites.exists?(member_id: member.id)
   end

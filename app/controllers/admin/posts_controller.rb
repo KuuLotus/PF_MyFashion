@@ -3,13 +3,13 @@ class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @posts = Post.page(params[:page]).order(id: :desc).per(40)
+    @posts = Post.order(id: :desc).page(params[:page]).per(40)
   end
 
   # いいねが多い順
   def many_favorites
-    @posts = Post.includes(:favorited_members).sort {|a,b| b.favorited_members.size <=> a.favorited_members.size}
-    @tags = Tag.limit(10)
+    posts = Post.includes(:favorited_members).sort {|a,b| b.favorited_members.size <=> a.favorited_members.size}
+    @posts = Kaminari.paginate_array(posts).page(params[:page]).per(40)
   end
 
   def show
