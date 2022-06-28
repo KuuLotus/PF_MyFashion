@@ -1,37 +1,5 @@
-<li class="list-group-item">
-  <div class="container">
-    <h3 class="title fw-bold">
-      <%= post.member.name %>へのコメント
-    </h3>
-    <% if post.post_comments.present? %>
-      <% post.post_comments.each do |post_comment| %>
-        <div class="comment_area p-2">
-          <div class="d-flex">
-            <p>
-              <%= link_to member_path(post_comment.member) do %>
-                <%= image_tag post_comment.member.profile_image, class: "profile_image_li me-2" %>
-              <% end %>
-            </p>
-            <div class="main">
-              <p class="mb-0"><%= post_comment.member.name %> <span><%= post_comment.created_at.strftime('%Y/%m/%d') %></span></p>
-              <div class="d-flex">
-                <div class="text_box">
-                  <%= post_comment.comment %>
-                </div>
-                <% if post_comment.member == current_member || current_admin %>
-                  <%= link_to post_post_comment_path(post, post_comment), method: :delete, data: {confirm: "コメントを削除します。よろしいですか？"}, class: "d-flex align-items-end ps-1", remote: true do %>
-                    <i class="fa-solid fa-delete-left"></i>
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    <% else %>
-      <p class="text-center py-5 fw-bold">NO COMMENT</p>
-    <% end %>
-  </div>
+<li class="list-group-item" id="post_comments_area_<%= post.id %>">
+  <%= render "public/post_comments/comment_area", post: post %>
 </li>
 <% if member_signed_in? %>
   <%= form_with model: post_comment_new, url: post_post_comments_path(post), method: :post, local: false do |f| %>
