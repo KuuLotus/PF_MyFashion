@@ -11,6 +11,10 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.member_id = current_member.id
     if @post.save
+      vision_tags = Vision.get_image_data(@post.outfit_image)
+      vision_tags.each do |tag|
+        @post.vision_tags.create(name: tag)
+      end
       flash[:notice] = "投稿しました"
       redirect_to post_path(@post)
     else

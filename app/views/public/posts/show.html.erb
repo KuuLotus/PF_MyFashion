@@ -89,6 +89,14 @@
           </div>
         <% end %>
       </div>
+      <h2 class="tag_title mt-3">VisionAPIのタグ</h2>
+      <div class="tag_area pt-2 gap-2">
+        <% @post.vision_tags.each do |tag| %>
+          <div class="tag_box">
+            <%= tag.name %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
