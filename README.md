@@ -1,6 +1,6 @@
 # MyFashion
 
-##デモ動画
+## デモ動画
 ![画面収録 2022-07-06 21 53 24](https://user-images.githubusercontent.com/102857120/177558750-4273073d-1d6f-41c4-be99-e6620ad7e525.gif)
 
 ## サイト概要
