@@ -24,18 +24,22 @@ Admin.create!(
   )
 
 Member.create!(
+  name: "成田凌",
   email: 'narita@gmail.com',
   password: 'narita',
   )
 Member.create!(
+  name: "綾野剛",
   email: 'ayano@gmail.com',
   password: '555555',
   )
 Member.create!(
+  name: "小松菜奈",
   email: 'komatu@gmail.com',
   password: '777777',
   )
 Member.create!(
+  name: "ロバート馬場",
   email: 'baba@gmail.com',
   password: 'bababa',
   )
