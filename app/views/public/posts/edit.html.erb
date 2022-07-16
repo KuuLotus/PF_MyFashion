@@ -23,7 +23,7 @@
           <div class="container pt-5 pb-3">
             <div class="form-group row mb-3 align-items-center">
               <div class="col-lg-4 text-center">
-                <p>コーディネート画像</p>
+                <p class="form-name">コーディネート画像</p>
               </div>
               <div class="col-lg-8">
                 <%= f.file_field :outfit_image, accept: 'image/*', class: "form-control" %>
@@ -31,7 +31,7 @@
             </div>
             <div class="form-group row mb-3 align-items-center">
               <div class="col-md-4 text-center">
-                <p>コーディネートのタイトル</p>
+                <p class="form-name">コーディネートのタイトル</p>
               </div>
               <div class="col-md-8 d-grid">
                 <%= f.text_field :title, class: "form-control" %>
@@ -39,7 +39,7 @@
             </div>
             <div class="form-group row mb-3 align-items-center">
               <div class="col-md-4 text-center">
-                <p>コーディネートのポイント</p>
+                <p class="form-name">コーディネートのポイント</p>
               </div>
               <div class="col-md-8 d-grid">
                 <%= f.text_area :body, class: "form-control" %>
