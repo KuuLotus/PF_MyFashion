@@ -11,15 +11,27 @@
             <div class="form-group mb-3 d-grid">
               <%= f.text_field :name, placeholder: "ニックネーム", class: "form-control" %>
             </div>
-            <div class="form-group mb-3 d-grid">
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control" %>
-            </div>
-            <div class="form-group mb-3 d-grid">
-              <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード(6文字以上)", class: "form-control" %>
-            </div>
-            <div class="form-group mb-3 d-grid">
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード(確認用)", class: "form-control" %>
-            </div>
+
+            <% if @sns_id.present? %>
+              <div class="form-group mb-3 d-grid">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control", readonly: true %>
+              </div>
+            <% else %>
+              <div class="form-group mb-3 d-grid">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control" %>
+              </div>
+            <% end %>
+
+            <% if @sns_id.present? %>
+              <%= hidden_field_tag :sns_auth, true %>
+            <% else %>
+              <div class="form-group mb-3 d-grid">
+                <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード(6文字以上)", class: "form-control" %>
+              </div>
+              <div class="form-group mb-3 d-grid">
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード(確認用)", class: "form-control" %>
+              </div>
+            <% end %>
             <div class="actions">
               <%= button_tag(type: "submit", class: "secondary-btn bg-gray") do %>
                 <span>登録する</span>
@@ -41,6 +53,12 @@
             </div>
           </div>
         </div>
+      <% end %>
+      <p class="py-2">SNS</p>
+      <%#= link_to 'Twitterで登録', user_twitter_omniauth_authorize_path, method: :post%>
+      <%#= link_to 'Facebookで登録', user_facebook_omniauth_authorize_path, method: :post%>
+      <%= link_to member_google_oauth2_omniauth_authorize_path, class: "success-btn bg-green", method: :post do %>
+        <span>Googleで登録</span>
       <% end %>
     </div>
   </div>

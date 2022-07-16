@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Public::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  layout 'public/application'
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
 
@@ -27,4 +28,30 @@ class Public::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def after_omniauth_failure_path_for(scope)
   #   super(scope)
   # end
+ def twitter
+  authorization
+ end
+
+ def facebook
+  authorization
+ end
+
+ def google_oauth2
+  authorization
+ end
+
+ private
+
+ def authorization
+    sns_info = Member.from_omniauth(request.env["omniauth.auth"])
+    # @user と @sns_id を追加
+    @member = sns_info[:member]
+
+    if @member.persisted? #ユーザー情報が登録済みなので、新規登録ではなくログイン処理を行う
+      sign_in_and_redirect @member, event: :authentication
+    else #ユーザー情報が未登録なので、新規登録画面へ遷移する
+      @sns_id = sns_info[:sns].id
+      render 'public/registrations/new'
+    end
+ end
 end

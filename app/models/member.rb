@@ -5,7 +5,9 @@ class Member < ApplicationRecord
   validates :body, length:{maximum:2000}
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         # Omniauthを使用するためのオプション
+         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -16,6 +18,7 @@ class Member < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :following
   has_many :favorited_posts, through: :favorites, source: :post
   has_many :followed_members, through: :reverse_of_relationships, source: :following
+  has_many :sns_credential, dependent: :destroy
   has_one_attached :profile_image
 
   # プロフィール画像が設定されていない場合にデフォルト画像を設定する
@@ -56,6 +59,22 @@ class Member < ApplicationRecord
       member.password = SecureRandom.urlsafe_base64
       member.name = "企業様(閲覧用)"
     end
+  end
+
+  def self.from_omniauth(auth)
+    sns = SnsCredential.where(provider: auth.provider, uid: auth.uid).first_or_create
+    # sns認証したことがあればアソシエーションで取得
+    # 無ければemailでユーザー検索して取得orビルド(保存はしない)
+    member = Member.where(email: auth.info.email).first_or_initialize(
+        name: auth.info.name,
+        email: auth.info.email
+    )
+    # memberが登録済みであるか判断
+    if member.persisted?
+      sns.member = member
+      sns.save
+    end
+     { member: member, sns: sns }
   end
 
 end

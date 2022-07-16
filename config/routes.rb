@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 devise_for :member,skip: [:passwords], controllers: {
   registrations: "public/registrations",
+  omniauth_callbacks: 'public/omniauth_callbacks',
   sessions: 'public/sessions'
 }
 

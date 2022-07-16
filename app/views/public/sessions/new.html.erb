@@ -39,6 +39,12 @@
           </div>
         </div>
       <% end %>
+      <p class="py-2">SNS</p>
+      <%#= link_to 'Twitterで登録', user_twitter_omniauth_authorize_path, method: :post%>
+      <%#= link_to 'Facebookで登録', user_facebook_omniauth_authorize_path, method: :post%>
+      <%= link_to member_google_oauth2_omniauth_authorize_path, class: "success-btn bg-green", method: :post do %>
+        <span>Googleでログイン</span>
+      <% end %>
     </div>
   </div>
 </div>

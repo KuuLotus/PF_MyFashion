@@ -61,6 +61,10 @@ gem "enum_help"
 gem 'ransack'
 gem 'kaminari'
 gem "rails-i18n"
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
+gem "omniauth-rails_csrf_protection"
+gem 'dotenv-rails'
 
 group :production do
   gem 'mysql2'
