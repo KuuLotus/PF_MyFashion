@@ -76,5 +76,5 @@ class Member < ApplicationRecord
     end
      { member: member, sns: sns }
   end
-
+  
 end

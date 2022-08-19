@@ -1,51 +1,5 @@
 <!--タイトル-->
-<header id="title_top">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <p><%= @member.name %>のいいね一覧</p>
-        <div class="member_profile mt-3">
-          <div class="d-flex">
-            <div>
-              <%= image_tag @member.get_profile_image, class: "profile_image_show" %>
-            </div>
-            <div class="title_text ps-4 pt-1">
-              <h1><%= @member.name %></h1>
-              <div class="d-flex">
-                <p class="pe-2"><%= @member.get_gender %></p>
-                <p class="pe-2"><%= @member.get_height %></p>
-              </div>
-              <p class="pt-3"><%= @member.body %></p>
-            </div>
-          </div>
-          <% if @member == current_member && @member.name != "企業様(閲覧用)" %>
-            <div class="btn_area d-flex justify-content-between mt-3">
-              <%= link_to edit_member_path(@member), class: "secondary-btn bg-gray" do %>
-                <span>プロフィール編集</span>
-              <% end %>
-              <%= link_to new_post_path, class: "primary-btn bg-blue" do %>
-                <span>コーディネート登録</span>
-              <% end %>
-              <%= link_to withdraw_confirm_member_path(@member), class: "danger-btn bg-red" do %>
-                <span>退会について</span>
-              <% end %>
-            </div>
-            <% elsif @member == current_member && @member.name == "企業様(閲覧用)" %>
-              <div class="btn_area d-flex justify-content-between mt-3">
-                <%= link_to new_post_path, class: "primary-btn bg-blue" do %>
-                  <span>コーディネート登録</span>
-                <% end %>
-              </div>
-          <% else %>
-            <div id="follow_btn_<%= @member.id %>" class="mt-3 ms-3">
-              <%= render "public/relationships/follow", member: @member %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
+<%= render "public/members/title-top", member: @member, text: "のいいね一覧" %>
 
 <div class="container mt-3">
   <!--ユーザーの投稿数、いいね数、フォロー、フォロワー数-->
