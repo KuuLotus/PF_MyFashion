@@ -5,59 +5,14 @@
   <!--ユーザーの投稿数、いいね数、フォロー、フォロワー数-->
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <div class="coordinate_follow d-flex text-center">
-        <div class="coordinate_follow_box col-3">
-          <%= link_to member_path(@member) do %>
-            <%= @member.posts.count %>
-            <span>コーディネート</span>
-          <% end %>
-        </div>
-        <div class="coordinate_follow_box col-3">
-          <%= link_to favorites_member_path(@member) do %>
-            <%= @member.favorites.count %>
-            <span>いいね</span>
-          <% end %>
-        </div>
-        <div class="coordinate_follow_box col-3">
-          <%= link_to followings_member_path(@member) do %>
-            <%= @member_followings.count %>
-            <span>フォロー</span>
-          <% end %>
-        </div>
-        <div class="coordinate_follow_box col-3">
-          <%= link_to followers_member_path(@member) do %>
-            <%= @member_followers.count %>
-            <span>フォロワー</span>
-          <% end %>
-        </div>
-      </div>
+      <%= render "public/members/coordinate_follow", member: @member, member_followings: @member_followings, member_followers: @member_followers %>
     </div>
   </div>
 
   <!--いいねした投稿一覧-->
   <div class="row">
     <% if @favorites.present? %>
-      <% @favorites.each do |post| %>
-        <div class="col-lg-3 col-md-4 col-sm-6 g-5">
-          <div class="card card-effect">
-            <%= link_to post_path(post) do %>
-              <%= image_tag post.outfit_image, class: "outfit_image_index" %>
-            <% end %>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item" id="favorite_buttons_<%= post.id %>">
-                <% if member_signed_in? %>
-                  <%= render "public/favorites/favorite", post: post %>
-                <% else %>
-                  <p class="text-center">
-                    <i class="fa-solid fa-heart text-danger"></i>
-                    <%= post.favorites.count %>
-                  </p>
-                <% end %>
-              </li>
-            </ul>
-          </div>
-        </div>
-      <% end %>
+      <%= render "public/members/member_posts", posts: @favorites %>
     <% else %>
       <h2 class="text-center pt-5">いいねした投稿がありません</h2>
     <% end %>

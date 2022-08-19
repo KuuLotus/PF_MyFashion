@@ -5,32 +5,7 @@
 <div class="container mt-3">
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <div class="coordinate_follow d-flex text-center">
-        <div class="coordinate_follow_box col-3">
-          <%= link_to member_path(@member) do %>
-            <%= @member.posts.count %>
-            <span>コーディネート</span>
-          <% end %>
-        </div>
-        <div class="coordinate_follow_box col-3">
-          <%= link_to favorites_member_path(@member) do %>
-            <%= @member.favorites.count %>
-            <span>いいね</span>
-          <% end %>
-        </div>
-        <div class="coordinate_follow_box col-3">
-          <%= link_to followings_member_path(@member) do %>
-            <%= @member_followings.count %>
-            <span>フォロー</span>
-          <% end %>
-        </div>
-        <div class="coordinate_follow_box col-3">
-          <%= link_to followers_member_path(@member) do %>
-            <%= @member_followers.count %>
-            <span>フォロワー</span>
-          <% end %>
-        </div>
-      </div>
+      <%= render "public/members/coordinate_follow", member: @member, member_followings: @member_followings, member_followers: @member_followers %>
     </div>
   </div>
 </div>
