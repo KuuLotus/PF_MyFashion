@@ -1,16 +1,5 @@
 <!--タイトル-->
-<header id="title_top">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 offset-md-2 d-flex justify-content-between">
-        <h1>ユーザー一覧</h1>
-        <div class="all_member">
-          <h2 class="ps-3"><%= @members.count %><span>件</span></h2>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
+<%= render "public/members/title_index", members: @members, title: "ユーザー一覧" %>
 
 <!--ユーザー一覧メイン-->
 <div class="container">
@@ -19,36 +8,12 @@
       <div class="container">
         <div class="row">
           <!--サイドバー-->
-          <div class="col-lg-3 gender-nav">
-            <nav id="sidebar">
-              <h2 class="title">性別</h2>
-              <ul class="m-0">
-                <li class="py-2"><%= link_to "ALL", members_path %></li>
-                <li class="py-2"><%= link_to "MEN", men_members_path %></li>
-                <li class="py-2"><%= link_to "WOMEN", women_members_path %></li>
-              </ul>
-            </nav>
-          </div>
+          <%= render "public/members/sidebar_index" %>
 
           <!--ユーザー一覧-->
           <div class="col-lg-9">
             <!--並び替え-->
-            <div class="row">
-              <div class="col-3 offset-9 text-end">
-                <div class="dropdown">
-                  <button class="dropdown-toggle order-btn" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                    新着順
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                    <li><%= link_to "新着順", members_path, class: "dropdown-item" %></li>
-                    <li><%= link_to "人気順", many_followers_members_path, class: "dropdown-item" %></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <ul class="ps-0">
-              <%= render "index", members: @members %>
-            </ul>
+            <%= render "public/members/sort_index", members: @members %>
             <%= paginate @members %>
           </div>
         </div>

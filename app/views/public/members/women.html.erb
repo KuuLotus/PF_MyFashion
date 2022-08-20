@@ -19,16 +19,7 @@
       <div class="container">
         <div class="row">
           <!--サイドバー-->
-          <div class="col-lg-3 gender-nav">
-            <nav id="sidebar">
-              <h2 class="title">性別</h2>
-              <ul class="m-0">
-                <li class="py-2"><%= link_to "ALL", members_path %></li>
-                <li class="py-2"><%= link_to "MEN", men_members_path %></li>
-                <li class="py-2"><%= link_to "WOMEN", women_members_path %></li>
-              </ul>
-            </nav>
-          </div>
+          <%= render "public/members/sidebar_index" %>
 
           <!--ユーザー一覧-->
           <div class="col-lg-9">
