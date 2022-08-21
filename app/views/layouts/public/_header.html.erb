@@ -45,7 +45,7 @@
           </ul>
         </div>
       <% else %>
-        <%= link_to "新規登録", new_member_registration_path %> 
+        <%= link_to "新規登録", new_member_registration_path %>
         <%= link_to "ログイン", new_member_session_path %>
       <% end %>
     </div>
@@ -61,12 +61,14 @@
 　  $(".user-search").click(function () {
       $("#search-wrap-user").show().addClass('panelactive');
       $('#q_name_cont').focus();//テキスト入力のinputにフォーカス
+      $("#footer").css("z-index", "0");
     });
 
     //閉じるボタンを押した時
     $(".close-btn-user").click(function () {
       $("#search-wrap-user").removeClass('panelactive');//#search-wrap-userからpanelactiveクラスを除去
       $("#q_name_cont").val("");
+      $("#footer").css("z-index", "2");
     });
 　};
 

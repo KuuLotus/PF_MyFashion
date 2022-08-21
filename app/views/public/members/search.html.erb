@@ -1,16 +1,5 @@
 <!--タイトル-->
-<header id="title_top">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 offset-md-2 d-flex justify-content-between">
-        <h1>ユーザー検索結果</h1>
-        <div class="all_member">
-          <h2 class="ps-3"><%= @search_members.count %><span>件</span></h2>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
+<%= render "public/members/title_index", members: @search_members, title: "ユーザー検索結果" %>
 
 <!--メイン-->
 <div class="container">
