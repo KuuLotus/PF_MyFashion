@@ -66,7 +66,7 @@
 
     //閉じるボタンを押した時
     $(".close-btn-user").click(function () {
-      $("#search-wrap-user").removeClass('panelactive');//#search-wrap-userからpanelactiveクラスを除去
+      $("#search-wrap-user").hide().removeClass('panelactive');//#search-wrap-userからpanelactiveクラスを除去
       $("#q_name_cont").val("");
       $("#footer").css("z-index", "2");
     });
@@ -81,7 +81,7 @@
 
     //閉じるボタンを押した時
     $(".close-btn-coordinate").click(function () {
-      $("#search-wrap-coordinate").removeClass('panelactive');//#search-wrap-coordinateからpanelactiveクラスを除去
+      $("#search-wrap-coordinate").hide().removeClass('panelactive');//#search-wrap-coordinateからpanelactiveクラスを除去
       $("#q_tags_name_cont").val("");
       $("#footer").css("z-index", "0");
     });

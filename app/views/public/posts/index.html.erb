@@ -1,15 +1,5 @@
-<header id="title_top">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-10 offset-md-1 d-flex justify-content-between">
-        <h1>コーディネート一覧</h1>
-        <div class="all_member">
-          <h2 class="ps-3"><%= @posts.count %><span>件</span></h2>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
+<!--タイトルヘッダー-->
+<%= render "public/posts/title_top", posts: @posts, title: "コーディネート一覧" %>
 
 <!--コーデ一覧メイン-->
 <div class="container">
@@ -26,15 +16,7 @@
             <!--並び替え-->
             <div class="row">
               <div class="col-3 offset-9 text-end">
-                <div class="dropdown">
-                  <button class="dropdown-toggle order-btn" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                    新着順
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                    <li><%= link_to "新着順", posts_path, class: "dropdown-item" %></li>
-                    <li><%= link_to "人気順", many_favorites_posts_path, class: "dropdown-item" %></li>
-                  </ul>
-                </div>
+                <%= render "public/posts/sort_index" %>
               </div>
             </div>
             <div class="row">
