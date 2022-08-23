@@ -19,30 +19,7 @@
         <div class="row">
           <!--サイドバー-->
           <div class="col-md-3 gender-nav">
-            <nav id="sidebar">
-              <section class="gender pb-3">
-                <h2 class="title">性別</h2>
-                <ul class="m-0 ">
-                  <li class="py-2 current"><%= link_to "ALL", posts_path %></li>
-                  <li class="py-2"><%= link_to "MEN", men_posts_path %></li>
-                  <li class="py-2"><%= link_to "WOMEN", women_posts_path %></li>
-                </ul>
-              </section>
-              <section class="sidebar-tag pt-3">
-                <h2 class="title">タグ</h2>
-                <ul>
-                  <li class="py-2 d-flex flex-wrap">
-                    <% @tags.each do |tag| %>
-                      <div class="tag_box mb-2 me-2">
-                        <%= link_to tag_path(tag) do %>
-                          # <%= tag.name %>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  </li>
-                </ul>
-              </section>
-            </nav>
+            <%= render "public/posts/sidebar", tags: @tags %>
           </div>
           <!--コーディネート一覧-->
           <div class="col-md-9">
