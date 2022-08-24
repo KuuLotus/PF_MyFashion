@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-3 offset-9 text-end">
+    <div class="dropdown">
+      <button class="dropdown-toggle order-btn" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+        <% if action_name == "index" %>
+          新着順
+        <% else %>
+          人気順
+        <% end %>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+        <li><%= link_to "新着順", admin_root_path, class: "dropdown-item" %></li>
+        <li><%= link_to "人気順", many_followers_admin_members_path, class: "dropdown-item" %></li>
+      </ul>
+    </div>
+  </div>
+</div>
