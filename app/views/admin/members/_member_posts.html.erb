@@ -1,0 +1,17 @@
+<% member_posts.each do |post| %>
+  <div class="col-md-3 g-5">
+    <div class="card card-effect">
+      <%= link_to admin_post_path(post) do %>
+        <%= image_tag post.outfit_image, class: "outfit_image_index" %>
+      <% end %>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" id="favorite_buttons_<%= post.id %>">
+          <p class="text-center">
+            <i class="fa-solid fa-heart text-danger"></i>
+            <%= post.favorites.count %>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+<% end %>

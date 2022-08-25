@@ -1,0 +1,35 @@
+<header id="title_top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2 member_info">
+        <p><%= member.name + text %></p>
+        <div class="member_profile mt-3">
+          <div class="d-flex">
+            <div>
+              <%= image_tag member.get_profile_image, class: "profile_image_show" %>
+            </div>
+            <div class="title_text ps-4 pt-1">
+              <h1><%= member.name %></h1>
+              <div class="d-flex">
+                <p class="pe-2"><%= member.get_gender %></p>
+                <p class="pe-2"><%= member.get_height %></p>
+              </div>
+              <p class="pt-3"><%= member.body %></p>
+            </div>
+          </div>
+        </div>
+        <div class="withdraw_btn">
+          <% if member.is_deleted != true %>
+            <%= link_to withdraw_admin_member_path(member), method: :patch, data: {confirm: "本当に退会させますか？"}, class: "danger-btn bg-red" do %>
+              <span>退会させる</span>
+            <% end %>
+          <% else %>
+            <%= link_to withdraw_admin_member_path(member), method: :patch, data: {confirm: "本当に入会中にさせますか？"}, class: "success-btn bg-green" do %>
+              <span>入会中に戻す</span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
